@@ -6,8 +6,9 @@ export PATH="$HOME/Library/Haskell/bin:$PATH" #CABAL
 
 export PATH=/usr/local/git/bin/:$PATH #git..
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# Source bash aliases
+if [ -f ~/dotfiles/.bash_aliases ]; then
+    . ~/dotfiles/.bash_aliases
 fi
 
-bind -f ~/.inputrc
+bind -f ~/dotfiles/.inputrc
