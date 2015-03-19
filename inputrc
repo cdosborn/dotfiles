@@ -1,7 +1,8 @@
 $if Bash
-    ";;": "\n"
     "\C-q":"\"\"\C-b"
     "\C-t":"\`\`\C-b"
+    "\C-x e": edit-and-execute-command
+    "\C-x *": glob-expand-word
     "\C-z": forward-word
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
