@@ -1,0 +1,83 @@
+http://www.gnu.org/software/bash/manual/html_node/Bindable-Readline-Commands.html#Bindable-Readline-Commands
+
+edit-and-execute-command (C-xC-e)
+
+    Invoke an editor on the current command line, and execute the result as shell commands. Bash attempts to invoke $VISUAL, $EDITOR, and emacs as the editor, in that order.
+
+digit-argument (M-0, M-1, ... M--)
+    Add this digit to the argument already accumulating, or start a new argument. M-- starts a negative argument. 
+
+beginning-of-line (C-a)
+    Move to the start of the current line.
+
+end-of-line (C-e)
+    Move to the end of the line.
+
+forward-char (C-f)
+    Move forward a character.
+
+backward-char (C-b)
+    Move back a character.
+
+forward-word (M-f)
+    Move forward to the end of the next word. Words are composed of letters and digits.
+
+backward-word (M-b)
+    Move back to the start of the current or previous word. Words are composed of letters and digits.
+
+clear-screen (C-l)
+    Clear the screen and redraw the current line, leaving the current line at the top of the screen. 
+
+undo (C-_ or C-x C-u)
+    Incremental undo, separately remembered for each line.
+
+character-search (C-])
+    A character is read and point is moved to the next occurrence of that character. A negative count searches for previous occurrences.
+
+character-search-backward (M-C-])
+    A character is read and point is moved to the previous occurrence of that character. A negative count searches for subsequent occurrences. 
+
+kill-line (C-k)
+    Kill the text from point to the end of the line.
+
+unix-line-discard (C-u)
+    Kill backward from the cursor to the beginning of the current line. 
+
+kill-word (M-d)
+    Kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+
+delete-char (C-d)
+    Delete the character at point. If this function is bound to the same character as the tty EOF character, as C-d commonly is, see above for the effects. 
+
+forward-backward-delete-char ()
+    Delete the character under the cursor, unless the cursor is at the end of the line, in which case the character behind the cursor is deleted. By default, this is not bound to a key.
+
+backward-kill-word (M-DEL)
+    Kill the word behind point. Word boundaries are the same as backward-word. 
+
+previous-history (C-p)
+    Move `back' through the history list, fetching the previous command.
+
+next-history (C-n)
+    Move `forward' through the history list, fetching the next command.
+
+beginning-of-history (M-<)
+    Move to the first line in the history.
+
+end-of-history (M->)
+    Move to the end of the input history, i.e., the line currently being entered.
+
+reverse-search-history (C-r)
+    Search backward starting at the current line and moving `up' through the history as necessary. This is an incremental search.
+
+forward-search-history (C-s)
+    Search forward starting at the current line and moving `down' through the the history as necessary. This is an incremental search. 
+
+transpose-chars (C-t)
+    Drag the character before the cursor forward over the character at the cursor, moving the cursor forward as well. If the insertion point is at the end of the line, then this transposes the last two characters of the line. Negative arguments have no effect.
+
+transpose-words (M-t)
+    Drag the word before point past the word after point, moving point past that word as well. If the insertion point is at the end of the line, this transposes the last two words on the line. 
+
+yank-last-arg (M-. or M-_) also known as Esc.
+    Insert last argument to the previous command (the last word of the previous history entry). With a numeric argument, behave exactly like yank-nth-arg. Successive calls to yank-last-arg move back through the history list, inserting the last word (or the word specified by the argument to the first call) of each line in turn. Any numeric argument supplied to these successive calls determines the direction to move through the history. A negative argument switches the direction through the history (back or forward). The history expansion facilities are used to extract the last argument, as if the `!$' history expansion had been specified. 
