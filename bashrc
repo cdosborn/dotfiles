@@ -7,9 +7,8 @@ export PATH="$HOME/Library/Haskell/bin:$PATH" #CABAL
 
 export PATH=/usr/local/git/bin/:$PATH #git..
 
-# Source bash aliases
-if [ -f ~/dotfiles/bash_aliases ]; then
-    . ~/dotfiles/bash_aliases
-fi
+[[ -s ~/dotfiles/bash_aliases ]] && . ~/dotfiles/bash_aliases 
 
 bind -f ~/dotfiles/inputrc
+
+stty -ixon -ixoff # For Terminal, enable C-s
