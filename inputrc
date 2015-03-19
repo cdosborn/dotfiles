@@ -1,3 +1,5 @@
 $if Bash
-";;": "\n"
-DEL: ""
+    ";;": "\n"
+    "\eh": backward-kill-word
+    DEL: ""
+$endif
