@@ -31,7 +31,9 @@ nnoremap '. '.zz
 nnoremap j gj
 nnoremap k gk
 nnoremap <space> :w<CR>
+nnoremap Q :q!<CR>
 noremap ;; :%s:::g<Left><Left><Left>
+
 set nocompatible                     " Use Vim settings, rather than Vi settings (much better!).
 set foldmethod=syntax
 set expandtab
@@ -48,6 +50,7 @@ set incsearch		" do incremental searching
 set hlsearch
 set autochdir
 set noswapfile
+set undofile
 syntax on
 
 " Disable auto commenting
