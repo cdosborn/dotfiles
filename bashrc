@@ -1,7 +1,6 @@
 export TERM=xterm-256color
 
 export EDITOR=/usr/bin/vim
-export MYVIMRC=~/dotfiles/vimrc
 
 export PATH="$HOME/Library/Haskell/bin:$PATH" #CABAL
 
