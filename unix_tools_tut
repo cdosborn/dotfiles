@@ -1,0 +1,15 @@
+du(1), 
+file(1), 
+nl
+look(1),  who(1), and wc(1)
+lam, paste, column
+who, whoami
+top -o cpu
+pbcopy
+/usr/share/dict/words
+test
+help
+[[ -s unix_tools_tut ]] && echo $?
+ls | tr 
+xargs
+(git ls-tree -r master --name-only; ls -a | grep -v .git | grep -Ev "\.$";) | sort | uniq -u | xargs rm
