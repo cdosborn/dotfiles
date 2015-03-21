@@ -1,11 +1,10 @@
 $if Bash
     "\C-q":"\"\"\C-b"
-    "\C-t":"\`\`\C-b"
-    "\C-x e": edit-and-execute-command
-    "\C-x *": glob-expand-word
+    "\C-t": "\C-aecho \C-j" 
+    "\C-xe": edit-and-execute-command
+    "\C-x*": glob-expand-word
     "\C-z": forward-word
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
     DEL: ""
-
 $endif

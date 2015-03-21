@@ -30,7 +30,9 @@ nnoremap <tab> zz
 nnoremap '. '.zz
 nnoremap j gj
 nnoremap k gk
+
 nnoremap <space> :w<CR>
+nnoremap m :!man<space> 
 nnoremap Q :q!<CR>
 noremap ;; :%s:::g<Left><Left><Left>
 
