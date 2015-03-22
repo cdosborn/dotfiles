@@ -1,7 +1,7 @@
 $if Bash
     "\C-q":"\"\"\C-b"
     "\C-t": "\C-aecho \C-j" 
-    "\C-xe": edit-and-execute-command
+    "\C-m": "\eb\ed\C-y\e>\C-y\C-aman \C-j" 
     "\C-x*": glob-expand-word
     "\C-z": forward-word
     "\ef": "\C-z\C-f"

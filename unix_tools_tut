@@ -13,3 +13,10 @@ help
 ls | tr 
 xargs
 (git ls-tree -r master --name-only; ls -a | grep -v .git | grep -Ev "\.$";) | sort | uniq -u | xargs rm
+
+!-n    Refer to the current command line minus n.
+!!     Refer to the previous command.  This is a synonym for `!-1'.
+!string
+      Refer to the most recent command starting with string.
+!?string[?] ++++ M-^ expands it so you can check
+      Refer to the most recent command containing string.  The trailing ? may be omitted if string is followed immediately by a newline.
