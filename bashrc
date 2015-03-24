@@ -8,6 +8,16 @@ export PATH=/usr/local/git/bin/:$PATH #git..
 
 [[ -s ~/dotfiles/bash_aliases ]] && . ~/dotfiles/bash_aliases 
 
+# Readline
+
+stty -ixon -ixoff # For Terminal to enable C-s with readline
 bind -f ~/dotfiles/inputrc
 
-stty -ixon -ixoff # For Terminal, enable C-s
+# History
+
+# On interactive startup, Bash truncates $HISTFILE to $HISTFILESIZE
+# On interactive close, if the shell option histappend is set, Bash 
+#   appends $HISTSIZE lines to $HISTFILE, otherwise it overwrites $HISTFILE
+shopt -s histappend
+HISTFILESIZE=
+HISTSIZE=

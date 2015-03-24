@@ -1,18 +1,4 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2008 Dec 17
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+set runtimepath=~/dotfiles/vim,$VIMRUNTIME
 
 " Create a scratch buffer
 nmap <Leader>s :new<CR>:setlocal buftype=nofile<CR>:setlocal bufhidden=hide<CR> :setlocal noswapfile
@@ -32,7 +18,6 @@ nnoremap j gj
 nnoremap k gk
 
 nnoremap <space> :w<CR>
-nnoremap m :!man<space> 
 nnoremap Q :q!<CR>
 noremap ;; :%s:::g<Left><Left><Left>
 
@@ -53,7 +38,14 @@ set hlsearch
 set autochdir
 set noswapfile
 set undofile
+set nomore     " removes the annoying vim page message thing
 syntax on
+set wildmode=longest:full
+set wildmenu
+colorscheme uncolor
+
+
+highlight MatchParen cterm=underline " causes unmatched parens to be visible
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

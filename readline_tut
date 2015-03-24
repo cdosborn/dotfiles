@@ -1,5 +1,9 @@
 http://www.gnu.org/software/bash/manual/html_node/Bindable-Readline-Commands.html#Bindable-Readline-Commands
 
+history-expand-line (M-^)
+
+    Perform history expansion on the current line.
+
 edit-and-execute-command (C-xC-e)
 
     Invoke an editor on the current command line, and execute the result as shell commands. Bash attempts to invoke $VISUAL, $EDITOR, and emacs as the editor, in that order.

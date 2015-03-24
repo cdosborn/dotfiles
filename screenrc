@@ -1,2 +1,5 @@
 # Makes Control+e become the escape combination
 escape ^Oo
+
+# the - means login
+defshell -bash
