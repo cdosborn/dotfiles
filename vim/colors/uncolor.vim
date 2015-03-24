@@ -24,7 +24,8 @@ highlight  PmenuSel     cterm=bold       ctermfg=Black     ctermbg=NONE
 highlight  PmenuSbar    cterm=NONE       ctermfg=NONE      ctermbg=Black
 highlight  PmenuThumb   cterm=NONE       ctermfg=NONE      ctermbg=Black
 highlight  LineNr       cterm=bold       ctermfg=Black     ctermbg=NONE
-highlight  Question       cterm=bold       ctermfg=Black     ctermbg=NONE
+highlight  Question     cterm=bold       ctermfg=Black     ctermbg=NONE
+highlight  Title        cterm=NONE       ctermfg=12      ctermbg=NONE
 highlight  Todo         cterm=NONE       ctermfg=12      ctermbg=NONE
 highlight  Search       cterm=NONE       ctermfg=12      ctermbg=NONE
 highlight  SpecialKey   cterm=NONE       ctermfg=12      ctermbg=NONE
