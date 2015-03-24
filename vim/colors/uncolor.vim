@@ -35,7 +35,7 @@ highlight  Type         cterm=NONE       ctermfg=NONE      ctermbg=NONE
 highlight  Special      cterm=NONE       ctermfg=NONE      ctermbg=NONE
 highlight  Constant     cterm=NONE       ctermfg=DarkGray  ctermbg=NONE
 highlight  Comment      cterm=NONE       ctermfg=DarkGray  ctermbg=NONE
-highlight  Visual       cterm=bold       ctermfg=White     ctermbg=Black
+highlight  Visual       cterm=bold       ctermfg=NONE     ctermbg=White
 highlight  MatchParen   cterm=underline  ctermfg=Black     ctermbg=NONE
 
 "hi Comment
