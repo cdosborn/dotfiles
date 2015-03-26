@@ -3,3 +3,6 @@ escape ^Oo
 
 # the - means login
 defshell -bash
+
+# lines of scrollback!
+defscrollback 4096
