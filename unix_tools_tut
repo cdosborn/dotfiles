@@ -13,7 +13,6 @@ help
 [[ -s unix_tools_tut ]] && echo $?
 ls | tr 
 xargs
-(git ls-tree -r master --name-only; ls -a | grep -v .git | grep -Ev "\.$";) | sort | uniq -u | xargs rm
 
 !-n    Refer to the current command line minus n.
 !!     Refer to the previous command.  This is a synonym for `!-1'.
@@ -21,3 +20,10 @@ xargs
       Refer to the most recent command starting with string.
 !?string[?] ++++ M-^ expands it so you can check
       Refer to the most recent command containing string.  The trailing ? may be omitted if string is followed immediately by a newline.
+
+
+-- Remove everything that isn't tracked
+(git ls-tree -r master --name-only; ls -a | grep -v .git | grep -Ev "\.$";) | sort | uniq -u | xargs rm
+
+-- List all dtrace scripts (http://dtrace.org/blogs/brendan/2011/10/10/top-10-dtrace-scripts-for-mac-os-x/)
+man -P 'cat' -k dtrace
