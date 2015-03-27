@@ -39,3 +39,7 @@ iconv -f encoding -t encoding
 
 -- List the bits!
 xxd -b
+
+-- Get file encoding 
+file -I path/to/file | cut -d : -f 1
+
