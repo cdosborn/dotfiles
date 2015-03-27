@@ -27,3 +27,15 @@ xargs
 
 -- List all dtrace scripts (http://dtrace.org/blogs/brendan/2011/10/10/top-10-dtrace-scripts-for-mac-os-x/)
 man -P 'cat' -k dtrace
+
+-- Implement tee with redirects (NOT IMPLEMENTED)
+echo "asdfs" | pbcopy 3<&0 0>
+
+-- Interactively remove untracked files
+git clean -fi
+
+-- Convert between file encodings
+iconv -f encoding -t encoding
+
+-- List the bits!
+xxd -b
