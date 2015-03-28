@@ -43,3 +43,5 @@ xxd -b
 -- Get file encoding 
 file -I path/to/file | cut -d : -f 1
 
+-- Lose first 3 and the last 2 
+tail -n +3 | head -n -2
