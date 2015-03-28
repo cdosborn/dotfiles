@@ -45,3 +45,9 @@ file -I path/to/file | cut -d : -f 1
 
 -- Lose first 3 and the last 2 
 tail -n +3 | head -n -2
+
+-- execute program with priority (-20,20), where lower is more priority
+-- kind of a white lie, essentially this runs 'nice' at that priority
+-- which passes on the priority to the subprocess started by program
+-- it `nicely` takes a lower priority for itself
+nice -n {priority} program args
