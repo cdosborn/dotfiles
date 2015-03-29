@@ -65,3 +65,7 @@ sdiff as bs
 
 -- Search for env var
 printenv | grep VAR
+
+-- Kill by name, rather than PID
+killall -9 python
+
