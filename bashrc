@@ -21,3 +21,8 @@ bind -f ~/dotfiles/inputrc
 shopt -s histappend
 HISTFILESIZE=
 HISTSIZE=
+
+# Prompt 
+
+PS1='\W > '
+#PS1='\h:\W > '

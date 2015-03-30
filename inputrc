@@ -6,5 +6,6 @@ $if Bash
     "\C-z": forward-word
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
+    "\ej": "\C-v\C-j"
     DEL: ""
 $endif
