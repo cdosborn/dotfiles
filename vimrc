@@ -38,7 +38,8 @@ set hlsearch
 set autochdir
 set noswapfile
 set undofile
-set nomore     " removes the annoying vim page message thing
+set nomore              " removes the annoying vim page message thing
+set display=lastline    " display lines that extend past bottom
 syntax on
 set wildmode=longest:full
 set wildmenu

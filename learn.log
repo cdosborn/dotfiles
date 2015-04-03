@@ -45,3 +45,40 @@ file -I path/to/file | cut -d : -f 1
 
 -- Lose first 3 and the last 2 
 tail -n +3 | head -n -2
+
+-- execute program with priority (-20,20), where lower is more priority
+-- kind of a white lie, essentially this runs 'nice' at that priority
+-- which passes on the priority to the subprocess started by program
+-- it `nicely` takes a lower priority for itself
+nice -n {priority} program args
+
+3/27
+read http://jackschaedler.github.io/circles-sines-signals/sampling3.html 
+learned about digital signal processing
+
+3/28
+read http://www.qnx.com/developers/docs/6.4.1/neutrino/getting_started/s1_procs.html
+a mutex is a semaphore is a rw_lock
+
+-- Find all the "words" in a partially text file
+strings libreadline.6.dylib | tr "\n " " "
+
+-- The bc calculator for good math support in bash
+bc <<< "$(date +%Y) + 3"
+
+-- Side by side diff
+sdiff as bs
+
+-- Search for env var
+printenv | grep VAR
+
+-- Kill by name, rather than PID
+killall -9 python
+
+3/29
+define parity : a synonym for equality, "strive for parity in education"
+define acrimony : bitterness or ill feeling, "fueling acrimony between pro and anti-union groups"
+
+3/31
+-- Strip the .py off of file name
+rename -n 's/(.*).py/\1/' *.py
