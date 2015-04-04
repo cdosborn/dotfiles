@@ -82,3 +82,10 @@ define acrimony : bitterness or ill feeling, "fueling acrimony between pro and a
 3/31
 -- Strip the .py off of file name
 rename -n 's/(.*).py/\1/' *.py
+
+4/4/14
+-- run a command at a later date
+at + 1 minute
+> echo watt
+> 
+

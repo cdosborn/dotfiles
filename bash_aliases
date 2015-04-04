@@ -5,4 +5,5 @@ alias vim="/usr/bin/vim -c 'source ~/dotfiles/vimrc'"
 alias py=python
 alias bc="bc bash_bc"
 alias myip="curl http://ipecho.net/plain; echo"
+alias yt='youtube-dl --quiet --exec "/Applications/VLC.app/Contents/MacOS/VLC {} 2>%-"'
 alias screen="screen -c ~/dotfiles/screenrc"
