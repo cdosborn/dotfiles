@@ -1,4 +1,6 @@
-set runtimepath=~/dotfiles/vim,$VIMRUNTIME
+" Source system vim config, necessary because of alias
+" in bash_aliases, which when skipped disallows plugins..
+so $VIM/vimrc
 
 " Create a scratch buffer
 nmap <Leader>s :new<CR>:setlocal buftype=nofile<CR>:setlocal bufhidden=hide<CR> :setlocal noswapfile
@@ -43,8 +45,16 @@ set display=lastline    " display lines that extend past bottom
 syntax on
 set wildmode=longest:full
 set wildmenu
-colorscheme uncolor
 
+" Load pathogen plugins
+execute pathogen#infect('~/dotfiles/vim/bundle/{}')
+filetype plugin indent on
+
+" These two lines must come after executing pathogen,
+" otherwise changing runtimepath borks pathogen's path
+" further experimentation required for a workaround
+let &rtp = expand("~/dotfiles/vim") . "," . &rtp
+colorscheme uncolor
 
 highlight MatchParen cterm=underline " causes unmatched parens to be visible
 

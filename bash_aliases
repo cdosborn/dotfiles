@@ -1,9 +1,10 @@
 alias gs='git status'
 alias gl='git log'
 alias ll='ls -lhA'
-alias vim="/usr/bin/vim -c 'source ~/dotfiles/vimrc'"
+#alias vim="/usr/bin/vim -c 'source ~/dotfiles/vimrc'"
+alias vim="vim -u ~/dotfiles/vimrc"
 alias py=python
-alias bc="bc bash_bc"
+alias bc="bc ~/dotfiles/bash_bc"
 alias myip="curl http://ipecho.net/plain; echo"
 alias yt='youtube-dl --quiet --exec "/Applications/VLC.app/Contents/MacOS/VLC {} 2>%-"'
 alias screen="screen -c ~/dotfiles/screenrc"
