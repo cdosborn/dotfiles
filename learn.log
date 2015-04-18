@@ -89,3 +89,18 @@ at + 1 minute
 > echo watt
 > 
 
+4/7/15
+-- make an http request
+telnet www.facebook.com 80
+
+-- make an https request
+openssl s_client -connect www.facebook.com:443
+
+4/18/15
+-- view cron-esque scripts on mac
+/etc/periodic/*
+
+-- update locatedb on mac (D: it took 7 min on ma slow mac)
+sudo /usr/libexec/locate.updatedb
+
+-- Save files to /tmp that you don't care about!

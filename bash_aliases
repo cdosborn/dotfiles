@@ -8,3 +8,4 @@ alias bc="bc ~/dotfiles/bash_bc"
 alias myip="curl http://ipecho.net/plain; echo"
 alias yt='youtube-dl --quiet --exec "/Applications/VLC.app/Contents/MacOS/VLC {} 2>%-"'
 alias screen="screen -c ~/dotfiles/screenrc"
+alias bin='xxd -b | colrm 1 10 | colrm 53 | tr -d "\n "'
