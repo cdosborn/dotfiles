@@ -19,6 +19,22 @@ nnoremap '. '.zz
 nnoremap j gj
 nnoremap k gk
 
+" Readline bindings for command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+cnoremap <C-h> <BS>
+cnoremap <C-x><C-e> <C-f>
+cnoremap <C-r> <C-f>?
+cnoremap <C-s> <C-f>/
+" The bindings below ought to be <M-...>, this is specific to 0SX
+cnoremap <C-[>b <S-Left>
+cnoremap <C-[>f <S-Right>
+
 nnoremap <space> :w<CR>
 nnoremap Q :q!<CR>
 noremap ;; :%s:::g<Left><Left><Left>
@@ -60,11 +76,3 @@ highlight MatchParen cterm=underline " causes unmatched parens to be visible
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif

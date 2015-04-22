@@ -104,3 +104,17 @@ openssl s_client -connect www.facebook.com:443
 sudo /usr/libexec/locate.updatedb
 
 -- Save files to /tmp that you don't care about!
+
+4/19/15
+
+-- total functions are functions defined for all possible inputs
+-- partial functionss * * not * * * * *
+define lexicon : a vocabulary of something
+
+4/20/15
+-- generate a 20 char rand password
+tr -dc "[:alnum:][:punct:]" < /dev/urandom | head -c 20 
+
+4/21/15
+-- STOP USING CAT FOR EVERYTHING
+-- instead of 'cat blah | less' do 'less < blah'
