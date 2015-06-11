@@ -15,7 +15,7 @@ highlight  TabLineFill  cterm=NONE       ctermfg=Black     ctermbg=Black
 highlight  Underlined   cterm=underline  ctermfg=NONE      ctermbg=NONE
 highlight  PreProc      cterm=NONE       ctermfg=NONE      ctermbg=NONE
 highlight  Ignore       cterm=NONE       ctermfg=NONE      ctermbg=NONE
-highlight  Error        cterm=bold       ctermfg=NONE      ctermbg=Red
+highlight  Error        cterm=NONE       ctermfg=NONE      ctermbg=NONE
 highlight  ErrorMsg     cterm=bold       ctermfg=Red       ctermbg=NONE
 highlight  WarningMsg     cterm=bold       ctermfg=Red       ctermbg=NONE
 highlight  MoreMsg      cterm=bold       ctermfg=Black     ctermbg=NONE

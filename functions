@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+
+source ~/proj/bash/bashful/bashful.sh
+
+function clean_dir {
+    export -f ask
+    find . -d 1 -exec bash -c "ask \"rm {}?\" \"postpone echo rm -r {}\;\"" \;
+    postpone
+    return
+}
+
+function mancat {
+    man -P cat $@ | col -b 
+}
+
+function cd {
+   command cd $1; 
+   ls;
+}
+
+function ju {
+    first=$1
+    shift;
+    cd $(find $first -type d | fzf --query="$@")
+}

@@ -1,15 +1,13 @@
-" Source system vim config, necessary because of alias
-" in bash_aliases, which when skipped disallows plugins..
-so $VIM/vimrc
+" Load pathogen plugins
+execute pathogen#infect()
+filetype plugin indent on
 
-" Create a scratch buffer
-nmap <Leader>s :new<CR>:setlocal buftype=nofile<CR>:setlocal bufhidden=hide<CR> :setlocal noswapfile
-
-" Make switching buffers easy
+" Make switching buffers/tabs easy
 nmap <Leader>b :ls<CR>:buffer!<Space>
+nmap <Leader>t :tabs<CR>:tabn<Space>
 
 imap \ <Esc>
-vmap \ <Esc> 
+vmap \ <Esc>
 inoremap <C-\> \
 nnoremap \ :noh<CR>
 map <down> <C-d>zz
@@ -34,19 +32,29 @@ cnoremap <C-s> <C-f>/
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
 cnoremap <C-[>f <S-Right>
-
 nnoremap <space> :w<CR>
-nnoremap Q :q!<CR>
+nnoremap Q :bd<CR>
 noremap ;; :%s:::g<Left><Left><Left>
+"Javascript convenience
+inoremap <C-l> console.log("")<Left><Left>
+"Yank the current buffer full path to clipboard
+nnoremap <silent> -y :let @+ = expand("%:p")<CR>
+nnoremap <silent> -[ <C-O>
+nnoremap <silent> -] <C-I>
+" v(imrc)
+noremap <silent> -v :tabe ~/.vimrc<CR>
+" s(hell)
+noremap <silent> -s :shell<CR>
+" t(rim) whitespace
 
-set nocompatible                     " Use Vim settings, rather than Vi settings (much better!).
+" Use Vim settings, rather than Vi settings (much better!).
+set nocompatible
 set foldmethod=syntax
 set expandtab
 set softtabstop=4
 set shiftwidth=4
 set pastetoggle=<F2>
 set noswapfile
-set autochdir
 set showmode
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
@@ -61,18 +69,22 @@ set display=lastline    " display lines that extend past bottom
 syntax on
 set wildmode=longest:full
 set wildmenu
+set autoread
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+    set undodir=~/.vim/undo
+endif
 
-" Load pathogen plugins
-execute pathogen#infect('~/dotfiles/vim/bundle/{}')
-filetype plugin indent on
-
-" These two lines must come after executing pathogen,
-" otherwise changing runtimepath borks pathogen's path
-" further experimentation required for a workaround
-let &rtp = expand("~/dotfiles/vim") . "," . &rtp
 colorscheme uncolor
 
 highlight MatchParen cterm=underline " causes unmatched parens to be visible
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
+autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
+
+autocmd BufDelete * if len(filter(range(1, bufnr('$')), '!empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif

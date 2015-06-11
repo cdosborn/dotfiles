@@ -1,4 +1,4 @@
-# Makes Control+e become the escape combination
+# Makes Control+o become the escape combination
 escape ^Oo
 
 # the - means login

@@ -1,21 +1,40 @@
 export TERM=xterm-256color
 
-export EDITOR=/usr/bin/vim
+# Aliases
+
+[ -f ~/dotfiles/aliases ] && source ~/dotfiles/aliases 
+
+# Functions
+
+[ -f ~/dotfiles/functions ] && source ~/dotfiles/functions 
 
 # Vim
 
-#export MYVIMRC=~/dotfiles/vimrc
+export EDITOR="vim -u ~/dotfiles/vim/vimrc"
 
-export PATH="$HOME/Library/Haskell/bin:$PATH" #CABAL
+# Completion
 
-export PATH=/usr/local/git/bin/:$PATH #git..
+#source "$(brew --prefix)/share/bash-completion/bash_completion";
+#[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+ 
+# FZF
 
-[[ -s ~/dotfiles/bash_aliases ]] && . ~/dotfiles/bash_aliases 
+[ -f ~/dotfiles/fzf/fzf.bash ] && source ~/dotfiles/fzf/fzf.bash
+
+#NVM
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # Readline
 
 stty -ixon -ixoff # For Terminal to enable C-s with readline
 bind -f ~/dotfiles/inputrc
+
+# Coreutils
+
+PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+#export MANPATH="$(brew --prefix coreutils)/libexec/gnuman/man1"
 
 # History
 
@@ -29,4 +48,6 @@ HISTSIZE=
 # Prompt 
 
 PS1='\W > '
-#PS1='\h:\W > '
+
+#export XDG_CONFIG_HOME=~/dotfiles/fish/
+#exec fish

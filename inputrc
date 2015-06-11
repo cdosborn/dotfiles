@@ -1,3 +1,7 @@
+# the love of my life
+#  complete with single tab
+set show-all-if-ambiguous on
+
 $if Bash
     RET: ""
     "\C-q":"\"\"\C-b"
