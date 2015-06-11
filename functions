@@ -1,14 +1,5 @@
 #! /usr/bin/env bash
 
-source ~/proj/bash/bashful/bashful.sh
-
-function clean_dir {
-    export -f ask
-    find . -d 1 -exec bash -c "ask \"rm {}?\" \"postpone echo rm -r {}\;\"" \;
-    postpone
-    return
-}
-
 function mancat {
     man -P cat $@ | col -b 
 }
