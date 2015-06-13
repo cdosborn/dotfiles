@@ -26,10 +26,13 @@ function get_ps1 {
     host=$(hostname)
     host=${host%%.*}
 
-    ls -pt -G | xargs >/tmp/_    
-    lines=$(wc -l /tmp/_)
+    width=$(tput cols)
+
+    ls -pt -G | xargs > /tmp/blah    
+    lines=$(wc -l < /tmp/blah )
+    echo $lines
     tput -S <<< "
-        cup $lines 0
+        cup $(( $lines + 2 )) 0
         el
         cup 0 0
     "
@@ -39,6 +42,29 @@ function get_ps1 {
         symb="●"
     fi
 
-    cat /tmp/_
+    cat /tmp/blah | gawk ' 
+    BEGIN {
+        "tput cols" | getline width
+        printf "┏"
+        w = width
+        while (--w > 1) {
+            printf "━";
+        }
+        printf "┓\n"
+    } 
+    {
+        w = width - 4;
+        printf "┃ %-"w"s ┃\n", substr($0, 0, length($0))
+    }
+    END {
+        printf "┗"
+        w = width
+        while (--w > 1) {
+            printf "━";
+        }
+        printf "┛\n"
+    }
+    '
+
     echo "$host..$(basename $(pwd))/$symb "
 }
