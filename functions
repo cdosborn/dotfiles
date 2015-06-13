@@ -24,6 +24,6 @@ function get_ps1 {
         cup 0 0
     "
     width=$(tput cols)
-    echo $(ls | xargs | head -c $width)    
+    echo $(ls -p | xargs | head -c $width)    
     echo "$(basename $(pwd))/● "
 }
