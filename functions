@@ -23,7 +23,22 @@ function get_ps1 {
         el
         cup 0 0
     "
-    width=$(tput cols)
-    echo $(ls -p | xargs | head -c $width)    
-    echo "$(basename $(pwd))/● "
+    host=$(hostname)
+    host=${host%%.*}
+
+    ls -pt -G | xargs >/tmp/_    
+    lines=$(wc -l /tmp/_)
+    tput -S <<< "
+        cup $lines 0
+        el
+        cup 0 0
+    "
+    if [ $(whoami) = "root" ]; then
+        symb="■"
+    else 
+        symb="●"
+    fi
+
+    cat /tmp/_
+    echo "$host..$(basename $(pwd))/$symb "
 }
