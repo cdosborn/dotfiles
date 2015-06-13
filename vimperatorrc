@@ -1,0 +1,7 @@
+set gui=none,tabs
+set fs=true
+inoremap "\\" <Esc>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+nnoremap Q :bd<CR>
+" vim: set ft=vimperator:
