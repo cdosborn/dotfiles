@@ -3,7 +3,8 @@
 set show-all-if-ambiguous on
 
 $if Bash
-    RET: ""
+    DEL: ""
+    RETURN: "\C-l\C-j"
     "\C-q":"\"\"\C-b"
     "\C-t": "\C-aecho \C-e" 
     "\C-x*": glob-expand-word
@@ -11,5 +12,4 @@ $if Bash
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
     "\ej": "\C-v\C-j"
-    DEL: ""
 $endif

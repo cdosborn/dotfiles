@@ -1,5 +1,3 @@
-export TERM=xterm-256color
-
 # Source
 
 for file in \
@@ -10,19 +8,10 @@ for file in \
     [ -f $file ] && source $file
 done
 
-# Exports
-
-export EDITOR="vim"
-export NVM_DIR=~/.nvm
-
 # Readline
 
 # For Terminal to enable C-s with readline
 stty -ixon -ixoff
-
-# Coreutils
-
-PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 # History
 
@@ -35,4 +24,12 @@ HISTSIZE=
 
 # Prompt 
 
-PS1='\W > '
+#PS1='\W > '
+PS1='$( get_ps1 )'
+
+# Exports
+
+export TERM=xterm-256color
+export EDITOR="vim"
+export NVM_DIR=~/.nvm
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
