@@ -4,7 +4,7 @@ for file in \
     ~/dotfiles/aliases \
     ~/dotfiles/functions \
     ~/dotfiles/fzf/fzf.bash \
-    $(brew --prefix nvm)/nvm.sh; do
+    /usr/local/opt/nvm/nvm.sh; do
     [ -f $file ] && source $file
 done
 
@@ -32,4 +32,4 @@ PS1='$( get_ps1 )'
 export TERM=xterm-256color
 export EDITOR="vim"
 export NVM_DIR=~/.nvm
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
