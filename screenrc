@@ -1,3 +1,6 @@
+# Emulate 256 color mode
+term    screen-256color
+
 # Makes Control+o become the escape combination
 escape ^Oo
 
