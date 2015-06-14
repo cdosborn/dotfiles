@@ -19,8 +19,6 @@ stty -ixon -ixoff
 # On interactive close, if the shell option histappend is set, Bash 
 #   appends $HISTSIZE lines to $HISTFILE, otherwise it overwrites $HISTFILE
 shopt -s histappend
-HISTFILESIZE=
-HISTSIZE=
 
 # Prompt 
 
@@ -33,3 +31,5 @@ export TERM=xterm-256color
 export EDITOR="vim"
 export NVM_DIR=~/.nvm
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export HISTFILESIZE=
+export HISTSIZE=
