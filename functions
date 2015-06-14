@@ -45,12 +45,15 @@ function get_ps1 {
     cat /tmp/blah | gawk ' 
     BEGIN {
         "tput cols" | getline width
+        "date" | getline date
         printf "┏"
         w = width
-        while (--w > 1) {
+        dateLength = length(date);
+        while (--w > dateLength + 2) {
             printf "━";
         }
-        printf "┓\n"
+        printf date
+        printf "━┓\n"
     } 
     {
         w = width - 4;

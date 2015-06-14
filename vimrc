@@ -8,10 +8,8 @@ nnoremap <Leader>b :ls<CR>:buffer!<Space>
 nnoremap <Leader>t :tabs<CR>:tabn<Space>
 
 inoremap <Leader> <Esc>
-"inoremap <BS> <Nop>
 inoremap <C-\> \
 vnoremap <Leader> <Esc>
-nnoremap <Esc> :noh<CR>
 nnoremap <Tab> zz
 nnoremap j gj
 nnoremap k gk
@@ -70,26 +68,30 @@ set shiftwidth=4
 set showcmd		" display incomplete commands
 set showmode
 set softtabstop=4
+set textwidth=78
 set undofile
 set wildmenu
 set wildmode=longest:full
 " Tap pages is omitted from below, so sessions are per tab
 set sessionoptions=blank,buffers,curdir,folds,help,options,winsize
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+if exists("&backupdir")
+    set backupdir=~/.vim/backups
+endif
+if exists("&directory")
+    set directory=~/.vim/swaps
+endif
 if exists("&undodir")
     set undodir=~/.vim/undo
 endif
-
 colorscheme uncolor
 
-"highlight MatchParen cterm=underline " causes unmatched parens to be visible
-"
-"" Disable auto commenting
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"
-"" Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
-"autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
-"
-"autocmd BufDelete * if len(filter(range(1, bufnr('$')), '!empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif
+highlight MatchParen cterm=underline " causes unmatched parens to be visible
+
+" Disable auto commenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
+autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
+
+autocmd BufDelete * if len(filter(range(1, bufnr('$')), '!empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif
