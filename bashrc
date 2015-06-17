@@ -22,8 +22,9 @@ shopt -s histappend
 
 # Prompt 
 
-#PS1='\W > '
-PS1='$( get_ps1 )'
+PS1='\W > '
+#PS1='$( get_ps1 )'
+#bind 'RETURN: "\C-l\C-j"'
 
 # Exports
 

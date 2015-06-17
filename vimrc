@@ -14,6 +14,9 @@ nnoremap <Tab> zz
 nnoremap j gj
 nnoremap k gk
 
+"Add the (e)x(ecute) macro
+let @x = 'v$""y@"'
+
 " Readline bindings for command mode
 "cnoremap <C-a> <Home>
 "cnoremap <C-e> <End>
@@ -35,8 +38,8 @@ noremap ;; :%s:::g<Left><Left><Left>
 inoremap <C-l> console.log("")<Left><Left>
 "Yank the current buffer full path to clipboard
 nnoremap <silent> -y :let @+ = expand("%:p")<CR>
-nnoremap <silent> -[ <C-O>
-nnoremap <silent> -] <C-I>
+"nnoremap <silent> -[ <C-O>
+"nnoremap <silent> -] <C-I>
 noremap -ms :mksession! .Session.vim<CR>
 nnoremap  -ss :source .Session.vim<CR>
 " v(imrc)

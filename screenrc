@@ -4,8 +4,13 @@ term    screen-256color
 # Makes Control+o become the escape combination
 escape ^Oo
 
+# Enable the alternate window
+altscreen on
+
 # the - means login
 defshell -bash
 
 # lines of scrollback!
 defscrollback 4096
+
+#hardstatus alwayslastline "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%C%a %Y-%M-%d"
