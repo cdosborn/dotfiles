@@ -28,6 +28,8 @@ nnoremap Q ZQ
 nnoremap n nzz
 "center when jumping to prev search
 nnoremap N Nzz
+nnoremap # #zz
+nnoremap * *zz
 "Yank the current buffer full path to clipboard
 nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
@@ -40,14 +42,15 @@ nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
 
 " v(imrc)
-noremap <silent> -tv :tabe ~/.vimrc<CR>
-noremap <silent> -tl :tabe ~/Documents/learned<CR>
-noremap -sv :source ~/.vimrc<CR>
+nnoremap <silent> -tv :tabe ~/.vimrc<CR>
+nnoremap <silent> -tl :tabe ~/Documents/learned<CR>
+nnoremap -sv :source ~/.vimrc<CR>
 " s(hell)
-noremap <silent> -sh :shell<CR>
-noremap <silent> -sx :Sex<CR>
+nnoremap <silent> -sh :shell<CR>
+nnoremap <silent> -sx :Sex<CR>
+nnoremap -sm :sp /tmp/manblah \| :%!man -P cat <right>
 " t(rim) whitespace
-noremap <silent> -t :%s:\s*$::g<CR>
+nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
 
 "function rename()
 
