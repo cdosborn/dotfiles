@@ -14,42 +14,43 @@ nnoremap <Tab> zz
 nnoremap j gj
 nnoremap k gk
 
+":echo "blah"
 "Add the (e)x(ecute) macro
 let @x = 'v$""y@"'
 
-" Readline bindings for command mode
-"cnoremap <C-a> <Home>
-"cnoremap <C-e> <End>
-"cnoremap <C-p> <Up>
-"cnoremap <C-n> <Down>
-"cnoremap <C-b> <Left>
-"cnoremap <C-f> <Right>
-"cnoremap <C-d> <Del>
-"cnoremap <C-h> <BS>
-cnoremap <C-r> <C-f>?
-cnoremap <C-s> <C-f>/
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
 cnoremap <C-[>f <S-Right>
 nnoremap <space> :w<CR>
-nnoremap Q :bd<CR>
-noremap ;; :%s:::g<Left><Left><Left>
-"Javascript convenience
-inoremap <C-l> console.log("")<Left><Left>
+"quit each tab
+nnoremap Q ZQ
+"center when jumping to next search
+nnoremap n nzz
+"center when jumping to prev search
+nnoremap N Nzz
 "Yank the current buffer full path to clipboard
-nnoremap <silent> -y :let @+ = expand("%:p")<CR>
-"nnoremap <silent> -[ <C-O>
-"nnoremap <silent> -] <C-I>
-noremap -ms :mksession! .Session.vim<CR>
-nnoremap  -ss :source .Session.vim<CR>
+nnoremap <silent> -yp :let @" = expand("%:p")<CR>
+nnoremap <silent> -yf m`ggVG""y``
+nnoremap <silent> -cp :let @* = expand("%:p")<CR>
+nnoremap <silent> -cf m`ggVG"*y``
+"save sessions as file name, to permit multiple sessions per dir
+nnoremap -ms :mksession! .%.vim<CR>
+nnoremap -ss :source .%.vim<CR>
+nnoremap -su :%s:::gc<Left><Left><Left><Left>
+nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
+
 " v(imrc)
 noremap <silent> -tv :tabe ~/.vimrc<CR>
 noremap <silent> -tl :tabe ~/Documents/learned<CR>
 noremap -sv :source ~/.vimrc<CR>
 " s(hell)
 noremap <silent> -sh :shell<CR>
+noremap <silent> -sx :Sex<CR>
 " t(rim) whitespace
 noremap <silent> -t :%s:\s*$::g<CR>
+
+"function rename()
+
 
 " Settings
 set backspace=indent,eol,start
@@ -77,6 +78,7 @@ set wildmenu
 set wildmode=longest:full
 " Tap pages is omitted from below, so sessions are per tab
 set sessionoptions=blank,buffers,curdir,folds,help,options,winsize
+set virtualedit=all 
 " Centralize backups, swapfiles and undo history
 if exists("&backupdir")
     set backupdir=~/.vim/backups
@@ -97,4 +99,4 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
 
-autocmd BufDelete * if len(filter(range(1, bufnr('$')), '!empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif
+"autocmd BufDelete * if len(filter(range(1, bufnr('$')), '!empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif
