@@ -1,7 +1,8 @@
-"Load pathogen plugins
+" Load pathogen plugins
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+" Load :Man plugin
 source /usr/local/share/vim/vim74/ftplugin/man.vim
 
 " Make switching buffers/tabs easy
@@ -32,6 +33,8 @@ nnoremap Q ZQ
 nnoremap n nzz
 "center when jumping to prev search
 nnoremap N Nzz
+nnoremap # #zz
+nnoremap * *zz
 "Yank the current buffer full path to clipboard
 nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
@@ -46,17 +49,14 @@ nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
 
 " v(imrc)
-noremap <silent> -tl :tabe ~/Documents/learned<CR>
-noremap <silent> -tv :tabe ~/.vimrc<CR>
 noremap -sv :source ~/.vimrc<CR>
 " s(hell)
 noremap <silent> -sh :!clear && bash;<CR>
 noremap <silent> -sx :Sex<CR>
+nnoremap <silent> -tv :tabe ~/.vimrc<CR>
+nnoremap <silent> -tl :tabe ~/Documents/learned<CR>
 " t(rim) whitespace
-noremap <silent> -t :%s:\s*$::g<CR>
-
-"function rename()
-
+nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
 
 " Settings
 set backspace=indent,eol,start
