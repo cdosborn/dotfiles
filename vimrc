@@ -2,6 +2,7 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+source /usr/local/share/vim/vim74/ftplugin/man.vim
 
 " Make switching buffers/tabs easy
 nnoremap <Leader>b :ls<CR>:buffer!<Space>
@@ -14,9 +15,12 @@ nnoremap <Tab> zz
 nnoremap j gj
 nnoremap k gk
 
+nnoremap <silent> <c-l> :call JumpToNextIndentifier()<cr>
+nnoremap <silent> <c-h> :call JumpToPrevIndentifier()<cr>
+
 ":echo "blah"
 "Add the (e)x(ecute) macro
-let @x = 'v$""y@"'
+let @x = 'm`v$""y@"``'
 
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
@@ -33,6 +37,8 @@ nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
 nnoremap <silent> -cp :let @* = expand("%:p")<CR>
 nnoremap <silent> -cf m`ggVG"*y``
+nnoremap <silent> -cf m`ggVG"*y``
+nnoremap <nowait> ! :!
 "save sessions as file name, to permit multiple sessions per dir
 nnoremap -ms :mksession! .%.vim<CR>
 nnoremap -ss :source .%.vim<CR>
@@ -40,11 +46,11 @@ nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
 
 " v(imrc)
-noremap <silent> -tv :tabe ~/.vimrc<CR>
 noremap <silent> -tl :tabe ~/Documents/learned<CR>
+noremap <silent> -tv :tabe ~/.vimrc<CR>
 noremap -sv :source ~/.vimrc<CR>
 " s(hell)
-noremap <silent> -sh :shell<CR>
+noremap <silent> -sh :!clear && bash;<CR>
 noremap <silent> -sx :Sex<CR>
 " t(rim) whitespace
 noremap <silent> -t :%s:\s*$::g<CR>
