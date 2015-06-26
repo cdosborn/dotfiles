@@ -3,7 +3,7 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 " Load :Man plugin
-source /usr/local/share/vim/vim74/ftplugin/man.vim
+source $VIMRUNTIME/ftplugin/man.vim
 
 " Make switching buffers/tabs easy
 nnoremap <Leader>b :ls<CR>:buffer!<Space>
@@ -44,6 +44,7 @@ nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <nowait> ! :!
 "save sessions as file name, to permit multiple sessions per dir
 nnoremap -ms :mksession! .%.vim<CR>
+nnoremap -mx !chmod +x %<CR>
 nnoremap -ss :source .%.vim<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
@@ -104,5 +105,3 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
-
-"autocmd BufDelete * if len(filter(range(1, bufnr('$')), '!empty(bufname(v:val)) && buflisted(v:val)')) == 1 | quit | endif

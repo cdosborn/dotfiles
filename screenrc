@@ -12,7 +12,7 @@ defshell bash
 # lines of scrollback!
 defscrollback 4096
 
-backtick 1 5 5 gawk -v width=15 -v sleep=5 -f /Users/cdosborn/proj/awk/progress.awk
+backtick 1 5 5 cpu_progress.awk
 hardstatus alwayslastline
 hardstatus string ' %H  %1` '
 caption string ' %{= kw}%-w%?%{-}%?%F%{= dk} %n %t %?%?%{= kw}%+w %?%{= kk}'

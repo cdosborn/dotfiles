@@ -31,10 +31,12 @@ PS1='\W > '
 export TERM=xterm-256color
 export EDITOR="vim"
 export NVM_DIR=~/.nvm
-export PATH="/Users/cdosborn/dotfiles/awk:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH=~/dotfiles/awk:/usr/local/opt/coreutils/libexec/gnubin:$PATH
+export AWKPATH=~/dotfiles/awk
 export HISTFILESIZE=
 export HISTSIZE=
 
 if [[ `hostname` == "toad" ]]; then
     export SCREENRC=~/.local.screenrc
+    export AWKPATH+=:~/proj/awk
 fi
