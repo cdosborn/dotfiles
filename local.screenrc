@@ -1,0 +1,4 @@
+# Makes Control+o become the escape combination
+escape ^Oo
+
+source ~/.screenrc

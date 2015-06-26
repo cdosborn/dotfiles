@@ -3,16 +3,16 @@ term    screen-256color
 
 startup_message off
 
-# Makes Control+o become the escape combination
-escape ^Oo
-
 # Enable the alternate window
 altscreen on
 
 # the - means login
-defshell -bash
+defshell bash
 
 # lines of scrollback!
 defscrollback 4096
 
-hardstatus alwayslastline "%{= kD} %H %{= bD}%n %W %=%C%a "
+backtick 1 5 5 gawk -v width=15 -v sleep=5 -f /Users/cdosborn/proj/awk/progress.awk
+hardstatus alwayslastline
+hardstatus string ' %H  %1` '
+caption string ' %{= kw}%-w%?%{-}%?%F%{= dk} %n %t %?%?%{= kw}%+w %?%{= kk}'
