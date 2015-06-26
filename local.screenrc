@@ -1,4 +1,6 @@
 # Makes Control+o become the escape combination
 escape ^Oo
 
+backtick 1 5 5 cpu_progress.awk
+
 source ~/.screenrc

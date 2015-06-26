@@ -40,4 +40,5 @@ export SCREENRC=~/.local.screenrc
 if [[ `hostname` == "toad" ]]; then
     # Source local awk (less compliant) scripts first
     export AWKPATH=~/proj/awk:$AWKPATH
+    export PATH=~/proj/awk:$PATH
 fi

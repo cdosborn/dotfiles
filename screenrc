@@ -12,6 +12,6 @@ defshell bash
 # lines of scrollback!
 defscrollback 4096
 
+caption splitonly ''
 hardstatus alwayslastline
-hardstatus string ' %H  %= %1` '
-caption string ' %{= kw}%-w%?%{-}%?%F%{= dk} %n %t %?%?%{= kw}%+w %?%{= kk}'
+hardstatus string ' %H  %?%-w%?%{-}%?%{+b R}&%{-} %t%:%{+b R}&%{-}-%?%+w %?%{-}%= %{-}%{-}%1` %{= kk}'
