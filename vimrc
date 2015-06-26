@@ -11,6 +11,7 @@ nnoremap <Leader>t :tabs<CR>:tabn<Space>
 
 inoremap <Leader> <Esc>
 inoremap <C-\> \
+inoremap / /<C-x><C-f><C-p>
 vnoremap <Leader> <Esc>
 nnoremap <Tab> zz
 nnoremap j gj

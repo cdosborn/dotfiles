@@ -1,4 +1,3 @@
-@include "round.awk"
 function progress(ratio, _width, _c, _ticks, _integral, _scaled, _bangs, _pad, _i) {
     if (!_width) _width = 10;
     if (!_c) _c = ".";

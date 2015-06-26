@@ -35,8 +35,9 @@ export PATH=~/dotfiles/awk:/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export AWKPATH=~/dotfiles/awk
 export HISTFILESIZE=
 export HISTSIZE=
+export SCREENRC=~/.local.screenrc
 
 if [[ `hostname` == "toad" ]]; then
-    export SCREENRC=~/.local.screenrc
-    export AWKPATH+=:~/proj/awk
+    # Source local awk (less compliant) scripts first
+    export AWKPATH=~/proj/awk:$AWKPATH
 fi
