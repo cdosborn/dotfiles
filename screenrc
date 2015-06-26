@@ -1,6 +1,8 @@
 # Emulate 256 color mode
 term    screen-256color
 
+startup_message off
+
 # Makes Control+o become the escape combination
 escape ^Oo
 
@@ -13,4 +15,4 @@ defshell -bash
 # lines of scrollback!
 defscrollback 4096
 
-#hardstatus alwayslastline "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%C%a %Y-%M-%d"
+hardstatus alwayslastline "%{= kD} %H %{= bD}%n %W %=%C%a "
