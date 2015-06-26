@@ -3,7 +3,7 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 " Load :Man plugin
-source /usr/local/share/vim/vim74/ftplugin/man.vim
+source $VIMRUNTIME/ftplugin/man.vim
 
 " Make switching buffers/tabs easy
 nnoremap <Leader>b :ls<CR>:buffer!<Space>
