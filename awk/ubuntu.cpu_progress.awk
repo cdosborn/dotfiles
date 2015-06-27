@@ -1,12 +1,10 @@
 BEGIN {
       # Expected to be called with -v width=n char=c
 
-      proc="top -b -n1 | head -n 9";
-      while((proc | getline output)) {
-          split(output, arr);
-          if (output ~ /^Cpu/) break
+      proc="vmstat 1 5 | tail -n 5";
+      while (proc | getline output) {
+          n = split(output, arr);
+          usage += arr[14] + arr[13]
       }
-      close(proc);
-      print progress((arr[2] + arr[4]) / 100, width);
-
+      print progress(usage / 5 / 100, width);
 }

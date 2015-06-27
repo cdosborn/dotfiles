@@ -13,5 +13,6 @@ defshell bash
 defscrollback 4096
 
 caption splitonly ''
+#caption splitonly '%{=u dd} '
 hardstatus alwayslastline
 hardstatus string ' %H  %?%-w%?%{-}%?%{+b R}&%{-} %t%:%{+b R}&%{-}-%?%+w %?%{-}%= %{-}%{-}%1` %{= kk}'
