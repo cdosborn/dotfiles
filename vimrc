@@ -16,9 +16,10 @@ vnoremap <Leader> <Esc>
 nnoremap <Tab> zz
 nnoremap j gj
 nnoremap k gk
-
-nnoremap <silent> <c-l> :call JumpToNextIndentifier()<cr>
-nnoremap <silent> <c-h> :call JumpToPrevIndentifier()<cr>
+nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
+nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
+nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
+nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
 
 ":echo "blah"
 "Add the (e)x(ecute) macro
@@ -28,6 +29,7 @@ let @v = '0/[{}]V%o'
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
 cnoremap <C-[>f <S-Right>
+
 nnoremap <space> :w<CR>
 "quit each tab
 nnoremap Q ZQ
@@ -44,12 +46,13 @@ nnoremap <silent> -cp :let @* = expand("%:p")<CR>
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <nowait> ! :!
+nnoremap -mn :Man<space>
 "save sessions as file name, to permit multiple sessions per dir
-nnoremap -ms :mksession! .%.vim<CR>
+nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx !chmod +x %<CR>
-nnoremap -ss :source .%.vim<CR>
+nnoremap -ss :source .session.vim<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
-nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
+nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
 noremap -sv :source ~/.vimrc<CR>
@@ -86,8 +89,8 @@ set undofile
 set wildmenu
 set wildmode=longest:full
 " Tap pages is omitted from below, so sessions are per tab
-set sessionoptions=blank,buffers,curdir,folds,help,options,winsize
-set virtualedit=all 
+set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
+set virtualedit=all
 " Centralize backups, swapfiles and undo history
 if exists("&backupdir")
     set backupdir=~/.vim/backups
@@ -106,4 +109,55 @@ highlight MatchParen cterm=underline " causes unmatched parens to be visible
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
-autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
+" autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
+
+set tabline=%!MyTabLine()  " custom tab pages line
+if !exists("*MyTabLine")
+    function MyTabLine()
+      let s = ''
+      for i in range(tabpagenr('$'))
+        " select the highlighting
+        if i + 1 == tabpagenr()
+          let s .= '%#TabLineSel#'
+        else
+          let s .= '%#TabLine#'
+        endif
+
+        " set the tab page number (for mouse clicks)
+        let s .= '%' . (i + 1) . 'T'
+
+        " the label is made by MyTabLabel()
+        let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+      endfor
+
+      " after the last tab fill with TabLineFill and reset tab page nr
+      let s .= '%#TabLineFill#%T'
+
+      " right-align the label to close the current tab page
+      if tabpagenr('$') > 1
+        let s .= '%=%#TabLine#%999X'
+      endif
+
+      return s
+    endfunction
+endif
+
+if !exists("*MyTabLabel")
+    function MyTabLabel(i)
+        let s = (a:i) . '' "complete tabline goes here
+        let m = ''       " &modified counter
+        " loop through each buffer in a tab
+        for b in tabpagebuflist(a:i)
+                " check and ++ tab's &modified count
+                if getbufvar( b, "&modified" )
+                        let m .= '+'
+                endif
+        endfor
+
+        if m != ''
+            let s .= ' ' . m
+        endif
+
+        return s
+    endfunction
+endif
