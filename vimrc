@@ -45,12 +45,13 @@ nnoremap <silent> -cp :let @* = expand("%:p")<CR>
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <nowait> ! :!
+nnoremap -mn :Man<space>
 "save sessions as file name, to permit multiple sessions per dir
-nnoremap -ms :mksession! .%.vim<CR>
+nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx !chmod +x %<CR>
-nnoremap -ss :source .%.vim<CR>
+nnoremap -ss :source .session.vim<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
-nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR> 
+nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
 noremap -sv :source ~/.vimrc<CR>
@@ -88,7 +89,7 @@ set wildmenu
 set wildmode=longest:full
 " Tap pages is omitted from below, so sessions are per tab
 set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
-set virtualedit=all 
+set virtualedit=all
 " Centralize backups, swapfiles and undo history
 if exists("&backupdir")
     set backupdir=~/.vim/backups
@@ -107,7 +108,7 @@ highlight MatchParen cterm=underline " causes unmatched parens to be visible
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
-autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
+" autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
 
 set tabline=%!MyTabLine()  " custom tab pages line
 if !exists("*MyTabLine")
@@ -133,7 +134,7 @@ if !exists("*MyTabLine")
 
       " right-align the label to close the current tab page
       if tabpagenr('$') > 1
-        let s .= '%=%#TabLine#%999Xclose'
+        let s .= '%=%#TabLine#%999X'
       endif
 
       return s
