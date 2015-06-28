@@ -23,6 +23,7 @@ nnoremap <silent> <c-h> :call JumpToPrevIndentifier()<cr>
 ":echo "blah"
 "Add the (e)x(ecute) macro
 let @x = 'm`v$""y@"``'
+let @v = '0/[{}]V%o'
 
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
