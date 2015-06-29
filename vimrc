@@ -42,6 +42,8 @@ nnoremap n nzz
 nnoremap N Nzz
 nnoremap # #zz
 nnoremap * *zz
+nnoremap g; g;zz
+nnoremap g, g,zz
 "Yank the current buffer full path to clipboard
 nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
@@ -70,6 +72,7 @@ nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
 
 " Settings
 set backspace=indent,eol,start
+set switchbuf=useopen
 set autochdir
 set autoread
 set display=lastline    " display lines that extend past bottom
