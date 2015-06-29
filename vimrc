@@ -1,3 +1,5 @@
+set  nocompatible
+
 " Load pathogen plugins
 execute pathogen#infect()
 syntax on
@@ -17,10 +19,14 @@ vnoremap <Leader> <Esc>
 nnoremap <Tab> zz
 nnoremap j gj
 nnoremap k gk
-nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
-nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
-nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
-nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
+"nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
+"nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
+"nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
+"nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
+nnoremap <silent> <C-J> <C-W><C-J>
+nnoremap <silent> <C-K> <C-W><C-K>
+nnoremap <silent> <C-L> <C-W><C-L>
+nnoremap <silent> <C-H> <C-W><C-H>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
 
@@ -61,49 +67,44 @@ nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
-noremap -sv :source ~/.vimrc<CR>
+nnoremap -sv :source ~/.vimrc<CR>
 " s(hell)
-noremap <silent> -sh :!clear && bash;<CR>
-noremap <silent> -sx :Sex<CR>
+nnoremap <silent> -sa :only \| all<CR>
+nnoremap <silent> -va :only \| vertical all<CR>
+nnoremap <silent> -sh :!clear && bash;<CR>
+nnoremap <silent> -sx :Sex<CR>
 nnoremap <silent> -ev :sp ~/.vimrc<CR>
 nnoremap <silent> -ec :sp ~/.vim/colors/uncolor.vim<CR>
 " t(rim) whitespace
 nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
 
 " Settings
-set backspace=indent,eol,start
-set switchbuf=useopen
 set autochdir
 set autoread
-set display=lastline    " display lines that extend past bottom
+set backspace=indent,eol,start
+set display=lastline
 set expandtab
-set foldenable          " enable folds
-set history=50		" keep 50 lines of command line history
+set foldenable
+set history=50
 set hlsearch
-set incsearch		" do incremental searching
-" Use Vim settings, rather than Vi settings (much better!).
-set nocompatible
-"set nomore              " removes the annoying vim page message thing
+set incsearch
 set noswapfile
 set pastetoggle=<F2>
-set ruler		" show the cursor position all the time
+set ruler                      
 set shiftwidth=4
-set showcmd		" display incomplete commands
+set showcmd                    
 set showmode
 set softtabstop=4
-
-""set winheight=9999
-set winminheight=0
-set winminwidth=20
-
+set switchbuf=useopen
+set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
+set tags=.tags
 set textwidth=78
 set undofile
+set virtualedit=all
 set wildmenu
 set wildmode=longest:full
-" Tap pages is omitted from below, so sessions are per tab
-set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
-set virtualedit=all
-" Centralize backups, swapfiles and undo history
+"set winminheight=0
+"set winminwidth=20
 if exists("&backupdir")
     set backupdir=~/.vim/backups
 endif
@@ -114,8 +115,6 @@ if exists("&undodir")
     set undodir=~/.vim/undo
 endif
 colorscheme uncolor
-
-highlight MatchParen cterm=underline " causes unmatched parens to be visible
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
