@@ -1,9 +1,21 @@
+" Set up plugins
 set  nocompatible
-
-" Load pathogen plugins
-execute pathogen#infect()
-syntax on
 filetype plugin indent on
+syntax on
+
+call plug#begin()
+
+" Using git URL
+Plug 'https://github.com/rking/ag.vim'
+Plug 'https://github.com/Rykka/colorv.vim.git'
+Plug 'git@github.com:cdosborn/dotfiles.git'
+Plug 'git://github.com/PeterRincker/vim-argumentative.git'
+Plug 'git://github.com/tpope/vim-commentary.git'
+Plug 'https://github.com/nvie/vim-flake8.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/cdosborn/vim-rsi.git'
+
+call plug#end()
 
 " Load :Man plugin
 source $VIMRUNTIME/ftplugin/man.vim
