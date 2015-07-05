@@ -21,7 +21,7 @@ stty -ixon -ixoff
 shopt -s histappend
 
 # Prompt 
-
+export PROMPT_COMMAND="history -a ~/.bash_history.global;${PROMPT_COMMAND}"
 PS1='\W > '
 #PS1='$( get_ps1 )'
 #bind 'RETURN: "\C-l\C-j"'

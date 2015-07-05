@@ -1,5 +1,5 @@
 set gui=none,tabs
-set fs=true
+" set fs=true
 inoremap "\\" <Esc>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
