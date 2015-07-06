@@ -9,7 +9,7 @@ filetype plugin indent on
 source $VIMRUNTIME/ftplugin/man.vim
 
 " Make switching buffers/tabs easy
-nnoremap <Leader>b :ls<CR>:buffer!<Space>
+nnoremap <Leader>b :ls<CR>:sbuffer!<Space>
 nnoremap <Leader>t :tabs<CR>:tabn<Space>
 
 inoremap <Leader> <Esc>
@@ -21,12 +21,10 @@ nnoremap j gj
 nnoremap k gk
 "nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
-"nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
-"nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
+nnoremap <silent> <C-L> <C-W><C-L><C-W>\|
+nnoremap <silent> <C-H> <C-W><C-H><C-W>\|
 nnoremap <silent> <C-J> <C-W><C-J>
 nnoremap <silent> <C-K> <C-W><C-K>
-nnoremap <silent> <C-L> <C-W><C-L>
-nnoremap <silent> <C-H> <C-W><C-H>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
 
@@ -104,7 +102,7 @@ set virtualedit=all
 set wildmenu
 set wildmode=longest:full
 "set winminheight=0
-"set winminwidth=20
+set winminwidth=10
 if exists("&backupdir")
     set backupdir=~/.vim/backups
 endif
