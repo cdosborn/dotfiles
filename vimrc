@@ -1,9 +1,21 @@
+" Set up plugins
 set  nocompatible
-
-" Load pathogen plugins
-execute pathogen#infect()
-syntax on
 filetype plugin indent on
+syntax on
+
+call plug#begin()
+
+" Using git URL
+Plug 'https://github.com/rking/ag.vim'
+Plug 'https://github.com/Rykka/colorv.vim.git'
+Plug 'git://github.com/PeterRincker/vim-argumentative.git'
+Plug 'git://github.com/tpope/vim-commentary.git'
+Plug 'https://github.com/nvie/vim-flake8.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/cdosborn/vim-rsi.git'
+Plug 'https://github.com/sjl/gundo.vim.git'
+
+call plug#end()
 
 " Load :Man plugin
 source $VIMRUNTIME/ftplugin/man.vim
@@ -21,10 +33,13 @@ nnoremap j gj
 nnoremap k gk
 "nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
-nnoremap <silent> <C-L> <C-W><C-L><C-W>\|
-nnoremap <silent> <C-H> <C-W><C-H><C-W>\|
+"nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
+"nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
+nnoremap <silent> <C-L> <C-W><C-L>
+nnoremap <silent> <C-H> <C-W><C-H>
 nnoremap <silent> <C-J> <C-W><C-J>
 nnoremap <silent> <C-K> <C-W><C-K>
+nnoremap <silent> <C-W>v :rightbelow vs<CR>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
 
@@ -60,18 +75,22 @@ nnoremap -mn :Man<space>
 nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx !chmod +x %<CR>
 nnoremap -ss :source .session.vim<CR>
-nnoremap -sf :so %<CR>
+nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
-nnoremap -dt :call setline(".", strftime("%m/%d/%y"))<CR>
+nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
 nnoremap -sv :source ~/.vimrc<CR>
 " s(hell)
+" nnoremap <silent> -va :set wiw=20 \| only \| vertical all \| set wiw=9999<CR>
+" nnoremap <silent> -sa :only \| all<CR>
+" nnoremap <silent> -va :only \| vertical all<CR>
 nnoremap <silent> -sa :only \| all<CR>
-nnoremap <silent> -va :only \| vertical all<CR>
+nnoremap -va <C-W>L:windo<space>normal<space><C-V><C-W>H<CR>
+nnoremap -sa <C-W>J:windo<space>normal<space><C-V><C-W>K<CR>
 nnoremap <silent> -sh :!clear && bash;<CR>
 nnoremap <silent> -sx :Sex<CR>
-nnoremap <silent> -ev :sp ~/.vimrc<CR>
+nnoremap <silent> -ev :vsp ~/.vimrc<CR>
 nnoremap <silent> -ec :sp ~/.vim/colors/uncolor.vim<CR>
 " t(rim) whitespace
 nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
@@ -101,8 +120,10 @@ set undofile
 set virtualedit=all
 set wildmenu
 set wildmode=longest:full
+" set wiw=9999
 "set winminheight=0
 set winminwidth=10
+"set winminheight=0
 if exists("&backupdir")
     set backupdir=~/.vim/backups
 endif
@@ -119,6 +140,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 " autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
+
+autocmd WinEnter * :exe "normal \<c-w>|"
 
 set statusline=\ %F%#Modified#\ %M\ 
 set tabline=%!MyTabLine()
