@@ -43,7 +43,6 @@ nnoremap <silent> <C-W>v :rightbelow vs<CR>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
 
-":echo "blah"
 "Add the (e)x(ecute) macro
 let @x = 'm`v$""y@"``'
 let @v = '0/[{}]V%o'
@@ -77,6 +76,7 @@ nnoremap -mx !chmod +x %<CR>
 nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
+nnoremap -sp `[v`]
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
