@@ -24,6 +24,9 @@ source $VIMRUNTIME/ftplugin/man.vim
 nnoremap <Leader>b :ls<CR>:sbuffer!<Space>
 nnoremap <Leader>t :tabs<CR>:tabn<Space>
 
+" Better goto file
+nnoremap gf :exec ":exec \":sb \" . expand(\"<cfile>\")"<CR>
+
 inoremap <Leader> <Esc>
 inoremap <C-\> \
 inoremap / /<C-x><C-f><C-p>
@@ -70,13 +73,16 @@ nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <nowait> ! :!
 nnoremap -mn :Man<space>
-"save sessions as file name, to permit multiple sessions per dir
 nnoremap -ms :mksession! .session.vim<CR>
-nnoremap -mx !chmod +x %<CR>
+nnoremap -mx :!chmod +x %<CR>
+nnoremap -mk :make<CR>
+nnoremap -mc :!ctags -o .tags *<CR>
 nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -sp `[v`]
+" re(fresh)
+nnoremap -re :normal! <CR>
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
@@ -112,7 +118,7 @@ set shiftwidth=4
 set showcmd                    
 set showmode
 set softtabstop=4
-set switchbuf=useopen
+set switchbuf=useopen,usetab
 set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
 set tags=.tags
 set textwidth=78
