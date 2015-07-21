@@ -1,0 +1,7 @@
+[user]
+	name = Connor Osborn
+	email = cdosborn@uw.edu
+[core]
+	editor = vim
+[push]
+	default = matching

@@ -1,4 +1,4 @@
-for file in bashrc inputrc vimrc screenrc; do
+for file in bashrc inputrc vimrc screenrc gitconfig; do
     ln -sf ~/dotfiles/$file ~/.$file
 done
 
