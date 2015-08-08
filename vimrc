@@ -14,6 +14,7 @@ Plug 'https://github.com/nvie/vim-flake8.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/cdosborn/vim-rsi.git'
 Plug 'https://github.com/sjl/gundo.vim.git'
+Plug 'git://github.com/walm/jshint.vim.git'
 
 call plug#end()
 
@@ -46,9 +47,14 @@ nnoremap <silent> <C-W>v :rightbelow vs<CR>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
 
-"Add the (e)x(ecute) macro
+" Add the (e)x(ecute) macro
 let @x = 'm`v$""y@"``'
 let @v = '0/[{}]V%o'
+" In js console.log the expression under the cursor
+let @i = '/\w[a-zA-Z0-9.-_]\+N:nohgn'
+let @l = 'yOconsole.log("\]pa", \]pa);\'
+" Reset search register
+let @/ = ''
 
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
@@ -111,6 +117,7 @@ set foldenable
 set history=50
 set hlsearch
 set incsearch
+set laststatus=2
 set noswapfile
 set pastetoggle=<F2>
 set ruler                      
@@ -144,12 +151,14 @@ colorscheme uncolor
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+"autocmd BufWritePre *.js JSHint %
+
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 " autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
 
 autocmd WinEnter * :exe "normal \<c-w>|"
 
-set statusline=\ %F%#Modified#\ %M\ 
+set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\  
 set tabline=%!MyTabLine()
 function! MyTabLine()
   let s = ''
