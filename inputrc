@@ -3,7 +3,7 @@
 set show-all-if-ambiguous on
 
 $if Bash
-    DEL: ""
+#    DEL: ""
     "\C-q":"\"\"\C-b"
     "\C-t": "\C-aecho \C-e" 
     "\C-x*": glob-expand-word
