@@ -1,6 +1,7 @@
 # Source
 
 for file in \
+    ~/dotfiles/bashrc.local \
     ~/dotfiles/aliases \
     ~/dotfiles/functions \
     ~/dotfiles/fzf/fzf.bash \

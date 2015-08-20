@@ -50,6 +50,8 @@ nnoremap <silent> <C-K> <C-W>k
 nnoremap <silent> <C-W>v :rightbelow vs<CR>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
+" Select last paste, kinda like gv
+nnoremap gp `[v`]
 
 " Add the (e)x(ecute) macro
 let @x = 'm`v$""y@"``'
