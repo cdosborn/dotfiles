@@ -15,6 +15,8 @@ Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/cdosborn/vim-rsi.git'
 Plug 'https://github.com/sjl/gundo.vim.git'
 Plug 'git://github.com/walm/jshint.vim.git'
+Plug 'git://github.com/marijnh/tern_for_vim.git'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
 call plug#end()
 
@@ -22,27 +24,29 @@ call plug#end()
 source $VIMRUNTIME/ftplugin/man.vim
 
 " Make switching buffers/tabs easy
+nnoremap // :FZFMru<CR>
 nnoremap <Leader>b :ls<CR>:sbuffer!<Space>
-nnoremap <Leader>t :tabs<CR>:tabn<Space>
+nnoremap ,e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+nnoremap _ 10<C-W>-
+nnoremap + 10<C-W>+
 
 " Better goto file
-nnoremap gf :exec ":exec \":sb \" . expand(\"<cfile>\")"<CR>
+"nnoremap gf :exec ":exec \":sb \" . expand(\"<cfile>\")"<CR>
 
-inoremap <Leader> <Esc>
+noremap <Leader> <Esc>
+inoremap \ <Esc>
 inoremap <C-\> \
 inoremap / /<C-x><C-f><C-p>
-vnoremap <Leader> <Esc>
 nnoremap <Tab> zz
-nnoremap j gj
-nnoremap k gk
 "nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
-nnoremap <silent> <C-L> <C-W><C-L>
-nnoremap <silent> <C-H> <C-W><C-H>
-nnoremap <silent> <C-J> <C-W><C-J>
-nnoremap <silent> <C-K> <C-W><C-K>
+nnoremap <silent> <C-L> <C-W>l
+nnoremap <silent> <C-H> <C-W>h
+nnoremap <silent> <C-J> <C-W>j
+nnoremap <silent> <C-K> <C-W>k
 nnoremap <silent> <C-W>v :rightbelow vs<CR>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
@@ -60,17 +64,17 @@ let @/ = ''
 cnoremap <C-[>b <S-Left>
 cnoremap <C-[>f <S-Right>
 
-nnoremap <space> :w<CR>
+nnoremap <Space> :w<CR>
 "quit each tab
 nnoremap Q ZQ
-"center when jumping to next search
-nnoremap n nzz
-"center when jumping to prev search
-nnoremap N Nzz
-nnoremap # #zz
-nnoremap * *zz
-nnoremap g; g;zz
-nnoremap g, g,zz
+""center when jumping to next search
+"nnoremap n nzz
+""center when jumping to prev search
+"nnoremap N Nzz
+"nnoremap # #zz
+"nnoremap * *zz
+"nnoremap g; g;zz
+"nnoremap g, g,zz
 "Yank the current buffer full path to clipboard
 nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
@@ -82,7 +86,7 @@ nnoremap -mn :Man<space>
 nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx :!chmod +x %<CR>
 nnoremap -mk :make<CR>
-nnoremap -mc :!ctags -o .tags *<CR>
+nnoremap -mc :!ctags -f .tags -R *<CR>
 nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
@@ -92,7 +96,7 @@ nnoremap -re :normal! <CR>
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " v(imrc)
-nnoremap -sv :source ~/.vimrc<CR>
+nnoremap -sv :source $MYVIMRC<CR>
 " s(hell)
 " nnoremap <silent> -va :set wiw=20 \| only \| vertical all \| set wiw=9999<CR>
 " nnoremap <silent> -sa :only \| all<CR>
@@ -102,13 +106,14 @@ nnoremap -va <C-W>L:windo<space>normal<space><C-V><C-W>H<CR>
 nnoremap -sa <C-W>J:windo<space>normal<space><C-V><C-W>K<CR>
 nnoremap <silent> -sh :!clear && bash;<CR>
 nnoremap <silent> -sx :Sex<CR>
-nnoremap <silent> -ev :vsp ~/.vimrc<CR>
+nnoremap <silent> -ev :vsp $MYVIMRC<CR>
 nnoremap <silent> -ec :sp ~/.vim/colors/uncolor.vim<CR>
 " t(rim) whitespace
 nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
+nnoremap <silent> -tp :TernDefPreview<CR>
 
 " Settings
-set autochdir
+" set autochdir
 set autoread
 set backspace=indent,eol,start
 set display=lastline
@@ -151,12 +156,16 @@ colorscheme uncolor
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"autocmd BufWritePre *.js JSHint %
+" augroup jsgroup
+"     autocmd!
+"     autocmd FileType javascript setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"     " autocmd BufWritePost *.js JSHint %
+" augroup END
 
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 " autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
 
-autocmd WinEnter * :exe "normal \<c-w>|"
+autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
 
 set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\  
 set tabline=%!MyTabLine()
@@ -187,3 +196,10 @@ function! MyTabLine()
 
   return s
 endfunction
+
+"Fuzzy search over recent files
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})

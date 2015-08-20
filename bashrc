@@ -42,3 +42,7 @@ if [[ `hostname` == "toad" ]]; then
     export AWKPATH=~/proj/awk:$AWKPATH
     export PATH=~/proj/awk:$PATH
 fi
+
+for file in ctags bashrc inputrc vimrc screenrc gitconfig; do
+    ln -sf ~/dotfiles/$file ~/.$file
+done

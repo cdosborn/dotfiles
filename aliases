@@ -1,6 +1,7 @@
 alias _='source ~/.bashrc'
 alias bin='xxd -pb'
 alias gl='git log'
+alias gb='git branch'
 alias grep='grep --color'
 alias gs='git status'
 alias j='cd $(sort -rn ~/dotfiles/dirlist | uniq -c | tr -s " " | cut -d " " -f 3 | fzf)'

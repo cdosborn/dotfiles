@@ -7,3 +7,5 @@
 	default = matching
 [alias]
 	co = checkout
+[mergetool]
+	tool = vimdiff
