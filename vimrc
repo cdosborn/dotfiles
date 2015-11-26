@@ -17,6 +17,7 @@ Plug 'https://github.com/sjl/gundo.vim.git'
 Plug 'git://github.com/walm/jshint.vim.git'
 Plug 'git://github.com/marijnh/tern_for_vim.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/vim-easy-align'
 
 call plug#end()
 
@@ -50,6 +51,8 @@ nnoremap <silent> <C-K> <C-W>k
 nnoremap <silent> <C-W>v :rightbelow vs<CR>
 nnoremap <silent> ) gt<CR>
 nnoremap <silent> ( gT<CR>
+" Select last paste, kinda like gv
+nnoremap gp `[v`]
 
 " Add the (e)x(ecute) macro
 let @x = 'm`v$""y@"``'
@@ -94,6 +97,12 @@ nnoremap -sp `[v`]
 " re(fresh)
 nnoremap -re :normal! <CR>
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap -a <Plug>(EasyAlign)
 
 " v(imrc)
 nnoremap -sv :source $MYVIMRC<CR>
@@ -165,7 +174,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 " autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
 
-autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
+" Resize windows on window switch
+" autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
 
 set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\  
 set tabline=%!MyTabLine()
