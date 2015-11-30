@@ -39,7 +39,6 @@ noremap <Leader> <Esc>
 inoremap \ <Esc>
 inoremap <C-\> \
 inoremap / /<C-x><C-f><C-p>
-nnoremap <Tab> zz
 "nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
