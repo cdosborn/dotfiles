@@ -17,6 +17,7 @@ Plug 'https://github.com/sjl/gundo.vim.git'
 Plug 'git://github.com/walm/jshint.vim.git'
 Plug 'git://github.com/marijnh/tern_for_vim.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'https://github.com/junegunn/vim-easy-align.git'
 
 call plug#end()
 
@@ -38,7 +39,7 @@ noremap <Leader> <Esc>
 inoremap \ <Esc>
 inoremap <C-\> \
 inoremap / /<C-x><C-f><C-p>
-nnoremap <Tab> zz
+" nnoremap <Tab> zz
 "nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
 "nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
@@ -167,7 +168,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
 " autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
 
-autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
+" autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
 
 set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\  
 set tabline=%!MyTabLine()
