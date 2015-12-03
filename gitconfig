@@ -9,3 +9,7 @@
 	co = checkout
 [mergetool]
 	tool = vimdiff
+[alias]
+        co = checkout
+[color]
+	ui = auto

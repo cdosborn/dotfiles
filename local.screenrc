@@ -1,5 +1,5 @@
 # Makes Control+o become the escape combination
-escape ^Oo
+# escape ^Oo
 
 #backtick 1 8 8 cpu_progress.sh
 
