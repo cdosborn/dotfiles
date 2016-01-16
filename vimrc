@@ -122,6 +122,7 @@ nnoremap <silent> -tp :TernDefPreview<CR>
 
 " Settings
 " set autochdir
+set autoindent
 set autoread
 set backspace=indent,eol,start
 set display=lastline
