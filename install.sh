@@ -15,4 +15,5 @@ fi
 
 if [[ `uname -v` =~ Darwin ]]; then
     brew install ag
+    osx/install.sh
 fi
