@@ -1,4 +1,4 @@
-for file in ctags bashrc inputrc vimrc screenrc gitconfig; do
+for file in ghci ctags bashrc inputrc vimrc screenrc gitconfig; do
     ln -sf ~/dotfiles/$file ~/.$file
 done
 
@@ -14,6 +14,7 @@ if [[ `uname -v` =~ Ubuntu ]]; then
 fi
 
 if [[ `uname -v` =~ Darwin ]]; then
-    brew install ag
-    osx/install.sh
+    # Install ag if it doesnt exist
+    which ag &>/dev/null || brew install ag
+     ~/dotfiles/osx/install.sh
 fi

@@ -24,7 +24,8 @@ shopt -s histappend
 # Prompt 
 export PROMPT_COMMAND="history -a ~/.bash_history.global;${PROMPT_COMMAND}"
 #PS1='%n \W > '
-PS1='[\h:\W] \$ \[\e[01m\]'
+#PS1='[\h:\W] \$ \[\e[01m\]'
+PS1='[\h:\W] \$ '
 #PS1='$( get_ps1 )'
 
 # Exports

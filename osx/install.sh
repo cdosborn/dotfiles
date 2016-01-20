@@ -1,7 +1,10 @@
 #! /bin/bash 
 
 # Set up defaults
-./defaults.sh
+~/dotfiles/osx/defaults.sh
 
 # Link emacs key bindings
-ln -sf DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
+if [ ! -d ~/Library/KeyBindings ]; then
+    mkdir ~/Library/KeyBindings
+fi
+ln -sf ~/dotfiles/osx/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
