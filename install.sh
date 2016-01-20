@@ -1,4 +1,4 @@
-for file in ctags bashrc inputrc vimrc screenrc gitconfig; do
+for file in ghci ctags bashrc inputrc vimrc screenrc gitconfig; do
     ln -sf ~/dotfiles/$file ~/.$file
 done
 
@@ -13,12 +13,14 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 curl -fLo ~/dotfiles/complete/git-completion.bash \
     https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash &>/dev/null
 
-# if [[ `uname -v` =~ Ubuntu ]]; then
-#     apt-get -qq install silversearcher-ag
-# fi
-# 
-# if [[ `uname -v` =~ Darwin ]]; then
-#     brew install ag
-# fi
+if [[ `uname -v` =~ Ubuntu ]]; then
+    apt-get -qq install silversearcher-ag
+fi
+
+if [[ `uname -v` =~ Darwin ]]; then
+    # Install ag if it doesnt exist
+    which ag &>/dev/null || brew install ag
+     ~/dotfiles/osx/install.sh
+fi
 
 source ~/dotfiles/bashrc
