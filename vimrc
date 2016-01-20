@@ -122,6 +122,7 @@ nnoremap <silent> -tp :TernDefPreview<CR>
 
 " Settings
 " set autochdir
+set autoindent
 set autoread
 set backspace=indent,eol,start
 set display=lastline
@@ -133,12 +134,13 @@ set incsearch
 set laststatus=2
 set noswapfile
 set pastetoggle=<F2>
-set ruler                      
+set ruler
 set shiftwidth=4
-set showcmd                    
+set showcmd
 set showmode
 set softtabstop=4
 set switchbuf=useopen,usetab
+set suffixesadd=.js
 set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
 set tags=.tags
 set textwidth=78
@@ -176,7 +178,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Resize windows on window switch
 " autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
 
-set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\  
+set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\
 set tabline=%!MyTabLine()
 function! MyTabLine()
   let s = ''
