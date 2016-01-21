@@ -4,8 +4,7 @@ for file in \
     ~/dotfiles/bashrc.local \
     ~/dotfiles/aliases \
     ~/dotfiles/functions \
-    ~/dotfiles/fzf/fzf.bash \
-    /usr/local/opt/nvm/nvm.sh; do
+    ~/dotfiles/complete/*; do
     [ -f $file ] && source $file
 done
 
@@ -48,3 +47,4 @@ fi
 for file in ctags bashrc inputrc vimrc screenrc gitconfig; do
     ln -sf ~/dotfiles/$file ~/.$file
 done
+shopt -q login_shell && screen -ls
