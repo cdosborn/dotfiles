@@ -3,7 +3,6 @@
 set show-all-if-ambiguous on
 
 $if Bash
-#    DEL: ""
     "!!":"\C-e`\C-avim `\C-b"
     "\C-q":"\"\"\C-b"
     "\C-t": "\C-aecho \C-e" 
@@ -12,4 +11,5 @@ $if Bash
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
     "\ej": "\C-v\C-j"
+    RET: " # did you mean ^J? "
 $endif
