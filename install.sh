@@ -11,7 +11,7 @@ mkdir -p ~/.vim/backups ~/.vim/swaps ~/.vim/undo
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &>/dev/null
 
-if [[ `uname -v` =~ Ubuntu ]]; then
+if [[ `uname -v` =~ Ubuntu -a `whoami` =~ root ]]; then
     apt-get -qq install silversearcher-ag
 fi
 
