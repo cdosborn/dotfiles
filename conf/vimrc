@@ -7,15 +7,10 @@ call plug#begin()
 
 " Using git URL
 Plug 'https://github.com/rking/ag.vim'
-Plug 'https://github.com/Rykka/colorv.vim.git'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
 Plug 'git://github.com/tpope/vim-commentary.git'
-Plug 'https://github.com/nvie/vim-flake8.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/cdosborn/vim-rsi.git'
-Plug 'https://github.com/sjl/gundo.vim.git'
-Plug 'git://github.com/walm/jshint.vim.git'
-Plug 'git://github.com/marijnh/tern_for_vim.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/vim-easy-align'
 
