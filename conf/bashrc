@@ -1,5 +1,3 @@
-# Source
-
 for file in \
     ~/.bashrc.local \
     ~/dotfiles/aliases \
@@ -8,36 +6,21 @@ for file in \
     [ -f $file ] && source $file
 done
 
-# Readline
-
 # For Terminal to enable C-s with readline
 stty -ixon -ixoff
 
 # History
-
 # On interactive startup, Bash truncates $HISTFILE to $HISTFILESIZE
 # On interactive close, if the shell option histappend is set, Bash 
 #   appends $HISTSIZE lines to $HISTFILE, otherwise it overwrites $HISTFILE
 shopt -s histappend
-
-# Prompt 
-# export PROMPT_COMMAND="history -a ~/.bash_history.global"
-PS1='[\h:\W]> ' 
-
-# Exports
-
-export TERM=xterm-256color
-export EDITOR="vim"
-export PATH=~/dotfiles/awk:/usr/local/opt/coreutils/libexec/gnubin:$PATH
-export AWKPATH=~/dotfiles/awk
 export HISTFILESIZE=
 export HISTSIZE=
 
-if [[ `hostname` == "toad" ]]; then
-    # Source local awk (less compliant) scripts first
-    export AWKPATH=~/proj/awk:$AWKPATH
-    export PATH=~/proj/awk:$PATH
-fi
+# export PROMPT_COMMAND="history -a ~/.bash_history.global"
+export PS1='[\h:\W]> ' 
+export TERM=xterm-256color
+export EDITOR="vim"
 
 # List open screen sessions
 shopt -q login_shell && screen -ls
