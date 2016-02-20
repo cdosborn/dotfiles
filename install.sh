@@ -1,5 +1,7 @@
-for file in ghci ctags bashrc inputrc vimrc screenrc gitconfig; do
-    ln -sf ~/dotfiles/$file ~/.$file
+#!/bin/bash
+for file in ~/dotfiles/conf/*; do
+    tail=${file##*/}
+    ln -sf $file ~/.$tail
 done
 
 # Vim config
@@ -23,4 +25,4 @@ if [[ `uname -v` =~ Darwin ]]; then
      ~/dotfiles/osx/install.sh
 fi
 
-source ~/dotfiles/bashrc
+source ~/dotfiles/conf/bashrc

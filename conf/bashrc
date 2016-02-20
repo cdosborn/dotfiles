@@ -1,7 +1,7 @@
 # Source
 
 for file in \
-    ~/dotfiles/bashrc.local \
+    ~/.bashrc.local \
     ~/dotfiles/aliases \
     ~/dotfiles/functions \
     ~/dotfiles/complete/*; do
@@ -21,22 +21,17 @@ stty -ixon -ixoff
 shopt -s histappend
 
 # Prompt 
-export PROMPT_COMMAND="history -a ~/.bash_history.global;${PROMPT_COMMAND}"
-#PS1='%n \W > '
-#PS1='[\h:\W] \$ \[\e[01m\]'
-PS1='[\h:\W] \$ '
-#PS1='$( get_ps1 )'
+# export PROMPT_COMMAND="history -a ~/.bash_history.global"
+PS1='[\h:\W]> ' 
 
 # Exports
 
 export TERM=xterm-256color
 export EDITOR="vim"
-export NVM_DIR=~/.nvm
 export PATH=~/dotfiles/awk:/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export AWKPATH=~/dotfiles/awk
 export HISTFILESIZE=
 export HISTSIZE=
-export SCREENRC=~/.local.screenrc
 
 if [[ `hostname` == "toad" ]]; then
     # Source local awk (less compliant) scripts first
@@ -44,7 +39,5 @@ if [[ `hostname` == "toad" ]]; then
     export PATH=~/proj/awk:$PATH
 fi
 
-for file in ctags bashrc inputrc vimrc screenrc gitconfig; do
-    ln -sf ~/dotfiles/$file ~/.$file
-done
+# List open screen sessions
 shopt -q login_shell && screen -ls

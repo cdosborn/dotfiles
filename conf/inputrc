@@ -11,5 +11,4 @@ $if Bash
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
     "\ej": "\C-v\C-j"
-    RET: " # did you mean ^J? "
 $endif

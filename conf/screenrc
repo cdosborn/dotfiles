@@ -1,13 +1,12 @@
 # Emulate 256 color mode
-term    screen-256color
+term    screen-255color
 
 startup_message off
 
 # Enable the alternate window
 altscreen on
 
-# the - means login
-defshell bash
+defshell bash --login
 
 # lines of scrollback!
 defscrollback 4096
