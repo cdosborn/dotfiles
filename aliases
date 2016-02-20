@@ -12,5 +12,4 @@ alias paux='ps aux | grep'
 alias pubkey='pbcopy < ~/.ssh/id_rsa.pub'
 alias r='echo $(base64 < /dev/random | head -c 10)'
 alias yt='youtube-dl --quiet --exec "/Applications/VLC.app/Contents/MacOS/VLC {} 2>%-"'
-# Send the last commands stdout to less
-alias l='bash -c "!-1" | less'
+alias l='bash -c "$(history | tail -2 | head -1 | cut -sd " " -f 4-)" | less'
