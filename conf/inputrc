@@ -4,6 +4,7 @@ set show-all-if-ambiguous on
 
 $if Bash
     "!!":"\C-e`\C-avim `\C-b"
+    "@@":"\C-p\C-e | less\C-j"
     "\C-q":"\"\"\C-b"
     "\C-t": "\C-aecho \C-e" 
     "\C-x*": glob-expand-word
