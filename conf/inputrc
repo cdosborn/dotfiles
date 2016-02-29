@@ -12,4 +12,7 @@ $if Bash
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
     "\ej": "\C-v\C-j"
+#   "\e[1;5Q": backward-delete-char
+#   "^[[19~": backward-delete-char
+#   "\e[11~": backward-delete-char
 $endif
