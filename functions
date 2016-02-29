@@ -4,11 +4,6 @@ function mancat {
     man -P cat $@ | col -b 
 }
 
-#function cd {
-#   command cd $1; 
-#   ls;
-#}
-
 function ju {
     first=$1
     shift;
@@ -36,7 +31,7 @@ function get_ps1 {
         el
         cup 0 0
     "
-    if [ $(whoami) = "root" ]; then
+    if [ $(whoami) == "root" ]; then
         symb="■"
     else 
         symb="●"
@@ -70,4 +65,18 @@ function get_ps1 {
     '
 
     echo "$host..$(basename $(pwd))/$symb "
+}
+
+function 9man {
+    if [[ $# -eq 0 ]]; then
+        man
+        return 
+    fi
+    cat $(/usr/bin/env man $@ -w) | 9 troff -N -mantimes | 9 sed '
+            ${
+                    /^$/p
+            }
+            //N
+            /^\n$/D
+    ' | less
 }

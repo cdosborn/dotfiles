@@ -4,6 +4,7 @@ set show-all-if-ambiguous on
 
 $if Bash
     "!!":"\C-e`\C-avim `\C-b"
+    "@@":"\C-p\C-e | less\C-j"
     "\C-q":"\"\"\C-b"
     "\C-t": "\C-aecho \C-e" 
     "\C-x*": glob-expand-word
@@ -11,4 +12,7 @@ $if Bash
     "\ef": "\C-z\C-f"
     "\eh": backward-kill-word
     "\ej": "\C-v\C-j"
+#   "\e[1;5Q": backward-delete-char
+#   "^[[19~": backward-delete-char
+#   "\e[11~": backward-delete-char
 $endif

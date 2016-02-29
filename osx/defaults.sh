@@ -27,8 +27,11 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+# Change screenshot location
+defaults write com.apple.screencapture location ~/Pictures
+
 # Restart affected apps
-for app in "Activity Monitor" "Dock" "Finder"; do
+for app in "SystemUIServer" "Activity Monitor" "Dock" "Finder"; do
 	killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
