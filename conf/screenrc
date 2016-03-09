@@ -6,7 +6,8 @@ startup_message off
 # Enable the alternate window
 altscreen on
 
-defshell bash --login
+# Screen treats this as a login shell 
+defshell -bash
 
 # lines of scrollback!
 defscrollback 4096
