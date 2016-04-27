@@ -6,6 +6,7 @@ syntax on
 call plug#begin()
 
 " Using git URL
+Plug 'git://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/rking/ag.vim'
 Plug 'https://github.com/tfnico/vim-gradle.git'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
