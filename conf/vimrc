@@ -90,6 +90,8 @@ nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -sp `[v`]
+vnoremap <silent> -tb :!column -t<CR>
+
 " re(fresh)
 nnoremap -re :normal! <CR>
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>

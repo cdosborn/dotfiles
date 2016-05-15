@@ -18,7 +18,8 @@ export HISTFILESIZE=
 export HISTSIZE=
 
 # export PROMPT_COMMAND="history -a ~/.bash_history.global"
-export PS1='[\h:\W]> ' 
+# \\export PS1='[\h:\W]> ' 
+export PS1='\h:\W \u\$ ' 
 export TERM=xterm-256color
 export EDITOR="vim"
 

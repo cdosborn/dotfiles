@@ -1,7 +1,13 @@
 #! /usr/bin/env bash
 
-function mancat {
-    man -P cat $@ | col -b 
+#  echo -e "a\nb\n" |  take 2
+#  > b
+function take { 
+    awk "NR == $1 { print; exit 0; }"; 
+}
+
+function join {
+    tr -d "\n"
 }
 
 function ju {
