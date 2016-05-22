@@ -6,6 +6,7 @@ syntax on
 call plug#begin()
 
 " Using git URL
+Plug 'git://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/rking/ag.vim'
 Plug 'https://github.com/maksimr/vim-jsbeautify.git'
 Plug 'https://github.com/tfnico/vim-gradle.git'
@@ -90,6 +91,8 @@ nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -sp `[v`]
+vnoremap <silent> -tb :!column -t<CR>
+
 " re(fresh)
 nnoremap -re :normal! <CR>
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>

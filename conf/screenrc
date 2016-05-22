@@ -1,5 +1,5 @@
 # Emulate 256 color mode
-term    screen-255color
+term    screen-256color
 
 startup_message off
 

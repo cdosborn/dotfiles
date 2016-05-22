@@ -7,6 +7,7 @@ done
 # Vim config
 rm -rf ~/.vim;
 ln -sf ~/dotfiles/vim ~/.vim
+find ~/.vim/ -exec sudo chown -R cdosborn:staff {} +
 mkdir -p ~/.vim/backups ~/.vim/swaps ~/.vim/undo
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &>/dev/null

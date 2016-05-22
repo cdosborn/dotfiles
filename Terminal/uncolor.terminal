@@ -78,7 +78,7 @@
 	<key>deleteSendsBackspace</key>
 	<true/>
 	<key>name</key>
-	<string>uncolor 1</string>
+	<string>uncolor</string>
 	<key>shellExitAction</key>
 	<integer>0</integer>
 	<key>type</key>
