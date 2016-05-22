@@ -7,12 +7,13 @@ call plug#begin()
 
 " Using git URL
 Plug 'https://github.com/rking/ag.vim'
+Plug 'https://github.com/maksimr/vim-jsbeautify.git'
 Plug 'https://github.com/tfnico/vim-gradle.git'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
 Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/cdosborn/vim-rsi.git'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install --bin' }
 Plug 'junegunn/vim-easy-align'
 
 call plug#end()
@@ -27,6 +28,8 @@ nnoremap ,e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 nnoremap _ 10<C-W>-
 nnoremap + 10<C-W>+
+nnoremap ) 10<C-W>>
+nnoremap ( 10<C-W><
 
 " Better goto file
 "nnoremap gf :exec ":exec \":sb \" . expand(\"<cfile>\")"<CR>
@@ -44,8 +47,6 @@ nnoremap <silent> <C-H> <C-W>h
 nnoremap <silent> <C-J> <C-W>j
 nnoremap <silent> <C-K> <C-W>k
 nnoremap <silent> <C-W>v :rightbelow vs<CR>
-nnoremap <silent> ) gt<CR>
-nnoremap <silent> ( gT<CR>
 " Select last paste, kinda like gv
 nnoremap gp `[v`]
 

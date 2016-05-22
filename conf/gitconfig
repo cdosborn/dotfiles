@@ -7,9 +7,8 @@
 	default = matching
 [alias]
 	co = checkout
+        ls = diff-tree --no-commit-id --name-only -r @
 [mergetool]
 	tool = vimdiff
-[alias]
-        co = checkout
 [color]
 	ui = auto
