@@ -6,7 +6,7 @@ $if Bash
     "!!":"\C-e`\C-avim `\C-b"
     "@@":"\C-p\C-e | less\C-j"
     "\C-q":"\"\"\C-b"
-    "\C-t": "\C-aecho \C-e" 
+    "\C-t": "\C-aecho \C-e\C-j\C-p\C-p" 
     "\C-x*": glob-expand-word
     "\C-z": forward-word
     "\ef": "\C-z\C-f"
