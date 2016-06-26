@@ -8,8 +8,8 @@ call plug#begin()
 " Using git URL
 Plug 'git://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/rking/ag.vim'
-Plug 'https://github.com/maksimr/vim-jsbeautify.git'
 Plug 'https://github.com/tfnico/vim-gradle.git'
+Plug 'millermedeiros/vim-esformatter'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
 Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
@@ -48,6 +48,7 @@ nnoremap <silent> <C-H> <C-W>h
 nnoremap <silent> <C-J> <C-W>j
 nnoremap <silent> <C-K> <C-W>k
 nnoremap <silent> <C-W>v :rightbelow vs<CR>
+
 " Select last paste, kinda like gv
 nnoremap gp `[v`]
 
@@ -125,6 +126,7 @@ nnoremap <silent> -tp :TernDefPreview<CR>
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set backupcopy=yes
 set display=lastline
 set expandtab
 set foldenable
@@ -150,7 +152,7 @@ set wildmenu
 set wildmode=longest:full
 " set wiw=9999
 "set winminheight=0
-set winminwidth=10
+set winminwidth=1
 "set winminheight=0
 if exists("&backupdir")
     set backupdir=~/.vim/backups
