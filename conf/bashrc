@@ -1,27 +1,33 @@
-for file in \
-    ~/.bashrc.local \
-    ~/dotfiles/aliases \
-    ~/dotfiles/functions \
-    ~/dotfiles/complete/*; do
-    [ -f $file ] && source $file
-done
+. ~/.bashrc.local \
 
-# For Terminal to enable C-s with readline
-stty -ixon -ixoff
+# Activate Connor's config
+function _() {
 
-# History
-# On interactive startup, Bash truncates $HISTFILE to $HISTFILESIZE
-# On interactive close, if the shell option histappend is set, Bash 
-#   appends $HISTSIZE lines to $HISTFILE, otherwise it overwrites $HISTFILE
-shopt -s histappend
-export HISTFILESIZE=
-export HISTSIZE=
+    for file in \
+        ~/.bashrc.local \
+        ~/dotfiles/aliases \
+        ~/dotfiles/functions \
+        ~/dotfiles/complete/*; do
+        [ -f $file ] && source $file
+    done
 
-# export PROMPT_COMMAND="history -a ~/.bash_history.global"
-# \\export PS1='[\h:\W]> ' 
-export PS1='\h:\W \u\$ ' 
-export TERM=xterm-256color
-export EDITOR="vim"
+    # For Terminal to enable C-s with readline
+    stty -ixon -ixoff
 
-# List open screen sessions
-shopt -q login_shell && screen -ls
+    # History
+    # On interactive startup, Bash truncates $HISTFILE to $HISTFILESIZE
+    # On interactive close, if the shell option histappend is set, Bash 
+    #   appends $HISTSIZE lines to $HISTFILE, otherwise it overwrites $HISTFILE
+    shopt -s histappend
+    export HISTFILESIZE=
+    export HISTSIZE=
+
+    # export PROMPT_COMMAND="history -a ~/.bash_history.global"
+    # \\export PS1='[\h:\W]> ' 
+    export PS1='\h:\W \u\$ ' 
+    export TERM=xterm-256color
+    export EDITOR="vim"
+
+    # List open screen sessions
+    shopt -q login_shell && screen -ls
+}

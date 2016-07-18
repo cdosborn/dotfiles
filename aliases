@@ -1,4 +1,3 @@
-alias _='source ~/.bashrc'
 alias bin='xxd -pb'
 alias gb='git branch'
 alias gl='git log'
