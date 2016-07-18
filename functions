@@ -2,8 +2,8 @@
 
 #  echo -e "a\nb\n" |  take 2
 #  > b
-function take { 
-    awk "NR == $1 { print; exit 0; }"; 
+function take {
+    awk "NR == $1 { print; exit 0; }";
 }
 
 function join {
@@ -14,6 +14,10 @@ function ju {
     first=$1
     shift;
     cd $(find $first -type d | fzf --query="$@")
+}
+
+function ? {
+    test $@ && echo true;
 }
 
 function get_ps1 {
@@ -29,7 +33,7 @@ function get_ps1 {
 
     width=$(tput cols)
 
-    ls -pt -G | xargs > /tmp/blah    
+    ls -pt -G | xargs > /tmp/blah
     lines=$(wc -l < /tmp/blah )
     echo $lines
     tput -S <<< "
@@ -39,11 +43,11 @@ function get_ps1 {
     "
     if [ $(whoami) == "root" ]; then
         symb="■"
-    else 
+    else
         symb="●"
     fi
 
-    cat /tmp/blah | gawk ' 
+    cat /tmp/blah | gawk '
     BEGIN {
         "tput cols" | getline width
         "date" | getline date
@@ -55,7 +59,7 @@ function get_ps1 {
         }
         printf date
         printf "━┓\n"
-    } 
+    }
     {
         w = width - 4;
         printf "┃ %-"w"s ┃\n", substr($0, 0, length($0))
@@ -76,7 +80,7 @@ function get_ps1 {
 function 9man {
     if [[ $# -eq 0 ]]; then
         man
-        return 
+        return
     fi
     cat $(/usr/bin/env man $@ -w) | 9 troff -N -mantimes | 9 sed '
             ${
@@ -85,4 +89,87 @@ function 9man {
             //N
             /^\n$/D
     ' | less
+}
+
+function args {
+    while [ $# -gt 0 ]; do
+        echo "'$1'";
+        shift;
+    done;
+}
+
+#
+# ve NAME           creates and activates venv
+# ve wipe           remove and deactivate current venv
+# ve wipe NAME...   remove multiple venvs
+# ve list           print all venvs
+#
+function ve {
+    local VE_DIR="$HOME/.ve"
+
+    if [ ! -x "$(which virtualenv)" ]; then
+        echo "virtualenv is not installed";
+        return;
+    fi;
+
+    case $1 in
+    "" )
+        echo "ve wipe [NAME...]  Erase virtual envs";
+        echo "ve list   List all virtual envs";
+        echo "ve NAME   Create or activate virtual env";
+        ;;
+    "wipe" )
+
+        shift;
+
+        #
+        # ve wipe w/o arguments removes current venv
+        #
+        if [ "$#" -eq 0 -a -d "$VIRTUAL_ENV" ]; then
+            rm -rf "$VIRTUAL_ENV";
+        fi;
+
+        #
+        # ve wipe with arguments removes each argument
+        #
+        local VENVS="$(ve list)"
+        for ENV in $@; do
+            local DIR="$VE_DIR/$ENV";
+            if [[ "$VENVS" =~ "$ENV" ]] && [ -d "$DIR" ]; then
+                rm -rf "$DIR";
+            fi;
+        done
+
+        #
+        # ve wipe deactivates an activated but deleted venv
+        #
+        if [ "$VIRTUAL_ENV" -a ! -d "$VIRTUAL_ENV" ]; then
+            deactivate;
+        fi;
+
+        ;;
+    "list" )
+        if [ ! -d "$VE_DIR" ]; then
+            mkdir "$VE_DIR";
+        fi;
+        ls -1 "$VE_DIR";
+        ;;
+    * )
+
+        #
+        # ve NAME deactivates, creates if necessary, then activates
+        #
+        if [ -d "$VIRTUAL_ENV" ]; then
+            deactivate;
+        fi;
+
+        if [ ! -d "$VE_DIR/$1" ]; then
+            virtualenv "$VE_DIR/$1";
+        fi;
+
+        if [ -e "$VE_DIR/$1/bin/activate" ]; then
+            . "$VE_DIR/$1/bin/activate";
+        fi
+        ;;
+    esac
 }
