@@ -23,5 +23,11 @@ export PS1='\h:\W \u\$ '
 export TERM=xterm-256color
 export EDITOR="vim"
 
-# List open screen sessions
-shopt -q login_shell && screen -ls
+# If we were in a virtualenv, reactivate it
+if [ "$VIRTUAL_ENV" ]; then
+    DIR="$VIRTUAL_ENV";
+    deactivate;
+    if [ -e "$DIR/bin/activate" ]; then
+        . "$DIR/bin/activate";
+    fi;
+fi;
