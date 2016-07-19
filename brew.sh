@@ -34,6 +34,7 @@ brew install rename
 brew install ssh-copy-id
 brew install tree
 brew install fzf
+brew install ag
 # graphical interface disk usage
 brew install ncdu
 

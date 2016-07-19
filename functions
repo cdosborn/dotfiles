@@ -105,7 +105,10 @@ function args {
 # ve list           print all venvs
 #
 function ve {
-    local VE_DIR="$HOME/.ve"
+    #
+    # Use $VE_DIR it it exists in env
+    #
+    local VE_DIR="${VE_DIR:-$HOME/.ve}"
 
     if [ ! -x "$(which virtualenv)" ]; then
         echo "virtualenv is not installed";
