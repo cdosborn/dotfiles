@@ -10,6 +10,7 @@ Plug 'git://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/rking/ag.vim'
 Plug 'https://github.com/tfnico/vim-gradle.git'
 Plug 'millermedeiros/vim-esformatter'
+Plug 'nvie/vim-flake8'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
 Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
@@ -87,7 +88,7 @@ nnoremap -mn :Man<space>
 nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx :!chmod +x %<CR>
 nnoremap -mk :make<CR>
-nnoremap -mc :!ctags -f .tags -R *<CR>
+nnoremap <silent> -mc :exe ":!ctags -f .tags -R * "<CR><CR>
 nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
@@ -209,6 +210,12 @@ function! MyTabLine()
 
   return s
 endfunction
+
+" Source my vimrc when file changes
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
 
 "Fuzzy search over recent files
 command! FZFMru call fzf#run({

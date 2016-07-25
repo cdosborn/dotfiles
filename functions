@@ -11,9 +11,7 @@ function join {
 }
 
 function ju {
-    first=$1
-    shift;
-    cd $(find $first -type d | fzf --query="$@")
+    cd $(find . -type d | fzf)
 }
 
 function ? {
@@ -175,4 +173,74 @@ function ve {
         fi
         ;;
     esac
+}
+
+pyenv() {
+  PYENV_PATH="${HOME}/.pyenv/shims"
+  if [[ ! "${PATH}" =~ "${PYENV_PATH}" ]]; then
+      export PATH="${PYENV_PATH}:${PATH}"
+  fi
+  export PYENV_SHELL=bash
+  command pyenv rehash 2>/dev/null
+
+  local command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  rehash|shell)
+    eval "$(pyenv "sh-$command" "$@")";;
+  *)
+    command pyenv "$command" "$@";;
+  esac
+}
+
+# reload-browser - A cross-platform wrapper for reloading the current
+# browser tab
+# Eric Radman, 2014
+# http://entrproject.org/
+reload-browser() {
+
+    usage() {
+            case `uname` in
+            Darwin)
+                    # applescript needs the exact title
+                    echo "Usage: reload-browser Firefox [Safari \"Google Chrome\" ...]"
+                    ;;
+            *)
+                    # xdotool uses regular expressions
+                    echo "Usage: reload-browser Firefox [Chrome ...]"
+                    ;;
+            esac
+            return 1
+    }
+
+    [ $# -lt 1 ] && usage;
+
+    for app in "$@";
+    do
+            case `uname` in
+            Darwin)
+                    /usr/bin/osascript <<< "
+                    set prev to (path to frontmost application as text)
+                    tell application \"$app\"
+                            activate
+                    end tell
+                    tell application \"System Events\"
+                            keystroke \"r\"
+                            delay 0.1
+                    end tell
+                    activate application prev
+                    "
+                    ;;
+            *)
+                    xdotool search --onlyvisible --class "$app" windowfocus key \
+                        --window %@ 'ctrl+r' || {
+                            1>&2 echo "unable to signal an application named \"$app\""
+                    }
+                    ;;
+            esac
+    done
 }

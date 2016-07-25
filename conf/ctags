@@ -1,3 +1,7 @@
+--python-kinds=-i
+--exclude=build
+--exclude=dist
+
 --exclude=*.min.js
 --exclude=vendors
 

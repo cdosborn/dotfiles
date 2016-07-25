@@ -9,6 +9,8 @@
 	co = checkout
         ca = diff --cached 
         bname = rev-parse --abbrev-ref HEAD
+        re = remote -v
+	edit = !vim -o `git diff --diff-filter=AM --name-only  --cached`
 [mergetool]
 	tool = vimdiff
 [color]
