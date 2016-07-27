@@ -28,7 +28,7 @@ function _() {
     export EDITOR="vim"
 
     # If we were in a virtualenv, reactivate it
-    if [ "$VIRTUAL_ENV" ]; then
+    if [ -n "$VIRTUAL_ENV" ]; then
         DIR="$VIRTUAL_ENV";
         deactivate;
         if [ -e "$DIR/bin/activate" ]; then
