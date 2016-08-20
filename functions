@@ -18,6 +18,14 @@ function ? {
     test $@ && echo true;
 }
 
+function debugger {
+    sed -i 's:// debugger:debugger:' $@
+}
+
+function nodebugger {
+    sed -i 's:^\( *\)debugger:\1// debugger:' $@
+}
+
 function get_ps1 {
     tput -S <<< "
         cup 0 0

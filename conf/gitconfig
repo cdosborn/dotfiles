@@ -7,10 +7,12 @@
 	default = matching
 [alias]
 	co = checkout
-        ca = diff --cached 
+        ca = diff --cached
         bname = rev-parse --abbrev-ref HEAD
         re = remote -v
-	edit = !vim -o `git diff --diff-filter=AM --name-only  --cached`
+	edit = !$EDITOR -o `git ls-files --modified`
+        ls = ls-files
+        diffls = diff --name-only
 [mergetool]
 	tool = vimdiff
 [color]
