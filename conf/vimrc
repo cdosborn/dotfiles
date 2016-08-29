@@ -131,7 +131,7 @@ set backupcopy=yes
 set display=lastline
 set expandtab
 set foldenable
-set history=50
+set history=1000
 set hlsearch
 set incsearch
 set laststatus=2
