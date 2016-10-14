@@ -4,13 +4,13 @@
 [core]
 	editor = vim
 [push]
-	default = matching
+	default = simple
 [alias]
 	co = checkout
         ca = diff --cached
         bname = rev-parse --abbrev-ref HEAD
         re = remote -v
-	edit = !$EDITOR -o `git ls-files --modified`
+	edit = !$EDITOR -o `git ls-files --modified | sort -u`
         ls = ls-files
         diffls = diff --name-only
 [mergetool]
