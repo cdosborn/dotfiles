@@ -252,3 +252,7 @@ reload-browser() {
             esac
     done
 }
+
+function trim {
+    sed -i "" 's/ *$//' $*
+}
