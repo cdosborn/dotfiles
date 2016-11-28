@@ -1,5 +1,5 @@
 alias bin='xxd -pb'
-alias gb='git branch'
+alias gb='git branch --sort=committerdate'
 alias gl='git log'
 alias grep='grep --color'
 alias gs='git status'

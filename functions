@@ -254,5 +254,5 @@ reload-browser() {
 }
 
 function trim {
-    sed -i "" 's/ *$//' $*
+    sed -i 's/ *$//' $*
 }
