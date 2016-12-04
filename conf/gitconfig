@@ -7,6 +7,7 @@
 	default = simple
 [alias]
 	co = checkout
+        br = branch --sort=committerdate
         ca = diff --cached
         bname = rev-parse --abbrev-ref HEAD
         re = remote -v
