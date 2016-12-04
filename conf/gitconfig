@@ -11,6 +11,7 @@
         bname = rev-parse --abbrev-ref HEAD
         re = remote -v
 	edit = !$EDITOR -o `git ls-files --modified | sort -u`
+        fixup = commit --amend -C @
         ls = ls-files
         diffls = diff --name-only
 [mergetool]

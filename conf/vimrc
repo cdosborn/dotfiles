@@ -58,6 +58,10 @@ let @l = 'yOconsole.log("\]pa", \]pa);\'
 " Reset search register
 let @/ = ''
 
+" Substitute word under cursor
+nnoremap <Leader>s :%s:\<<C-r><C-w>\>::gc<Left><Left><Left>
+
+
 " The bindings below ought to be <M-...>, this is specific to 0SX
 cnoremap <C-[>b <S-Left>
 cnoremap <C-[>f <S-Right>

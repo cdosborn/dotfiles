@@ -237,8 +237,8 @@ reload-browser() {
                             activate
                     end tell
                     tell application \"System Events\"
-                            keystroke \"r\"
-                            delay 0.1
+                            keystroke \"r\" using {command down}
+                            delay 0.3
                     end tell
                     activate application prev
                     "
