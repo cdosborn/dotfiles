@@ -6,6 +6,12 @@ function take {
     awk "NR == $1 { print; exit 0; }";
 }
 
+# echo "abcd" | from 1 2
+# > "bc"
+function from() {
+    head -c $2 | tail -c $(($2 - $1));
+}
+
 function join {
     tr -d "\n"
 }
