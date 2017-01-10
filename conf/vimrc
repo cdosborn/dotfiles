@@ -7,8 +7,8 @@ call plug#begin()
 
 " Using git URL
 Plug 'git://github.com/shime/vim-livedown.git'
-Plug 'mhinz/vim-grepper'
 Plug 'https://github.com/tfnico/vim-gradle.git'
+Plug 'https://github.com/rking/ag.vim.git'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'nvie/vim-flake8'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
