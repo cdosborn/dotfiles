@@ -5,6 +5,7 @@ function _() {
         ~/.bashrc.local \
         ~/dotfiles/aliases \
         ~/dotfiles/functions \
+        ~/dotfiles/scripts/z.sh \
         ~/dotfiles/complete/*; do
         [ -f $file ] && source $file
     done
