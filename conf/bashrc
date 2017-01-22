@@ -14,18 +14,14 @@ function _() {
     stty -ixon -ixoff
 
     # History
-    # On interactive startup, Bash truncates $HISTFILE to $HISTFILESIZE
-    # On interactive close, if the shell option histappend is set, Bash 
-    #   appends $HISTSIZE lines to $HISTFILE, otherwise it overwrites $HISTFILE
+    # If set, the history list is appended to the file named by the value of the HISTFILE variable when the shell exits, rather than overwriting the file.
     shopt -s histappend
-    export HISTFILESIZE=
+    # The value of the HISTSIZE variable  is  used  as  the number  of  commands to save in a history list.
     export HISTSIZE=
 
-    # export PROMPT_COMMAND="history -a ~/.bash_history.global"
-    # \\export PS1='[\h:\W]> ' 
-    export PS1='\h:\W \u\$ ' 
     export TERM=xterm-256color
     export EDITOR="vim"
+    export PATH="$PATH:~/dotfiles/scripts"
 
     # If we were in a virtualenv, reactivate it
     if [ -n "$VIRTUAL_ENV" ]; then
