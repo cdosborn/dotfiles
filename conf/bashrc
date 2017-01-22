@@ -21,7 +21,6 @@ function _() {
 
     export TERM=xterm-256color
     export EDITOR="vim"
-    export PATH="$PATH:~/dotfiles/scripts"
 
     # If we were in a virtualenv, reactivate it
     if [ -n "$VIRTUAL_ENV" ]; then

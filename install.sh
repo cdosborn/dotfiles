@@ -2,8 +2,14 @@
 
 # Symlink conf files
 for file in ~/dotfiles/conf/*; do
-    tail=${file##*/}
-    ln -sf $file ~/.$tail
+    name=`basename $file`
+    ln -sf $file ~/.$name
+done
+
+# Symlink scripts into /usr/local/bin
+for file in ~/dotfiles/scripts/*; do
+    name=`basename $file`
+    ln -sf $file /usr/local/bin/$name
 done
 
 # Install vim
