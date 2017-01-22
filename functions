@@ -260,5 +260,12 @@ reload-browser() {
 }
 
 function trim {
-    sed -i 's/ *$//' $*
+    case `uname` in
+        Darwin)
+            sed -i '' 's/ *$//' $*
+            ;;
+        *)
+            sed -i 's/ *$//' $*
+            ;;
+    esac
 }
