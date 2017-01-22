@@ -5,6 +5,8 @@
 --exclude=*.min.js
 --exclude=vendors
 
+--python-kinds=-i
+
 --langdef=less
 --langmap=less:.less
 --regex-less=/^[ t]*.([A-Za-z0-9_-]+)/1/c,class,classes/

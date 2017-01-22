@@ -22,6 +22,7 @@ brew install caskroom/cask/brew-cask
 brew install coreutils
 
 brew install bash
+brew install ctags
 brew install moreutils
 brew install gnu-sed --with-default-names
 brew install gawk
