@@ -1,1 +1,5 @@
-find .git/objects/?? -type f |  sed -n 's:.*\([[:alnum:]]\{2\}\)/\([[:alnum:]]*\)$:\1\2:p' 
+hashes=$(find . -path './.git/objects/??/*' -type f | sed -n 's:.*\([[:alnum:]]\{2\}\)/\([[:alnum:]]*\)$:\1\2:p');
+
+for hash in $hashes; do
+    printf "$hash $(git cat-file -t $hash)\n";
+done

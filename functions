@@ -259,6 +259,9 @@ reload-browser() {
     done
 }
 
+#
+# trim file1 file2 ... - Trim whitespace from files
+#
 function trim {
     case `uname` in
         Darwin)
@@ -268,4 +271,14 @@ function trim {
             sed -i 's/ *$//' $*
             ;;
     esac
+}
+
+#
+# For each line of stdin execute command, where the {} is expanded to the
+# input line.
+#
+# { echo a; echo b; } | each echo - {}
+#
+function each {
+    xargs -I{} $@
 }
