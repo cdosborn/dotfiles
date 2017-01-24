@@ -15,6 +15,7 @@
         fixup = commit --amend -C @
         ls = ls-files
         diffls = diff --name-only
+        index = ls-files --stage
 [mergetool]
 	tool = vimdiff
 [color]

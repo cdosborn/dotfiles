@@ -1,8 +1,11 @@
-alias bin='xxd -pb'
+# Git
 alias gb='git branch --sort=committerdate'
 alias gl='git log'
 alias grep='grep --color'
 alias gs='git status'
+alias gca='git commit -am'
+
+alias bin='xxd -pb'
 alias hs='ghci'
 alias kwmr='launchctl stop homebrew.mxcl.kwm;launchctl start homebrew.mxcl.kwm'
 alias kwmrold='launchctl stop com.koekeishiya.kwm;launchctl start com.koekeishiya.kwm'
