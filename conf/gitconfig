@@ -16,6 +16,7 @@
         ls = ls-files
         diffls = diff --name-only
         index = ls-files --stage
+        pull = pull --ff-only
 [mergetool]
 	tool = vimdiff
 [color]
