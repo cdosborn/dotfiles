@@ -13,7 +13,6 @@
         re = remote -v
 	edit = !$EDITOR -o `git ls-files --modified | sort -u`
         fixup = commit --amend -C @
-        ls = ls-files
         diffls = diff --name-only
         index = ls-files --stage
         pull = pull --ff-only

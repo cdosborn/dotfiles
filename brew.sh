@@ -36,6 +36,7 @@ brew install ssh-copy-id
 brew install tree
 brew install fzf
 brew install ag
+brew install yank
 # graphical interface disk usage
 brew install ncdu
 
