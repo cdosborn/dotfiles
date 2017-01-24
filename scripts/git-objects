@@ -1,1 +1,2 @@
+#!/bin/bash
 find .git/objects/?? -type f |  sed -n 's:.*\([[:alnum:]]\{2\}\)/\([[:alnum:]]*\)$:\1\2:p' 
