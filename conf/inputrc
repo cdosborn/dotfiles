@@ -3,7 +3,7 @@ set show-all-if-ambiguous on
 
 $if Bash
     # Wrap a command in backticks
-    "!!":"\C-e`\C-a `\C-b \C-b\C-b"
+    "!!":"\C-e)\C-a $(\C-b\C-b \C-b\C-b"
 
     # Quote a string
     "\C-q":"\"\"\C-b"

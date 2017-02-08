@@ -16,6 +16,9 @@
         diffls = diff --name-only
         index = ls-files --stage
         pull = pull --ff-only
+
+        # Get all files changed in a commit (d)iff(c)ommit
+        dc = diff-tree --no-commit-id --name-only -r
 [mergetool]
 	tool = vimdiff
 [color]
