@@ -282,3 +282,19 @@ function trim {
 function each {
     xargs -I{} $@
 }
+
+#
+# Re-export the auth sock when it gets trampled.
+#
+# export-auth-sock
+#
+function export-auth-sock {
+    local NUM_SOCKETS=$(echo /tmp/ssh*/* | wc -l)
+    if [ "$NUM_SOCKETS" -eq 1 ]; then
+        export SSH_AUTH_SOCK="$(echo /tmp/ssh*/*)";
+        return;
+    else
+        echo "SSH_AUTH_SOCK was not set" >&2;
+        false;
+    fi
+}
