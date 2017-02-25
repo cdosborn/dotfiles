@@ -12,6 +12,10 @@ function from() {
     head -c $2 | tail -c $(($2 - $1));
 }
 
+function filter {
+    xargs -I{} bash -c "$@ {} && echo {}";
+}
+
 function join {
     tr -d "\n"
 }

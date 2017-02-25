@@ -25,9 +25,9 @@ brew install bash
 brew install ctags
 brew install moreutils
 brew install gnu-sed --with-default-names
-brew install gawk
 brew install grep --with-default-names
 brew install vim --override-system-vi
+brew install gawk
 brew install homebrew/dupes/screen
 brew install wget
 brew install git

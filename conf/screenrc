@@ -6,7 +6,7 @@ startup_message off
 # Enable the alternate window
 altscreen on
 
-# Screen treats this as a login shell 
+# Screen treats this as a login shell
 defshell -bash
 
 # lines of scrollback!
@@ -14,4 +14,4 @@ defscrollback 4096
 
 hardstatus ignore
 #caption splitonly '%{=u dd} '
-caption always ' %H  %?%-w%?%{-}%?%{+b R}&%{-} %t%:%{+b R}&%{-}-%?%+w %?%{-}%= %{-}%{-}%1` %{= kk}'
+#caption always ' %H  %?%-w%?%{-}%?%{+b R}&%{-} %t%:%{+b R}&%{-}-%?%+w %?%{-}%= %{-}%{-}%1` %{= kk}'

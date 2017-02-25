@@ -14,10 +14,10 @@ done
 
 # Install vim
 rm -rf ~/.vim;
-ln -sf ~/dotfiles/vim ~/.vim
-mkdir -p ~/.vim/backups ~/.vim/swaps ~/.vim/undo
+mkdir -p ~/.vim ~/.vim/backups ~/.vim/swaps ~/.vim/undo ~/.vim/colors
+ln {~/dotfiles/vim,~/.vim}/colors/uncolor.vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &>/dev/null
+    https://raw.githubusercontent.com/junegunn/vim-plug/b44ea685aa2899316e58cba646095fa7551f8808/plug.vim
 
 # Install ubuntu packages
 if [[ `uname -v` =~ Ubuntu ]]; then

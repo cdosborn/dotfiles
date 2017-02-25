@@ -7,14 +7,14 @@ call plug#begin()
 
 " Using git URL
 Plug 'git://github.com/shime/vim-livedown.git'
-Plug 'https://github.com/tfnico/vim-gradle.git'
 Plug 'https://github.com/rking/ag.vim.git'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'nvie/vim-flake8'
 Plug 'git://github.com/PeterRincker/vim-argumentative.git'
 Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/cdosborn/vim-rsi.git'
+Plug 'kana/vim-textobj-user'
+Plug 'rbonvall/vim-textobj-latex'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install --bin' }
 Plug 'junegunn/vim-easy-align'
 
@@ -83,7 +83,6 @@ nnoremap <silent> -yf m`ggVG""y``
 nnoremap <silent> -cp :let @* = expand("%:p")<CR>
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -cf m`ggVG"*y``
-nnoremap <nowait> ! :!
 nnoremap -mn :Man<space>
 nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx :!chmod +x %<CR>
@@ -94,6 +93,7 @@ nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -sp `[v`]
 vnoremap <silent> -tb :!column -t<CR>
+vnoremap ! :'<,'>w !
 
 " re(fresh)
 nnoremap -re :normal! <CR>
@@ -151,15 +151,9 @@ set undofile
 set virtualedit=all
 set wildmenu
 set wildmode=longest:full
-" set wiw=9999
-"set winminheight=0
 set winminwidth=1
-"set winminheight=0
 if exists("&backupdir")
     set backupdir=~/.vim/backups
-endif
-if exists("&directory")
-    set directory=~/.vim/swaps
 endif
 if exists("&undodir")
     set undodir=~/.vim/undo
@@ -168,18 +162,6 @@ colorscheme uncolor
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" augroup jsgroup
-"     autocmd!
-"     autocmd FileType javascript setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"     " autocmd BufWritePost *.js JSHint %
-" augroup END
-
-" Let commentary default to #, if filetype is empty useful when opening cmd line and editing a bash/awk script
-" autocmd BufRead,BufNewFile * if &ft == '' | set commentstring=#\ %s | endif
-
-" Resize windows on window switch
-" autocmd WinEnter * :exe "normal \<c-w>=\<c-w>|"
 
 set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\
 set tabline=%!MyTabLine()
