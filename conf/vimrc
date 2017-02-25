@@ -93,7 +93,7 @@ nnoremap -sf :w \| so %<CR>
 nnoremap -su :%s:::gc<Left><Left><Left><Left>
 nnoremap -sp `[v`]
 vnoremap <silent> -tb :!column -t<CR>
-vnoremap ! :'<,'>w !
+vnoremap ! :w !
 
 " re(fresh)
 nnoremap -re :normal! <CR>
