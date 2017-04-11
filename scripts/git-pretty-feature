@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Print a short list of commits merged from the feature into the target branch
+#
+# git pretty-feature $MERGE_COMMIT
+#
+main() {
+    local MERGE_PARENTS=$(git log -1 --merges --pretty=format:%P "$1")
+    local MERGE_BASE=$(git merge-base $MERGE_PARENTS)
+    echo "$MERGE_PARENTS" | { 
+        read PARENT_SHA FEATURE_SHA; 
+        git log --decorate --pretty=oneline --abbrev-commit "$MERGE_BASE".."$FEATURE_SHA";
+    }
+}
+main $@
