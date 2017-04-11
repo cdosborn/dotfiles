@@ -20,4 +20,4 @@ do
         break;
     fi;
 
-done 3< <(git log --reverse --pretty=format:'%H' "$1") 4< <(git log --reverse --pretty=format:'%H' "$2")
+done 3< <(git rev-list --reverse --first-parent "$1") 4< <(git rev-list --reverse  --first-parent "$2")
