@@ -1,8 +1,28 @@
 #!/bin/bash
 
+# Find the oldest/original shared ancestor between two commits
+#
+# git original-ancestor <commit> <commit>
+#
+# In the example below,
+#
+#   git merge-base E D is B, the most recent common ancestor
+#
+# However, this doesn't capture the original base which feature shared with
+# master, which is S
+#
+#   git original-ancestor E D is S, the original ancestor
+#
+#  S      M1   E  M2
+#   o-------o---o---o  master
+#    \     /       /
+#     o---o---o---o  feature
+#    A   B   C   D
+#
+
 if [ $# -lt  2 ]
 then
-    echo "git common-ancestor <commit> <commit>";
+    echo "git original-ancestor <commit> <commit>";
     exit 1;
 fi
 
@@ -13,6 +33,7 @@ do
     then
         COMMON_ANCESTOR="$sha1";
     else
+        # Break at the first occurence where the history diverged
         if [ -n "$COMMON_ANCESTOR" ];
         then
             echo $COMMON_ANCESTOR;
