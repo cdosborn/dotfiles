@@ -1,1 +1,7 @@
+#!/bin/bash
+
+# Print a nice graph which isolates the feature and target branches in a merge
+#
+# git pretty-merge $MERGE_COMMIT
+#
 git log --boundary --decorate --graph --pretty=oneline --abbrev-commit $(git merge-base $(git log -1 --merges --pretty=format:%P "$1")).."$1"
