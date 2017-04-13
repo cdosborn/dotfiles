@@ -15,7 +15,7 @@ Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'kana/vim-textobj-user'
 Plug 'rbonvall/vim-textobj-latex'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install --bin' }
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 
 call plug#end()
@@ -23,8 +23,17 @@ call plug#end()
 " Load :Man plugin
 source $VIMRUNTIME/ftplugin/man.vim
 
-" Make switching buffers/tabs easy
-nnoremap // :FZFMru<CR>
+" Fuzzy search files
+nnoremap // :CtrlP<CR>
+let g:ctrlp_working_path_mode='wra'
+if executable('ag')
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects
+    " .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 nnoremap <Leader>b :ls<CR>:sbuffer!<Space>
 nnoremap ,e :e <C-R>=expand("%:p:h") . "/" <CR>
 
@@ -199,10 +208,3 @@ augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
-
-"Fuzzy search over recent files
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
