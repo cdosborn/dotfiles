@@ -78,6 +78,7 @@ nnoremap Q ZQ
 "nnoremap g; g;zz
 "nnoremap g, g,zz
 "Yank the current buffer full path to clipboard
+nnoremap <silent> -gs :Gstatus<CR>
 nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
 nnoremap <silent> -cp :let @* = expand("%:p")<CR>
