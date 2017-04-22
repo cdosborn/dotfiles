@@ -6,18 +6,19 @@ syntax on
 call plug#begin()
 
 " Using git URL
-Plug 'git://github.com/shime/vim-livedown.git'
-Plug 'https://github.com/rking/ag.vim.git'
+Plug 'shime/vim-livedown'
+Plug 'rking/ag.vim'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'nvie/vim-flake8'
-Plug 'git://github.com/PeterRincker/vim-argumentative.git'
-Plug 'git://github.com/tpope/vim-commentary.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'PeterRincker/vim-argumentative'
 Plug 'kana/vim-textobj-user'
 Plug 'rbonvall/vim-textobj-latex'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jeetsukumaran/vim-indentwise'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
 
 call plug#end()
 
