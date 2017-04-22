@@ -133,8 +133,8 @@ function ve {
 
     case $1 in
     "" )
-        echo "ve wipe [NAME...]  Erase virtual envs";
         echo "ve list   List all virtual envs";
+        echo "ve wipe [NAME...]  Erase virtual envs";
         echo "ve NAME   Create or activate virtual env";
         ;;
     "wipe" )

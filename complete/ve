@@ -1,0 +1,8 @@
+_ve() {
+    local cur opts
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts=$(ls ${VE_DIR:-$HOME/.ve})
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+complete -F _ve ve
