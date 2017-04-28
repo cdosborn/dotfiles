@@ -183,7 +183,7 @@ function ve {
         fi;
 
         if [ ! -d "$VE_DIR/$1" ]; then
-            virtualenv "$VE_DIR/$1";
+            virtualenv -p "$(which python)" "$VE_DIR/$1";
         fi;
 
         if [ -e "$VE_DIR/$1/bin/activate" ]; then
