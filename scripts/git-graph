@@ -18,8 +18,9 @@ main() {
     local MERGE_PARENTS=${commits[@]}
     local MERGE_BASE=$(oldest-merge-base $MERGE_PARENTS)
     git log \
-        --first-parent --graph --decorate --oneline \
-        --format=format:'%C(black)%h%C(reset) %C(auto)%d%C(reset) %C(white)%s %C(reset)' \
+        --first-parent \
+        --graph --decorate --oneline \
+        --format=format:'%C(black)%h%C(reset)%C(auto)%d%C(reset) %C(white)%<(50,trunc)%s %C(reset)' \
         "^$MERGE_BASE~1" $MERGE_PARENTS;
 }
 
@@ -47,13 +48,12 @@ oldest-merge-base() {
     echo $COMMON_ANCESTOR;
 }
 
-# git bash-completion.sh will use this function to provide completion
-_git_graph()
-{
-      # you can return anything here for the autocompletion for example all
-      # the branches
-        __gitcomp_nl "$(__git_refs)"
-}
+# Source this function to leverage git-bash-completion.sh with git graph
+# _git_graph()
+# {
+#       # you can return anything here for the autocompletion for example all
+#       # the branches
+#       __gitcomp_nl "$(__git_refs)"
+# }
 
-main $@
-
+main $@;
