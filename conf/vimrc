@@ -83,16 +83,12 @@ cnoremap <C-[>f <S-Right>
 nnoremap <Space> :w<CR>
 "quit each tab
 nnoremap Q ZQ
-""center when jumping to next search
-"nnoremap n nzz
-""center when jumping to prev search
-"nnoremap N Nzz
-"nnoremap # #zz
-"nnoremap * *zz
-"nnoremap g; g;zz
-"nnoremap g, g,zz
-"Yank the current buffer full path to clipboard
+
+" Insert a file specific debug statement
+" See dotfiles/autoload/debug.vim
+map <silent> -db :call debug#InsertDebugStatement()<CR>
 nnoremap <silent> -gs :Gstatus<CR>
+"Yank the current buffer full path to clipboard
 nnoremap <silent> -yp :let @" = expand("%:p")<CR>
 nnoremap <silent> -yf m`ggVG""y``
 nnoremap <silent> -cp :let @* = expand("%:p")<CR>
