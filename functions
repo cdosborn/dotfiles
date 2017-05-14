@@ -13,11 +13,18 @@ function from() {
 }
 
 function filter {
-    xargs -I{} bash -c "$@ {} && echo {}";
+    xargs -I{} bash -c "$@ &>/dev/null && echo {}";
 }
 
 function join {
     tr -d "\n"
+}
+
+# l(eft)trim the input
+# echo "   a" | ltrim
+# > "a"
+function ltrim {
+    sed 's/^[ \t]*//'
 }
 
 function ju {

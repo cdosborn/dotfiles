@@ -19,6 +19,7 @@
         pull = pull --ff-only
         lg = log --oneline
         head = rev-parse @
+        empty = commit --allow-empty --allow-empty-message -m ''
 
         # Get all files changed in a commit (d)iff(c)ommit
         dc = diff-tree --no-commit-id --name-only -r
