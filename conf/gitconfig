@@ -15,6 +15,7 @@
         fixup = commit --amend -C @
         diffls = diff --name-only
         index = ls-files --stage
+        applydiff= "!{ echo 'cat <<DIFF | git apply'; git diff; echo 'DIFF'; }"
         pull = pull --ff-only
         lg = log --oneline
         head = rev-parse @

@@ -23,6 +23,8 @@ for file in ~/dotfiles/vim/colors/*; do
     name=`basename $file`
     ln -sf $file ~/.vim/colors/$name
 done
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/b44ea685aa2899316e58cba646095fa7551f8808/plug.vim
 
 # Install ubuntu packages
 if [[ `uname -v` =~ Ubuntu ]]; then
