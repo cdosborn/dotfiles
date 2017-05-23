@@ -94,6 +94,7 @@ nnoremap <silent> -yf m`ggVG""y``
 nnoremap <silent> -cp :let @* = expand("%:p")<CR>
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -cf m`ggVG"*y``
+nnoremap <silent> -td <C-W>T:Gvdiff<CR>
 nnoremap -mn :Man<space>
 nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx :!chmod +x %<CR>

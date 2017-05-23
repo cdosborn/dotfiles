@@ -5,8 +5,11 @@ alias grep='grep --color'
 alias gs='git status'
 alias gca='git commit -am'
 alias grc='git rebase --continue'
+
+# Copy/paste for tmux
 alias tpbcopy='tmux loadb -'
 alias tpbpaste='tmux saveb -'
+
 alias bin='xxd -pb'
 alias hs='ghci'
 alias kwmr='launchctl stop homebrew.mxcl.kwm;launchctl start homebrew.mxcl.kwm'
@@ -16,7 +19,8 @@ alias myip='curl http://ipecho.net/plain; echo'
 alias paux='ps aux | grep'
 alias pubkey='pbcopy < ~/.ssh/id_rsa.pub'
 alias r='echo $(base64 < /dev/random | head -c 10)'
-alias yt='youtube-dl --quiet --exec "/Applications/VLC.app/Contents/MacOS/VLC {} 2>%-"'
 
 # execute '<last command> |  less'
 alias l='bash -c "$(history | tail -2 | head -1 | cut -sd " " -f 4-)" | less'
+
+alias t='python ~/dotfiles/scripts/t.py --task-dir ~/dotfiles/tasks --list tasks'

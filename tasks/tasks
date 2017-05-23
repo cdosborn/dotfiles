@@ -1,0 +1,5 @@
+Resolve 00fc17537 that commit is using both parse and initialize, needs work | id:18fbfc61c593d9c992a6bba7ebc11837f90097d7
+Added editor support for t | id:256926a2eb8a87eaa358a3263a31d4d7ae0ef51e
+Need to allow allocation sources to be patchable! | id:493ed484fa3b83eddf77be443426f14ad423c8da
+Is badges still a valid url? yes. It should be removed. | id:5d5b48353bb5a291b51c3f2d615b06f7d328b5b0
+Talked with Jason to resolve Git issue | id:a8ef1a24b119099aaf18a47900482fd413165d78

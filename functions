@@ -125,8 +125,8 @@ function args {
 # ve NAME           creates and activates venv
 # ve wipe           remove and deactivate current venv
 # ve wipe NAME...   remove multiple venvs
-# ve list           print all venvs
-#
+# ve                print all venvs
+# ve [-h|--help]    print usage
 function ve {
     #
     # Use $VE_DIR it it exists in env
@@ -139,13 +139,21 @@ function ve {
     fi;
 
     case $1 in
-    "" )
-        echo "ve list   List all virtual envs";
-        echo "ve wipe [NAME...]  Erase virtual envs";
-        echo "ve NAME   Create or activate virtual env";
+    --help|-h )
+        echo "ve                List all virtual envs";
+        echo "ve wipe [NAME...] Erase virtual envs";
+        echo "ve NAME           Create or activate virtual env";
+        echo "ve [-h|--help]    Print usage";
         ;;
-    "wipe" )
 
+    "" )
+        if [ ! -d "$VE_DIR" ]; then
+            mkdir "$VE_DIR";
+        fi;
+        ls -1 "$VE_DIR";
+        ;;
+
+    "wipe" )
         shift;
 
         #
@@ -158,7 +166,7 @@ function ve {
         #
         # ve wipe with arguments removes each argument
         #
-        local VENVS="$(ve list)"
+        local VENVS="$(ve)"
         for ENV in $@; do
             local DIR="$VE_DIR/$ENV";
             if [[ "$VENVS" =~ "$ENV" ]] && [ -d "$DIR" ]; then
@@ -172,14 +180,8 @@ function ve {
         if [ "$VIRTUAL_ENV" -a ! -d "$VIRTUAL_ENV" ]; then
             deactivate;
         fi;
+        ;;
 
-        ;;
-    "list" )
-        if [ ! -d "$VE_DIR" ]; then
-            mkdir "$VE_DIR";
-        fi;
-        ls -1 "$VE_DIR";
-        ;;
     * )
 
         #
