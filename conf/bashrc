@@ -13,6 +13,9 @@ function _() {
     # For Terminal to enable C-s with readline
     stty -ixon -ixoff
 
+    # Use common sense bindings for less
+    export LESSKEY=~/dotfiles/less/lesskey.generated
+
     # History
     # If set, the history list is appended to the file named by the value of the HISTFILE variable when the shell exits, rather than overwriting the file.
     shopt -s histappend
