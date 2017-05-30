@@ -1,10 +1,15 @@
 # Git
 alias gb='git branch --sort=committerdate'
 alias gl='git log'
-alias grep='grep --color'
 alias gs='git status'
 alias gca='git commit -am'
 alias grc='git rebase --continue'
+
+alias grep='grep --color'
+# Default head to show you up to the number of lines available in your
+# terminal, this is slightly verbose, because it handles the case where your
+# terminal window is very tiny
+alias head='head -n $(( lines=$(($(tput lines) - 2)), lines < 0 ? 0 : lines))'
 
 # Copy/paste for tmux
 alias tpbcopy='tmux loadb -'

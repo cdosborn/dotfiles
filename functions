@@ -1,5 +1,11 @@
 #! /usr/bin/env bash
 
+# Ask the process running on a port to just die already
+# > portkill 5000
+function portkill {
+    kill $(lsof -i :$1 -t);
+}
+
 #  echo -e "a\nb\n" |  take 2
 #  > b
 function take {
