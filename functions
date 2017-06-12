@@ -1,8 +1,50 @@
 #! /usr/bin/env bash
 
+# Create or use existing weekly file for t's task list
+function weekly-task-file {
+    local DATE="$(date +%m-%d-%y)";
+    local TASK_FILE=~/dotfiles/tasks/tasks-${DATE};
+    local TASK_DONE_FILE=~/dotfiles/tasks/.tasks-${DATE}.done;
+    touch $TASK_FILE $TASK_DONE_FILE;
+    echo "Using $TASK_FILE as task list";
+    ln -sf $TASK_FILE ~/dotfiles/tasks/tasks;
+    ln -sf $TASK_DONE_FILE ~/dotfiles/tasks/.tasks.done;
+}
+
+# Print my jiras from the last week
+function printjiras {
+    local jql api;
+
+    read -p "Username? " user;
+    read -s -p "Password? " pass;
+    echo;
+
+    jql="reporter = $user AND createdDate >= -1w"
+    api="https://pods.iplantcollaborative.org/jira/rest/api/2/search"
+
+    # Fetch the json
+    curl --fail --silent --show-error                                     \
+        --data-urlencode "jql=$jql"                                       \
+        -G                                                                \
+        -H "Content-Type: application/json"                               \
+        -X GET -H "Authorization: Basic $(echo -n $user:$pass | base64)"  \
+        $api |
+
+    # Format json into a small bash program
+    jq -r '.issues[] | .key as $ISSUE | .fields | @sh "echo $(date -d" + .created + " +%D) " + $ISSUE + " " +  .summary' |
+
+    # Evaluate it
+    bash;
+}
+
+# Get the path to a python package
+function pipwhich {
+    pip show $1 | grep -Po '^Location: \K.*';
+}
+
 # Ask the process running on a port to just die already
-# > portkill 5000
-function portkill {
+# > killport 5000
+function killport {
     kill $(lsof -i :$1 -t);
 }
 

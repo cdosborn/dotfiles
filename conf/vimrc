@@ -15,10 +15,13 @@ Plug 'kana/vim-textobj-user'
 Plug 'rbonvall/vim-textobj-latex'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-github-dashboard'
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
+Plug 'yssl/TWcmd.vim'
+Plug 'drmikehenry/vim-fixkey' "Necessary for <M-...> bindings
 
 call plug#end()
 
@@ -59,6 +62,18 @@ nnoremap <silent> <C-H> <C-W>h
 nnoremap <silent> <C-J> <C-W>j
 nnoremap <silent> <C-K> <C-W>k
 nnoremap <silent> <C-W>v :rightbelow vs<CR>
+
+function! s:nnoreicmap(option, shortcut, command)
+    execute 'nnoremap '.a:option.' '.a:shortcut.' '.a:command
+    execute 'imap '.a:option.' '.a:shortcut.' <Esc>'.a:shortcut
+    execute 'cmap '.a:option.' '.a:shortcut.' <Esc>'.a:shortcut
+endfunction
+
+" window moving
+call s:nnoreicmap('','<A-l>',':TWcmd wmv l<CR>')
+call s:nnoreicmap('','<A-h>',':TWcmd wmv h<CR>')
+call s:nnoreicmap('','<A-j>',':TWcmd wmv j<CR>')
+call s:nnoreicmap('','<A-k>',':TWcmd wmv k<CR>')
 
 " Select last paste, kinda like gv
 nnoremap gp `[v`]
@@ -102,7 +117,7 @@ nnoremap -mk :make<CR>
 nnoremap <silent> -mc :exe ":!ctags -f .tags -R * "<CR><CR>
 nnoremap -ss :source .session.vim<CR>
 nnoremap -sf :w \| so %<CR>
-nnoremap -su :%s:::gc<Left><Left><Left><Left>
+nnoremap -su :%s:\<<C-r><C-w>\>::gc<Left><Left><Left>
 nnoremap -ag :Ag <cword><CR>
 nnoremap -sp `[v`]
 vnoremap <silent> -tb :!column -t<CR>
@@ -149,7 +164,7 @@ set hlsearch
 set incsearch
 set laststatus=2
 set noswapfile
-set pastetoggle=<F2>
+set pastetoggle=<M-p>
 set ruler
 set shiftwidth=4
 set showcmd
@@ -165,6 +180,12 @@ set virtualedit=all
 set wildmenu
 set wildmode=longest:full
 set winminwidth=1
+
+" This purpoteldy allows running shell aliases/functions, but forces vim to
+" background, needs more futzing
+" set shell=bash\ --login
+" set shellcmdflag=-ic "Allow aliases to be ran from !commands"
+
 if exists("&backupdir")
     set backupdir=~/.vim/backups
 endif
