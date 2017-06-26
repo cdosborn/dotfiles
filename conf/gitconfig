@@ -19,7 +19,10 @@
         pull = pull --ff-only
         lg = log --oneline
         head = rev-parse @
+
+        # Commands to create a history quickly
         empty = commit --allow-empty --allow-empty-message -m ''
+        mempty = merge --no-edit --no-ff
 
         # Get all files changed in a commit (d)iff(c)ommit
         dc = diff-tree --no-commit-id --name-only -r

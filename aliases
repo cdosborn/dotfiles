@@ -6,10 +6,11 @@ alias gca='git commit -am'
 alias grc='git rebase --continue'
 
 alias grep='grep --color'
-# Default head to show you up to the number of lines available in your
-# terminal, this is slightly verbose, because it handles the case where your
-# terminal window is very tiny
-alias head='head -n $(( n=$(($(tput lines) - 2)), n < 0 ? 0 : n))'
+
+# head that only outputs the  number of lines available in your terminal, this
+# is slightly verbose, because it handles the case where your terminal window
+# is very tiny
+alias headfit='head -n $(( n=$(($(tput lines) - 2)), n < 0 ? 0 : n))'
 
 # Copy/paste for tmux
 alias tpbcopy='tmux loadb -'

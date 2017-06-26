@@ -21,7 +21,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'yssl/TWcmd.vim'
-Plug 'drmikehenry/vim-fixkey' "Necessary for <M-...> bindings
 
 call plug#end()
 
@@ -164,7 +163,7 @@ set hlsearch
 set incsearch
 set laststatus=2
 set noswapfile
-set pastetoggle=<M-p>
+set pastetoggle=<C-L>
 set ruler
 set shiftwidth=4
 set showcmd
