@@ -8,9 +8,6 @@ $if Bash
     # Quote a string
     "\C-q":"\"\"\C-b"
 
-    # Echo a command before executing it
-    "\C-t": "\C-aecho \C-e\C-j\C-p\C-a\ed\C-d\C-e"
-
     # Combo to make Meta-f move one character more
     "\C-z": forward-word
     "\ef": "\C-z\C-f"

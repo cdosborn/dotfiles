@@ -14,6 +14,7 @@
 --regex-less=/^[ t]*(([A-Za-z0-9_-]+[ tn,]+)+)\{/1/t,tag,tags/
 --regex-less=/^[ t]*@medias+([A-Za-z0-9_-]+)/1/m,media,medias/
 
+/*
 --langdef=js
 --langmap=js:.js
 --langmap=js:+.jsx
@@ -37,3 +38,4 @@
 --regex-js=/['"]*([A-Za-z$][A-Za-z0-9_$]+)['"]*:[ \t]*function[ \t]*\(/\1/m,method/
 --regex-js=/([A-Za-z0-9_$]+)\[["']([A-Za-z0-9_$]+)["']\][ \t]*=[ \t]*function[ \t]*\(/\2/m,method/
 
+*/

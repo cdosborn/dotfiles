@@ -1,14 +1,28 @@
 #! /usr/bin/env bash
 
+# Replace current editing line with evald echo, via C-t
+_replaceCommad() {
+    READLINE_LINE="$(eval echo "$READLINE_LINE")"
+}
+bind -m emacs -x '"\C-t": _replaceCommad'
+
 # Create or use existing weekly file for t's task list
 function weekly-task-file {
-    local DATE="$(date +%m-%d-%y)";
+    local DAY="$(printf "%02d" $(($(date +%d) - $(date +%u) + 1)))";
+    local DATE="$(date +%Y-%m-)${DAY}"
     local TASK_FILE=~/dotfiles/tasks/tasks-${DATE};
     local TASK_DONE_FILE=~/dotfiles/tasks/.tasks-${DATE}.done;
     touch $TASK_FILE $TASK_DONE_FILE;
-    echo "Using $TASK_FILE as task list";
+    echo "Using $TASK_FILE as task list.";
     ln -sf $TASK_FILE ~/dotfiles/tasks/tasks;
     ln -sf $TASK_DONE_FILE ~/dotfiles/tasks/.tasks.done;
+
+    local PREV_DATE="$(date --date="${DATE} -7 day" +%F)"
+    local PREV_TASK_FILE=~/dotfiles/tasks/tasks-${PREV_DATE};
+    if [ -e $PREV_TASK_FILE ]; then
+        echo "Importing tasks from prior week.";
+        sort -u ${PREV_TASK_FILE} ${TASK_FILE} | sponge ${TASK_FILE};
+    fi;
 }
 
 # Print my jiras from the last week
