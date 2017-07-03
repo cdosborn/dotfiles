@@ -21,6 +21,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'yssl/TWcmd.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()
 
@@ -52,10 +53,6 @@ nnoremap ( 10<C-W><
 " Better goto file
 "nnoremap gf :exec ":exec \":sb \" . expand(\"<cfile>\")"<CR>
 
-"nnoremap <silent> <C-J> <C-W><C-J>:exe 'resize +1000 \| vertical resize +1000'<CR>
-"nnoremap <silent> <C-K> <C-W><C-K>:exe 'resize +1000 \| vertical resize +1000'<CR>
-"nnoremap <silent> <C-L> <C-W><C-L>:exe 'resize +1000 \| vertical resize +1000'<CR>
-"nnoremap <silent> <C-H> <C-W><C-H>:exe 'resize +1000 \| vertical resize +1000'<CR>
 nnoremap <silent> <C-L> <C-W>l
 nnoremap <silent> <C-H> <C-W>h
 nnoremap <silent> <C-J> <C-W>j
@@ -109,7 +106,6 @@ nnoremap <silent> -cp :let @* = expand("%:p")<CR>
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -cf m`ggVG"*y``
 nnoremap <silent> -td <C-W>T:Gvdiff<CR>
-nnoremap -mn :Man<space>
 nnoremap -ms :mksession! .session.vim<CR>
 nnoremap -mx :!chmod +x %<CR>
 nnoremap -mk :make<CR>
@@ -120,7 +116,6 @@ nnoremap -su :%s:\<<C-r><C-w>\>::gc<Left><Left><Left>
 nnoremap -ag :Ag <cword><CR>
 nnoremap -sp `[v`]
 vnoremap <silent> -tb :!column -t<CR>
-vnoremap ! :w !
 
 " re(fresh)
 nnoremap -re :normal! <CR>
@@ -147,7 +142,6 @@ nnoremap <silent> -ev :vsp $MYVIMRC<CR>
 nnoremap <silent> -ec :sp ~/.vim/colors/uncolor.vim<CR>
 " t(rim) whitespace
 nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
-nnoremap <silent> -tp :TernDefPreview<CR>
 
 " Settings
 " set autochdir
@@ -161,7 +155,11 @@ set foldenable
 set history=1000
 set hlsearch
 set incsearch
+" Disable the extra spaces vim introduces after sentence terminating
+" punctuation.
+set nojoinspaces
 set laststatus=2
+set listchars=eol:¬,nbsp:␣
 set noswapfile
 set pastetoggle=<C-L>
 set ruler
@@ -196,38 +194,42 @@ colorscheme uncolor
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\
-set tabline=%!MyTabLine()
-function! MyTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
-    else
-      let s .= '%#TabLine#'
-    endif
+" set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\
+" set tabline=%!MyTabLine()
+" function! MyTabLine()
+"   let s = ''
+"   for i in range(tabpagenr('$'))
+"     " select the highlighting
+"     if i + 1 == tabpagenr()
+"       let s .= '%#TabLineSel#'
+"     else
+"       let s .= '%#TabLine#'
+"     endif
 
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T'
+"     " set the tab page number (for mouse clicks)
+"     let s .= '%' . (i + 1) . 'T'
 
-    " the label is made by MyTabLabel()
-    let s .= ' ' . (i + 1) . ' '
-  endfor
+"     " the label is made by MyTabLabel()
+"     let s .= ' ' . (i + 1) . ' '
+"   endfor
 
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
+"   " after the last tab fill with TabLineFill and reset tab page nr
+"   let s .= '%#TabLineFill#%T'
 
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s .= '%=%#TabLine#%999X'
-  endif
+"   " right-align the label to close the current tab page
+"   if tabpagenr('$') > 1
+"     let s .= '%=%#TabLine#%999X'
+"   endif
 
-  return s
-endfunction
+"   return s
+" endfunction
 
 " Source my vimrc when file changes
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+
+" Auto strip whitespace 'ntpeters/vim-better-whitespace'
+autocmd BufEnter * EnableStripWhitespaceOnSave
+
