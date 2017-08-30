@@ -6,6 +6,26 @@ _replaceCommad() {
 }
 bind -m emacs -x '"\C-t": _replaceCommad'
 
+function copy {
+    if [[ "$(uname)" -eq "Linux" ]]; then
+        xsel -b -i;
+    else
+        pbcopy;
+    fi;
+}
+
+function paste {
+    if [[ "$(uname)" -eq "Linux" ]]; then
+        xsel -b -o;
+    else
+        pbpaste;
+    fi;
+}
+
+function pubkey {
+    copy < ~/.ssh/id_rsa.pub
+}
+
 # Create or use existing weekly file for t's task list
 function weekly-task-file {
     local DAY="$(printf "%02d" $(($(date +%d) - $(date +%u) + 1)))";

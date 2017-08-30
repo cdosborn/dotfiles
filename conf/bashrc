@@ -1,7 +1,6 @@
 # Activate Connor's config
 function _() {
     for file in \
-        ~/.bashrc \
         ~/.bashrc.local \
         ~/dotfiles/aliases \
         ~/dotfiles/functions \
