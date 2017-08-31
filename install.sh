@@ -1,3 +1,6 @@
+# Print each command as its run
+set -x
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -48,12 +51,12 @@ curl -sSLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Install ubuntu packages
 if [[ `uname -v` =~ Ubuntu ]]; then
-    ~/dotfiles/ubuntu/install.sh
+    source ~/dotfiles/ubuntu/install.sh
 fi
 
 # Install osx packages
 if [[ `uname -v` =~ Darwin ]]; then
-    ~/dotfiles/osx/install.sh
+    source ~/dotfiles/osx/install.sh
 fi
 
 # Only source if we're attached to a terminal
