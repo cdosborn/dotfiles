@@ -34,7 +34,6 @@ for file in ~/dotfiles/scripts/*; do
 done
 
 # Install vim
-rm -rf ~/.vim;
 mkdir -p ~/.vim ~/.vim/backups ~/.vim/swaps ~/.vim/undo ~/.vim/colors ~/.vim/autoload
 for file in ~/dotfiles/vim/autoload/*; do
     name=`basename $file`
@@ -57,4 +56,7 @@ if [[ `uname -v` =~ Darwin ]]; then
     ~/dotfiles/osx/install.sh
 fi
 
-source ~/dotfiles/conf/bashrc
+# Only source if we're attached to a terminal
+if [[ -t 1 ]]; then
+    source ~/dotfiles/conf/bashrc;
+fi;

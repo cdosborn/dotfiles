@@ -13,4 +13,7 @@ if [[ ! -d ~/dotfiles ]]; then
     git clone https://github.com/cdosborn/dotfiles.git ~/dotfiles
 fi;
 
-. ~/dotfiles/conf/bashrc
+# Only source if we're attached to a terminal
+if [[ -t 1 ]]; then
+    source ~/dotfiles/conf/bashrc;
+fi;
