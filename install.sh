@@ -5,11 +5,11 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install git prerequisite
-which git &>-;
+which git &>/dev/null;
 if [[ $? -ne 0 ]]; then
     # Install git
     if [[ `uname -v` =~ Ubuntu ]]; then
-        apt-get -qq install git
+        apt-get -qq install git;
     else
         echo "git is required. Exiting."
         exit 1;

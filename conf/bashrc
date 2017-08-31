@@ -1,4 +1,4 @@
-# Activate Connor's config
+# Source config
 function _() {
     for file in \
         ~/.bashrc.local \
