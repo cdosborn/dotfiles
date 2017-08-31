@@ -230,6 +230,9 @@ augroup reload_vimrc " {
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
 
-" Auto strip whitespace 'ntpeters/vim-better-whitespace'
-autocmd BufEnter * EnableStripWhitespaceOnSave
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall | q
 
+" Auto strip whitespace 'ntpeters/vim-better-whitespace'
+" autocmd BufEnter * EnableStripWhitespaceOnSave
