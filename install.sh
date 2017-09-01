@@ -53,7 +53,7 @@ for file in ~/dotfiles/scripts/*; do
 done
 
 # Install vim
-mkdir -p ~/.vim ~/.vim/backups ~/.vim/swaps ~/.vim/undo ~/.vim/colors ~/.vim/autoload
+mkdir -p ~/.vim/colors ~/.vim/autoload
 for file in ~/dotfiles/vim/autoload/*; do
     name=`basename $file`
     ln -sf $file ~/.vim/autoload/$name

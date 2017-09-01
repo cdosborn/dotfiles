@@ -3,10 +3,10 @@ set  nocompatible
 filetype plugin indent on
 syntax on
 
-
 " Install plugin manager if it doesn't exist
 if !filereadable(glob('~/.vim/autoload/plug.vim'))
     call system('curl -sSLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+    source ~/.vim/autoload/plug.vim
 endif
 
 call plug#begin()
@@ -30,6 +30,11 @@ Plug 'yssl/TWcmd.vim'
 Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()
+
+" Install/update all plugins
+if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    PlugInstall --sync | q
+endif
 
 " Load :Man plugin
 source $VIMRUNTIME/ftplugin/man.vim
@@ -189,11 +194,17 @@ set winminwidth=1
 " set shell=bash\ --login
 " set shellcmdflag=-ic "Allow aliases to be ran from !commands"
 
-if exists("&backupdir")
-    set backupdir=~/.vim/backups
+if !exists("&backupdir")
+   set backupdir=~/.vim/backups
+   if !isdirectory($HOME . "/.vim/backups")
+       call mkdir($HOME . "/.vim/backups", "p")
+   endif
 endif
 if exists("&undodir")
     set undodir=~/.vim/undo
+   if !isdirectory($HOME . "/.vim/undo")
+       call mkdir($HOME . "/.vim/undo", "p")
+   endif
 endif
 if filereadable(glob('~/.vim/colors/uncolor.vim'))
     colorscheme uncolor
@@ -237,10 +248,6 @@ augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
-
-autocmd VimEnter *
-  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall --sync | q
 
 " Auto strip whitespace 'ntpeters/vim-better-whitespace'
 autocmd BufEnter * EnableStripWhitespaceOnSave
