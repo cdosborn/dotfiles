@@ -1,0 +1,13 @@
+#!/bin/bash
+
+xrdb -merge .Xresources
+
+xscreensaver -no-splash &
+
+xmodmap .xmodmap
+
+if [ -x /usr/bin/nm-applet ] ; then
+   nm-applet --sm-disable &
+fi
+
+exec xmonad

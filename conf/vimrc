@@ -235,4 +235,8 @@ autocmd VimEnter *
   \|   PlugInstall | q
 
 " Auto strip whitespace 'ntpeters/vim-better-whitespace'
-" autocmd BufEnter * EnableStripWhitespaceOnSave
+autocmd BufEnter * EnableStripWhitespaceOnSave
+
+if system("uname") =~ "Linux"
+    let g:livedown_browser = "vivaldi"
+endif
