@@ -194,18 +194,14 @@ set winminwidth=1
 " set shell=bash\ --login
 " set shellcmdflag=-ic "Allow aliases to be ran from !commands"
 
-if !exists("&backupdir")
-   set backupdir=~/.vim/backups
-   if !isdirectory($HOME . "/.vim/backups")
-       call mkdir($HOME . "/.vim/backups", "p")
-   endif
+if !isdirectory($HOME . "/.vim/backup")
+   call mkdir($HOME . "/.vim/backup", "p")
 endif
-if exists("&undodir")
-    set undodir=~/.vim/undo
-   if !isdirectory($HOME . "/.vim/undo")
-       call mkdir($HOME . "/.vim/undo", "p")
-   endif
+set backupdir=~/.vim/backups
+if !isdirectory($HOME . "/.vim/undo")
+   call mkdir($HOME . "/.vim/undo", "p")
 endif
+set undodir=~/.vim/undo
 if filereadable(glob('~/.vim/colors/uncolor.vim'))
     colorscheme uncolor
 endif
