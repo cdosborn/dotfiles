@@ -195,7 +195,9 @@ endif
 if exists("&undodir")
     set undodir=~/.vim/undo
 endif
-colorscheme uncolor
+if filereadable(glob('~/.vim/colors/uncolor.vim'))
+    colorscheme uncolor
+endif
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
