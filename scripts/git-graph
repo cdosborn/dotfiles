@@ -1,27 +1,53 @@
 #!/bin/bash
 
-# Print the smallest graph from these endpoints
-#
-# git graph <commit>...
-#
+usage() {
+    echo 'Print the smallest graph from these endpoints';
+    echo '';
+    echo 'git graph [-w|--watch] <commit>...';
+}
+
 main() {
-    local commits=();
+    local REFS=();
     if [[ $# -eq 0 ]]; then
-        echo 'git graph <commit>...';
+        usage
         return 0;
     elif [[ $# -eq 1 ]]; then
-        commits=( "$1" HEAD );
+        REFS=( "$1" HEAD );
     else
-        commits=( $@ );
+        REFS=( $@ );
     fi
 
-    local MERGE_PARENTS=${commits[@]}
-    local MERGE_BASE=$(oldest-merge-base $MERGE_PARENTS)
-    git log \
-        --first-parent \
+    if [[ "$1" =~ ^(-w|--watch)$ ]]; then
+        while true; do
+	    {
+		find .git/ -maxdepth 1 -type f;
+		echo .git/refs/heads/*;
+	    } | entr -cd draw-graph ${REFS[@]};
+	done
+    else
+        draw-graph ${REFS[@]}
+    fi
+}
+
+draw-graph() {
+    local MERGE_TIPS=$1;
+    local MERGE_BASE=$(oldest-merge-base $MERGE_TIPS);
+
+    # Set the GRAPH_BASE to be the ancestor of the merge base. If the ancestor
+    # doesn't exist then use just the merge base
+    local MERGE_BASE_ANCESTOR=$(git rev-parse --quiet --verify $MERGE_BASE~1^{commit});
+    local GRAPH_BASE;
+    if [ -n $MERGE_BASE_ANCESTOR ]; then
+        GRAPH_BASE=$MERGE_BASE_ANCESTOR
+    else
+        GRAPH_BASE=$MERGE_BASE
+    fi
+
+
+    echo git log \
         --graph --decorate --oneline \
         --format=format:'%C(black)%h%C(reset)%C(auto)%d%C(reset) %C(white)%<(50,trunc)%s %C(reset)' \
-        "^$MERGE_BASE~1" $MERGE_PARENTS;
+        "^$GRAPH_BASE" $MERGE_TIPS;
 }
 
 oldest-merge-base() {

@@ -1,4 +1,4 @@
-#! /bin/bash 
+#! /bin/bash
 
 # Set up defaults
 ~/dotfiles/osx/defaults.sh

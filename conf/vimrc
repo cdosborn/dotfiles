@@ -172,7 +172,7 @@ set nojoinspaces
 set laststatus=2
 set listchars=eol:¬,nbsp:␣
 set noswapfile
-set pastetoggle=<C-L>
+set pastetoggle=<F2>
 set ruler
 set shiftwidth=4
 set showcmd
