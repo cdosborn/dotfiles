@@ -27,5 +27,3 @@ alias r='echo $(base64 < /dev/random | head -c 10)'
 
 # execute '<last command> |  less'
 alias l='bash -c "$(history | tail -2 | head -1 | cut -sd " " -f 4-)" | less'
-
-alias t='python ~/dotfiles/scripts/t.py --task-dir ~/dotfiles/tasks --list tasks'

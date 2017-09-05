@@ -46,6 +46,9 @@ for file in ~/dotfiles/scripts/*; do
     ln -sf $file /usr/local/bin/$name
 done
 
+# Create task directory for t function to use
+mkdir ~/.tasks;
+
 # Install vim
 mkdir -p ~/.vim/colors ~/.vim/autoload
 for file in ~/dotfiles/vim/autoload/*; do

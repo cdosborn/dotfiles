@@ -393,3 +393,14 @@ function export-auth-sock {
         false;
     fi
 }
+
+function t {
+    local dir;
+    if [ -d ~/.tasks ]; then
+        dir=~/.tasks
+    else
+        mkdir -p /tmp/tasks;
+        dir=/tmp/tasks;
+    fi;
+    python ~/dotfiles/scripts/t.py --task-dir "$dir" --list tasks $@;
+}
