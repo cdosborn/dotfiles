@@ -251,3 +251,6 @@ autocmd BufEnter * EnableStripWhitespaceOnSave
 if system("uname") =~ "Linux"
     let g:livedown_browser = "vivaldi"
 endif
+
+command! GFollow execute 'file '.fnameescape(resolve(expand('%:p')))<bar>
+    \ call fugitive#detect(fnameescape(expand('%:p:h')))
