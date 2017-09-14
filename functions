@@ -26,19 +26,31 @@ function pubkey {
     copy < ~/.ssh/id_rsa.pub
 }
 
+# Try man, then help, then --help until some docs are found
+function h {
+    man "$1" 2>&- || { { help "$1" 2>&- || $1 --help; } | less;
+}
+
 # Create or use existing weekly file for t's task list
 function weekly-task-file {
+    local task_dir;
+    if [ -d ~/.tasks ]; then
+        task_dir=~/.tasks
+    else
+        mkdir -p /tmp/tasks;
+        task_dir=/tmp/tasks;
+    fi;
     local DAY="$(printf "%02d" $(($(date +%d) - $(date +%u) + 1)))";
     local DATE="$(date +%Y-%m-)${DAY}"
-    local TASK_FILE=~/dotfiles/tasks/tasks-${DATE};
-    local TASK_DONE_FILE=~/dotfiles/tasks/.tasks-${DATE}.done;
+    local TASK_FILE="${task_dir}/tasks-${DATE}";
+    local TASK_DONE_FILE="${task_dir}/.tasks-${DATE}.done";
     touch $TASK_FILE $TASK_DONE_FILE;
     echo "Using $TASK_FILE as task list.";
-    ln -sf $TASK_FILE ~/dotfiles/tasks/tasks;
-    ln -sf $TASK_DONE_FILE ~/dotfiles/tasks/.tasks.done;
+    ln -sf $TASK_FILE "${task_dir}/tasks";
+    ln -sf $TASK_DONE_FILE "${task_dir}/.tasks.done";
 
     local PREV_DATE="$(date --date="${DATE} -7 day" +%F)"
-    local PREV_TASK_FILE=~/dotfiles/tasks/tasks-${PREV_DATE};
+    local PREV_TASK_FILE="${task_dir}/tasks-${PREV_DATE}";
     if [ -e $PREV_TASK_FILE ]; then
         echo "Importing tasks from prior week.";
         sort -u ${PREV_TASK_FILE} ${TASK_FILE} | sponge ${TASK_FILE};
@@ -395,12 +407,12 @@ function export-auth-sock {
 }
 
 function t {
-    local dir;
+    local task_dir;
     if [ -d ~/.tasks ]; then
-        dir=~/.tasks
+        task_dir=~/.tasks
     else
         mkdir -p /tmp/tasks;
-        dir=/tmp/tasks;
+        task_dir=/tmp/tasks;
     fi;
-    python ~/dotfiles/scripts/t.py --task-dir "$dir" --list tasks $@;
+    python ~/dotfiles/scripts/t.py --task-dir "$task_dir" --list tasks $@;
 }

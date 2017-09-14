@@ -170,7 +170,7 @@ set incsearch
 " punctuation.
 set nojoinspaces
 set laststatus=2
-set listchars=eol:¬,nbsp:␣
+set listchars=eol:¬
 set noswapfile
 set pastetoggle=<F2>
 set ruler
