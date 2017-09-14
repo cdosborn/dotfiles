@@ -28,7 +28,7 @@ function pubkey {
 
 # Try man, then help, then --help until some docs are found
 function h {
-    man "$1" 2>&- || { { help "$1" 2>&- || $1 --help; } | less;
+    man "$1" 2>&- || { { help "$1" 2>&- || $1 --help; } | less; }
 }
 
 # Create or use existing weekly file for t's task list
