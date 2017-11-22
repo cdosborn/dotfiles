@@ -14,6 +14,19 @@ function copy {
     fi;
 }
 
+# Execute a command in each pane inside a tmux session
+# tmuxrun $SESSION $COMMAND
+# tmuxrun 0 "echo hi"
+function tmuxrun {
+    local session="$1"; shift;
+    local run_command="$@";
+    tmux list-panes -t "$session" -s -F '#{pane_id} #{pane_current_command}' |
+    awk '/bash/ { print $1; }' |
+    while read pane; do
+        tmux send-keys -t $pane "$run_command" Enter;
+    done
+}
+
 function paste {
     if [[ "$(uname)" -eq "Linux" ]]; then
         xsel -b -o;
