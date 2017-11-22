@@ -16,10 +16,10 @@ function _() {
     export LESSKEY=~/dotfiles/less/lesskey.generated
 
     # History
-    # If set, the history list is appended to the file named by the value of the HISTFILE variable when the shell exits, rather than overwriting the file.
+    # If set, the history list is appended to the file on shell exit
     shopt -s histappend
-    # The value of the HISTSIZE variable  is  used  as  the number  of  commands to save in a history list.
-    export HISTSIZE=
+    export HISTSIZE=-1
+    export HISTFILESIZE=-1
 
     export TERM=xterm-256color
     export EDITOR="vim"
