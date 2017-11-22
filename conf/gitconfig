@@ -30,3 +30,6 @@
 	tool = vimdiff
 [color]
 	ui = auto
+[rebase]
+	autosquash = true
+	autostash = true
