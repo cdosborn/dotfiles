@@ -74,10 +74,10 @@ function printjiras {
         -G                                                                \
         -H "Content-Type: application/json"                               \
         -X GET -H "Authorization: Basic $(echo -n $user:$pass | base64)"  \
-        $api |
+        "$api" |
 
     # Format json into a small bash program
-    jq -r '.issues[] | .key as $ISSUE | .fields | @sh "echo $(date -d" + .created + " +%D) " + $ISSUE + " " +  .summary' |
+    jq -r '.issues[] | .key as $ISSUE | .fields | @sh "echo $(date -d" + .created + " +%D) " + $ISSUE + " \"" +  .summary + "\""' |
 
     # Evaluate it
     bash;

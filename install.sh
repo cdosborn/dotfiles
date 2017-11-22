@@ -43,7 +43,7 @@ done
 # Symlink scripts into /usr/local/bin
 for file in ~/dotfiles/scripts/*; do
     name=`basename $file`
-    ln -sf $file /usr/local/bin/$name
+    sudo ln -sf $file /usr/local/bin/$name
 done
 
 # Create task directory for t function to use
