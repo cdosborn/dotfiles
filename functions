@@ -35,6 +35,11 @@ function paste {
     fi;
 }
 
+# vimmake 'some unix command which generates a locationlist'
+function vimmake {
+    vim -c "set makeprg=$(echo $1 | sed 's: :\\ :g') | make";
+}
+
 function pubkey {
     copy < ~/.ssh/id_rsa.pub
 }
