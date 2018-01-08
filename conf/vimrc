@@ -13,6 +13,7 @@ call plug#begin()
 
 " Using git URL
 Plug 'shime/vim-livedown'
+Plug 'mattboehm/vim-unstack'
 Plug 'rking/ag.vim'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'nvie/vim-flake8'

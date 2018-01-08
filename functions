@@ -58,7 +58,7 @@ function weekly-task-file {
         mkdir -p /tmp/tasks;
         task_dir=/tmp/tasks;
     fi;
-    local DAY="$(printf "%02d" $(($(date +%d) - $(date +%u) + 1)))";
+    local DAY="$(printf "%02d" $(($(date +%_d) - $(date +%_u) + 1)))";
     local DATE="$(date +%Y-%m-)${DAY}"
     local TASK_FILE="${task_dir}/tasks-${DATE}";
     local TASK_DONE_FILE="${task_dir}/.tasks-${DATE}.done";
