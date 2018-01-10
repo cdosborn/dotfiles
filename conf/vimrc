@@ -198,7 +198,7 @@ set winminwidth=1
 if !isdirectory($HOME . "/.vim/backup")
    call mkdir($HOME . "/.vim/backup", "p")
 endif
-set backupdir=~/.vim/backups
+set backupdir=~/.vim/backup
 if !isdirectory($HOME . "/.vim/undo")
    call mkdir($HOME . "/.vim/undo", "p")
 endif
