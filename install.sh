@@ -24,11 +24,6 @@ if [[ ! -d ~/dotfiles ]]; then
     git clone https://github.com/cdosborn/dotfiles.git ~/dotfiles
 fi;
 
-# Install ubuntu packages
-if [[ `uname -v` =~ Ubuntu ]]; then
-    ~/dotfiles/ubuntu/apt-install.sh
-fi
-
 # Clone the dotfiles repo if it doesn't exist
 if [[ ! -d ~/dotfiles ]]; then
     git clone https://github.com/cdosborn/dotfiles.git ~/dotfiles
@@ -49,7 +44,7 @@ done
 # Create task directory for t function to use
 mkdir ~/.tasks;
 
-# Install vim
+# Prepare vim install
 mkdir -p ~/.vim/colors ~/.vim/autoload
 for file in ~/dotfiles/vim/autoload/*; do
     name=`basename $file`
@@ -68,6 +63,11 @@ fi
 # Install osx packages
 if [[ `uname -v` =~ Darwin ]]; then
     source ~/dotfiles/osx/install.sh
+fi
+
+# Install tmux package manager
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 # Only source if we're attached to a terminal
