@@ -9,9 +9,13 @@ if !filereadable(glob('~/.vim/autoload/plug.vim'))
     source ~/.vim/autoload/plug.vim
 endif
 
+" vim-closetag
+let g:closetag_filenames = '*.html,*.jsx,*.js'
+
 call plug#begin()
 
 " Using git URL
+Plug 'alvan/vim-closetag'
 Plug 'shime/vim-livedown'
 Plug 'mattboehm/vim-unstack'
 Plug 'rking/ag.vim'
