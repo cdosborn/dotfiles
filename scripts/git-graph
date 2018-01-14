@@ -3,59 +3,69 @@
 usage() {
     echo 'Print the smallest graph from these endpoints';
     echo '';
-    echo 'git graph [-w|--watch] <commit>...';
+    echo 'git graph <commit>...';
 }
 
 main() {
-    local REFS=();
-    if [[ $# -eq 0 ]]; then
-        usage
+    local REFS FLAGS FILES;
+    FLAGS=(
+        '--graph' \
+        '--oneline' \
+        '--format=format:%C(auto)%h%C(reset)%C(auto)%d%C(reset) %C(auto)%<(50,trunc)%s %C(reset)'
+    );
+
+    if [[ "$#" -eq 0 ]]; then
+        usage;
         return 0;
-    elif [[ $# -eq 1 ]]; then
-        REFS=( "$1" HEAD );
-    else
-        REFS=( $@ );
     fi
 
-    if [[ "$1" =~ ^(-w|--watch)$ ]]; then
-        while true; do
-	    {
-		find .git/ -maxdepth 1 -type f;
-		echo .git/refs/heads/*;
-	    } | entr -cd draw-graph ${REFS[@]};
-	done
-    else
-        draw-graph ${REFS[@]}
-    fi
-}
+    while [ "$#" -gt 0 ]; do
+        if [ "$1" == '--' ]; then
+            FILES+=( "$@" );
+            break;
+        elif [[ "$1" =~ ^- ]]; then
+            FLAGS+=( "$1" );
+        else
+            REFS+=( "$1" );
+        fi
+        shift;
+    done;
 
-draw-graph() {
-    local MERGE_TIPS=$1;
-    local MERGE_BASE=$(oldest-merge-base $MERGE_TIPS);
-
-    # Set the GRAPH_BASE to be the ancestor of the merge base. If the ancestor
-    # doesn't exist then use just the merge base
-    local MERGE_BASE_ANCESTOR=$(git rev-parse --quiet --verify $MERGE_BASE~1^{commit});
-    local GRAPH_BASE;
-    if [ -n $MERGE_BASE_ANCESTOR ]; then
-        GRAPH_BASE=$MERGE_BASE_ANCESTOR
-    else
-        GRAPH_BASE=$MERGE_BASE
+    if [ "${#REFS[@]}" -eq 1 ]; then
+        REFS+=( HEAD );
     fi
 
+    local MERGE_BASE=$(oldest-merge-base "${REFS[@]}");
+    local NEGATION_SET;
 
-    echo git log \
-        --graph --decorate --oneline \
-        --format=format:'%C(black)%h%C(reset)%C(auto)%d%C(reset) %C(white)%<(50,trunc)%s %C(reset)' \
-        "^$GRAPH_BASE" $MERGE_TIPS;
+    # Only compute negation set, if a merge base exists
+    if [ -n "$MERGE_BASE" ]; then
+
+        # We want to show the merge base of the tips, but no further, so we
+        # add the parents of the merge base, so we exclude with ^parent
+        for parent in $(git log --format=%P $MERGE_BASE -n 1); do
+            NEGATION_SET+=( "^$parent" );
+        done;
+
+        # If the merge base exists, but has no parents, the merge base is the
+        # first commit
+        if [ "${#NEGATION_SET[@]}" -eq 0 ]; then
+            NEGATION_SET=( "^$MERGE_BASE" );
+        fi
+    fi
+
+    git log "${FLAGS[@]}" "${NEGATION_SET[@]}" "${REFS[@]}" -- "${FILES[@]}";
 }
 
 oldest-merge-base() {
     local COMMON_ANCESTOR="" endpoint1 endpoint2;
-    endpoint1=$1;
-    while [[ $# -gt 1 ]]; do
+    endpoint1="$1";
+
+    # To handle more than 2 endpoints, we compute like so
+    # o-m-b(o-m-b(o-m-b($1, $2), $3), ...)
+    while [[ "$#" -gt 1 ]]; do
         shift;
-        endpoint2=$1;
+        endpoint2="$1";
 
         while read sha1 <&3  && read sha2 <&4
         do
@@ -66,12 +76,18 @@ oldest-merge-base() {
                 break;
             fi;
 
-        done 3< <(git rev-list --reverse --first-parent "$endpoint1") 4< <(git rev-list --reverse  --first-parent "$endpoint2")
+        done 3< <(git rev-list --reverse --first-parent "$endpoint1" --) 4< <(git rev-list --reverse  --first-parent "$endpoint2" -- )
 
-        endpoint1=$COMMON_ANCESTOR;
+        # When comparing the two histories from their starts, we never found
+        # a branching off point
+        if [ -z "$COMMON_ANCESTOR" ]; then
+            return 1;
+        fi;
+
+        endpoint1="$COMMON_ANCESTOR";
     done
 
-    echo $COMMON_ANCESTOR;
+    echo "$COMMON_ANCESTOR";
 }
 
 # Source this function to leverage git-bash-completion.sh with git graph
