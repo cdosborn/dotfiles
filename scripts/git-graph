@@ -1,13 +1,34 @@
 #!/bin/bash
 
-usage() {
-    echo 'Print the smallest graph from these endpoints';
+#
+# Print a handy graph of some refs.
+#
+# `git graph master feature` will print a graph which includes the feature and
+# master, but omits the long history they have in common.
+#
+# You could achieve the above rougly with:
+#
+#   git log --graph --oneline master feature ^$(git merge-base master feature)
+#
+# But this has a shortcoming. If feature gets merged into master several
+# times. You'll only see since the last merge. `git graph` will show you the
+# larger picture, i.e. the branches since their first shared ancestor.
+#
+
+function usage {
+    echo 'Print the shared history of git refs';
     echo '';
-    echo 'git graph <commit>...';
+    echo 'git graph <ref 1> <ref 2>     # Pass several refs to graph';
+    echo 'git graph ... -- <path>       # Filter commits which affected <path';
+    echo 'git graph --single-parent     # Pass options know to git log';
+    echo 'git graph --echo              # Just print the underlying git command';
+    echo 'git graph --bash-completion   # Print bash completion code';
+    echo 'git graph --help              # Print this message';
 }
 
-main() {
+function main {
     local REFS FLAGS FILES;
+    local ECHO_GIT_COMMAND=0; # false
     FLAGS=(
         '--graph' \
         '--oneline' \
@@ -19,8 +40,17 @@ main() {
         return 0;
     fi
 
+    # Parse arguments
     while [ "$#" -gt 0 ]; do
-        if [ "$1" == '--' ]; then
+        if [ "$1" == '--help' ]; then
+            usage;
+            exit 0;
+        elif [ "$1" == '--bash-completion' ]; then
+             print_bash_completion;
+             exit 0;
+        elif [ "$1" == '--echo' ]; then
+            ECHO_GIT_COMMAND=1;
+        elif [ "$1" == '--' ]; then
             FILES+=( "$@" );
             break;
         elif [[ "$1" =~ ^- ]]; then
@@ -31,9 +61,27 @@ main() {
         shift;
     done;
 
+    if [ "${#REFS[@]}" -eq 0 ]; then
+        echo "Err! 1 or more refs required" >&2;
+        usage >&2;
+        return 1;
+    fi
+
+    # If only one ref is passed, make this invocation equivalent to:
+    # `git graph <ref> HEAD`
     if [ "${#REFS[@]}" -eq 1 ]; then
         REFS+=( HEAD );
     fi
+
+    # Validate the refs
+    for ref in "${REFS[@]}"; do
+        git rev-parse --verify "$ref" &>/dev/null;
+        if [ "$?" -ne 0 ]; then
+           echo "Err! this is an invalid ref: $ref" >&2;
+           exit 1;
+        fi;
+    done;
+
 
     local MERGE_BASE=$(oldest-merge-base "${REFS[@]}");
     local NEGATION_SET;
@@ -54,10 +102,15 @@ main() {
         fi
     fi
 
-    git log "${FLAGS[@]}" "${NEGATION_SET[@]}" "${REFS[@]}" -- "${FILES[@]}";
+    local COMMAND=( git log "${FLAGS[@]}" "${NEGATION_SET[@]}" "${REFS[@]}" -- "${FILES[@]}" );
+    if [ "$ECHO_GIT_COMMAND" -eq 1 ]; then
+        echo_args "${COMMAND[@]}"
+    else
+       "${COMMAND[@]}";
+    fi
 }
 
-oldest-merge-base() {
+function oldest-merge-base {
     local COMMON_ANCESTOR="" endpoint1 endpoint2;
     endpoint1="$1";
 
@@ -90,12 +143,27 @@ oldest-merge-base() {
     echo "$COMMON_ANCESTOR";
 }
 
-# Source this function to leverage git-bash-completion.sh with git graph
-# _git_graph()
-# {
-#       # you can return anything here for the autocompletion for example all
-#       # the branches
-#       __gitcomp_nl "$(__git_refs)"
-# }
+# Print quoted arguments
+function echo_args {
+    while [ "$#" -gt 1 ]; do
+        printf "%q " "$1";
+        shift;
+    done;
+    if [ "$#" -eq 1 ]; then
+        printf "%q" "$1";
+        echo;
+    fi;
+}
+
+function print_bash_completion {
+  cat <<'EOF'
+# Source me, so that git graph support git completion!
+# Requires git bash completion.
+function git_graph
+{
+      __gitcomp_nl "$(__git_refs)"
+}
+EOF
+}
 
 main $@;
