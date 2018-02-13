@@ -23,7 +23,7 @@ alias khdr='launchctl stop homebrew.mxcl.khd;launchctl start homebrew.mxcl.khd'
 alias ll='ls -lhA'
 alias myip='curl http://ipecho.net/plain; echo'
 alias paux='ps aux | grep'
-alias r='echo $(base64 < /dev/random | head -c 10)'
+alias r='echo $(base64 < /dev/urandom | head -c 10)'
 
 # execute '<last command> |  less'
 alias l='bash -c "$(history | tail -2 | head -1 | cut -sd " " -f 4-)" | less'
