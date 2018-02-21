@@ -256,6 +256,14 @@ function! EsLint()
    set makeprg=./node_modules/eslint/bin/eslint.js\ -c\ .eslintrc\ --ext\ .jsx,.js\ --no-eslintrc\ --format\ unix\ --fix\ %
    make
 endfunction
+function! Prospector()
+   set makeprg=prospector\ --profile\ prospector_profile.yaml\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
+   make
+endfunction
+function! ProspectorAll()
+   set makeprg=prospector\ --profile\ prospector_profile.yaml\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint
+   make
+endfunction
 
 " Source my vimrc when file changes
 augroup reload_vimrc " {

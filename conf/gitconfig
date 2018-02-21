@@ -4,7 +4,7 @@
 [core]
 	editor = vim
 [push]
-	default = simple
+	default = current
 [alias]
 	co = checkout
         br = branch --sort=committerdate
