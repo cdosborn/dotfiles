@@ -15,7 +15,8 @@
         fixup = commit --amend -C @
         diffls = diff --name-only
         index = ls-files --stage
-        applydiff= "!{ echo 'cat <<DIFF | git apply'; git diff; echo 'DIFF'; }"
+        catapplydiff= "!{ echo 'cat <<DIFF | git apply'; git diff; echo 'DIFF'; }"
+        ff= fetch -fu
         pull = pull --ff-only
         lg = log --oneline
         head = rev-parse @
@@ -30,6 +31,8 @@
 	tool = vimdiff
 [color]
 	ui = auto
+[merge]
+        ff = false
 [rebase]
 	autosquash = true
 	autostash = true

@@ -268,7 +268,7 @@ function! EsLint()
    cc
 endfunction
 function! Prospector()
-   set makeprg=prospector\ --profile\ prospector_profile.yaml\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
+   set makeprg=prospector\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
    make
 endfunction
 function! ProspectorAll()
