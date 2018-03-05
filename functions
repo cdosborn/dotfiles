@@ -1,10 +1,8 @@
 #! /usr/bin/env bash
 
 # Replace current editing line with evald echo, via C-t
-_replaceCommad() {
-    READLINE_LINE="$(eval echo "$READLINE_LINE")"
-}
-bind -m emacs -x '"\C-t": _replaceCommad'
+_replace() { READLINE_LINE="$(eval echo "$READLINE_LINE")"; }
+bind -m emacs -x '"\C-t": _replace'
 
 function copy {
     if [[ "$(uname)" -eq "Linux" ]]; then

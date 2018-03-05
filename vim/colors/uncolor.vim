@@ -7,7 +7,6 @@ endif
 ":so $VIMRUNTIME/syntax/hitest.vim
 
 set background=light
-
 highlight Modified           cterm=NONE      ctermfg=14       ctermbg=0
 highlight wildmenu           cterm=bold      ctermfg=NONE     ctermbg=NONE
 highlight VertSplit          cterm=NONE      ctermfg=Black    ctermbg=Black
@@ -33,13 +32,13 @@ highlight Todo               cterm=NONE      ctermfg=12       ctermbg=NONE
 highlight Search             cterm=NONE      ctermfg=12       ctermbg=NONE
 highlight SpecialKey         cterm=NONE      ctermfg=12       ctermbg=NONE
 highlight helpHyperTextEntry cterm=underline ctermfg=12       ctermbg=NONE
-highlight Statement          cterm=bold      ctermfg=NONE     ctermbg=NONE
+highlight Statement          cterm=bold      ctermfg=16     ctermbg=NONE
 highlight Identifier         cterm=NONE      ctermfg=NONE     ctermbg=NONE
 highlight Type               cterm=NONE      ctermfg=NONE     ctermbg=NONE
 highlight Special            cterm=NONE      ctermfg=NONE     ctermbg=NONE
 highlight Constant           cterm=NONE      ctermfg=DarkGray ctermbg=NONE
 highlight Comment            cterm=NONE      ctermfg=DarkGray ctermbg=NONE
-highlight Visual             cterm=bold      ctermfg=NONE     ctermbg=White
+highlight Visual                                              ctermbg=7
 highlight MatchParen         cterm=underline ctermfg=Black    ctermbg=NONE
 "highlight  helpBar      cterm=NONE       ctermfg=12        ctermbg=NONE
 

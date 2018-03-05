@@ -135,7 +135,7 @@ nnoremap -sp `[v`]
 vnoremap <silent> -tb :!column -t<CR>
 
 " re(fresh)
-nnoremap -re :normal! <CR>
+nnoremap -re :normal! <C-V><C-L><CR>
 nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -247,14 +247,25 @@ function! Prettier()
    let save_pos = getpos(".")
    silent! %!prettier
    call setpos(".", save_pos)
+
+   "Force a redraw, :redraw would show buffer has faving changes when there
+   "were no changes
+   normal! <C-V><C-L><CR>
 endfunction
 function! EsLintAll()
    set makeprg=./node_modules/eslint/bin/eslint.js\ -c\ .eslintrc\ --ext\ .jsx,.js\ --no-eslintrc\ --format\ unix\ --fix\ src
    make
 endfunction
 function! EsLint()
-   set makeprg=./node_modules/eslint/bin/eslint.js\ -c\ .eslintrc\ --ext\ .jsx,.js\ --no-eslintrc\ --format\ unix\ --fix\ %
-   make
+   " set makeprg=./node_modules/eslint/bin/eslint.js\ -c\ .eslintrc\ --ext\ .jsx,.js\ --no-eslintrc\ --format\ unix\ --fix\ %
+   " make
+   silent cexpr system('./node_modules/eslint/bin/eslint.js -c .eslintrc --ext .jsx,.js --no-eslintrc --format unix --fix ' . expand('%'))
+
+   " Since eslint will change the buffer, manually reload the file
+   silent execute 'open ' . expand('%')
+
+   " Reprint the message of the current error
+   cc
 endfunction
 function! Prospector()
    set makeprg=prospector\ --profile\ prospector_profile.yaml\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
