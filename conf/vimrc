@@ -9,12 +9,10 @@ if !filereadable(glob('~/.vim/autoload/plug.vim'))
     source ~/.vim/autoload/plug.vim
 endif
 
-" vim-closetag
-let g:closetag_filenames = '*.html,*.jsx,*.js'
-
 call plug#begin()
 
 " Using git URL
+Plug 'mxw/vim-jsx'
 Plug 'alvan/vim-closetag'
 Plug 'altercation/vim-colors-solarized'
 Plug 'shime/vim-livedown'
@@ -37,6 +35,12 @@ Plug 'yssl/TWcmd.vim'
 Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()
+
+" vim-jsx
+let g:jsx_ext_required = 0
+
+" vim-closetag
+let g:closetag_filenames = '*.html,*.jsx,*.js'
 
 " Install/update all plugins
 if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))

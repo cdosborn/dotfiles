@@ -4,10 +4,12 @@ xrdb -merge .Xresources
 
 xscreensaver -no-splash &
 
-xmodmap .xmodmap
-
 if [ -x /usr/bin/nm-applet ]; then
    nm-applet --sm-disable &
 fi
+
+redshift -O 3000;
+ssh-add /home/cdosborn/.ssh/id_rsa /home/cdosborn/.ssh/connor_cyverse;
+safeeyes &;
 
 exec xmonad
