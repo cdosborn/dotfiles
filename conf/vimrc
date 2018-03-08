@@ -16,6 +16,7 @@ call plug#begin()
 
 " Using git URL
 Plug 'alvan/vim-closetag'
+Plug 'altercation/vim-colors-solarized'
 Plug 'shime/vim-livedown'
 Plug 'mattboehm/vim-unstack'
 Plug 'rking/ag.vim'
@@ -208,9 +209,15 @@ if !isdirectory($HOME . "/.vim/undo")
    call mkdir($HOME . "/.vim/undo", "p")
 endif
 set undodir=~/.vim/undo
-if filereadable(glob('~/.vim/colors/uncolor.vim'))
-    colorscheme uncolor
-endif
+
+" Enable my custom colorscheme
+" if filereadable(glob('~/.vim/colors/uncolor.vim'))
+"     colorscheme uncolor
+" endif
+
+syntax enable
+set background=dark
+colorscheme solarized
 
 " set statusline=\ %F%#Modified#\ %M%*%=%-14.(%l,%c%V%)\ %P\
 " set tabline=%!MyTabLine()
