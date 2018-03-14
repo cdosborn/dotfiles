@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-# If a terminal is attached
-if [ -t ]; then
+# If tty is connected to stdin
+if [ -t 0 ]; then
     # Replace current editing line with evald echo, via C-t
     _replace() { READLINE_LINE="$(eval echo "$READLINE_LINE")"; }
     bind -m emacs -x '"\C-t": _replace'

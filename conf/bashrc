@@ -1,5 +1,5 @@
 # Source config
-function _() {
+function _ {
     for file in \
         ~/.bashrc.local \
         ~/dotfiles/aliases \
@@ -9,8 +9,11 @@ function _() {
         [ -f $file ] && source $file
     done
 
-    # For Terminal to enable C-s with readline
-    stty -ixon -ixoff
+    # If tty is connected to stdin
+    if [ -t 0 ]; then
+        # Enable C-s with readline
+        stty -ixon -ixoff
+    fi
 
     # Use common sense bindings for less
     export LESSKEY=~/dotfiles/less/lesskey.generated
@@ -18,8 +21,8 @@ function _() {
     # History
     # If set, the history list is appended to the file on shell exit
     shopt -s histappend
-    export HISTSIZE=-1
-    export HISTFILESIZE=-1
+    export HISTSIZE=
+    export HISTFILESIZE=
 
     export TERM=xterm-256color
     export EDITOR="vim"
@@ -33,3 +36,5 @@ function _() {
         fi;
     fi;
 }
+
+_;
