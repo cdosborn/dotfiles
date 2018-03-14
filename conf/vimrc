@@ -12,6 +12,7 @@ endif
 call plug#begin()
 
 " Using git URL
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 Plug 'mxw/vim-jsx'
 Plug 'alvan/vim-closetag'
 Plug 'altercation/vim-colors-solarized'
@@ -254,6 +255,17 @@ colorscheme solarized
 " endfunction
 
 " autocmd BufWritePost *.js silent %!prettier
+" function! Yapf()
+"    let start = v:lnum
+"    let end = v:lnum + v:count
+"    let save_pos = getpos(".")
+"    silent! execute start . ',' . end . '!yapf --style google -l ' . start . '-' . end
+"    call setpos(".", save_pos)
+
+"    " "Force a redraw, :redraw would show buffer has faving changes when there
+"    " "were no changes
+"    normal! <C-V><C-L><CR>
+" endfunction
 function! Prettier()
    let save_pos = getpos(".")
    silent! %!prettier
@@ -279,7 +291,7 @@ function! EsLint()
    cc
 endfunction
 function! Prospector()
-   set makeprg=prospector\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
+   set makeprg=prospector\ -s\ veryhigh\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
    make
 endfunction
 function! ProspectorAll()

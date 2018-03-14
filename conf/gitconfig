@@ -3,6 +3,7 @@
 	email = cdosborn@email.arizona.edu
 [core]
 	editor = vim
+	commentChar = ";"
 [push]
 	default = current
 [alias]
