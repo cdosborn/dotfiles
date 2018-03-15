@@ -434,3 +434,19 @@ function t {
     fi;
     python ~/dotfiles/scripts/t.py --task-dir "$task_dir" --list tasks $@;
 }
+
+function randrwork {
+    xrandr --output HDMI2 --scale 1.5x1.5 --mode 1920x1200 --fb 2880x1800 --panning 2880x1800 --output eDP1 --off;
+
+}
+function randrreset {
+    xrandr --output HDMI2 --off --output eDP1 --auto;
+}
+
+function randroldhome {
+    xrandr  --output HDMI2 --scale 1.5x1.5 --mode  1920x1080 --fb 2880x1620 --panning  2880x1620 --output eDP1 --off;
+}
+function randrhome {
+    local width=2560 height=1440 scaledWidth=3840 scaledHeight=2160
+    xrandr  --output HDMI2 --scale 1.5x1.5 --mode  "${width}x${height}" --fb "${scaledWidth}x${scaledHeight}" --panning  "${scaledWidth}x${scaledHeight}" --output eDP1 --off;
+}
