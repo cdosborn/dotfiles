@@ -16,3 +16,6 @@ if [ ! -d ~/.xmonad ]; then
     mkdir ~/.xmonad
 fi;
 ln -sf ~/dotfiles/xmonad/xmonad.hs ~/.xmonad/xmonad.hs
+
+# Install st
+~/dotfiles/st/install.sh
