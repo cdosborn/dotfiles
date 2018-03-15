@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-char font[] = "Liberation Mono:pixelsize=30:antialias=true:autohint=true";
+char font[] = "Liberation Mono:size=12:antialias=true:autohint=true";
 int borderpx = 2;
 
 /*
