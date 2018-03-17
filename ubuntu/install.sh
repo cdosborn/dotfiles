@@ -1,10 +1,11 @@
 #!/bin/bash
 # Get the latest version of git
-sudo apt-add-repository -y ppa:git-core/ppa
-sudo apt-add-repository -y ppa:pi-rho/dev
+for repo in ppa:git-core/ppa ppa:pi-rho/dev ppa:slgobinath/safeeyes; do
+    sudo apt-add-repository -y "$repo";
+done
 sudo apt-get update
 
-for pkg in curl vim git xsel silversearcher-ag tree moreutils ctags jq entr tmux redshift; do
+for pkg in curl vim git xsel silversearcher-ag tree moreutils ctags jq entr tmux redshift safeeyes; do
     sudo apt-get install -qy "$pkg";
     if [ "$?" -ne 0 ]; then
         echo "Note: $pkg wasn't found, and could not be installed." >&2;

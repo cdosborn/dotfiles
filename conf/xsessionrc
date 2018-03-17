@@ -1,0 +1,5 @@
+if [ -f $HOME/.Xresources]; then
+  xrdb -merge ~/.Xresources
+fi
+redshift -O 3000
+safeeyes &
