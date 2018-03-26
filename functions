@@ -450,3 +450,15 @@ function randrhome {
     local width=2560 height=1440 scaledWidth=3840 scaledHeight=2160
     xrandr  --output HDMI2 --scale 1.5x1.5 --mode  "${width}x${height}" --fb "${scaledWidth}x${scaledHeight}" --panning  "${scaledWidth}x${scaledHeight}" --output eDP1 --off;
 }
+
+function tmux-close-other-windows-with-same-name {
+    local CUR_WIN_INDEX CUR_WIN_NAME;
+    read CUR_WIN_INDEX CUR_WIN_NAME <<< "$(tmux display-message -p "#{window_index} #{window_name}")"
+    tmux list-windows -F '#{window_index} #{window_name}' | while read WINDOW_INDEX WINDOW_NAME; do
+        if [ "$CUR_WIN_INDEX" == "$WINDOW_INDEX" ]; then
+            continue
+        elif [ "$CUR_WIN_NAME" == "$WINDOW_NAME" ]; then
+            tmux kill-window -t "$WINDOW_INDEX";
+        fi
+    done
+}

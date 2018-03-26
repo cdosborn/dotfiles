@@ -1,5 +1,22 @@
 # Source config
 function _ {
+    # If tty is not connected to stdin
+    if [ ! -t 0 ]; then
+        return;
+    fi
+
+    # Enable C-s with readline
+    stty -ixon -ixoff
+
+    # If we were in a virtualenv, reactivate it
+    if [ -n "$VIRTUAL_ENV" ]; then
+        DIR="$VIRTUAL_ENV";
+        deactivate;
+        if [ -e "$DIR/bin/activate" ]; then
+            . "$DIR/bin/activate";
+        fi;
+    fi;
+
     for file in \
         ~/.bashrc.local \
         ~/dotfiles/aliases \
@@ -8,12 +25,6 @@ function _ {
         ~/dotfiles/complete/*; do
         [ -f $file ] && source $file
     done
-
-    # If tty is connected to stdin
-    if [ -t 0 ]; then
-        # Enable C-s with readline
-        stty -ixon -ixoff
-    fi
 
     # Use common sense bindings for less
     export LESSKEY=~/dotfiles/less/lesskey.generated
@@ -26,15 +37,7 @@ function _ {
 
     export TERM=xterm-256color
     export EDITOR="vim"
-
-    # If we were in a virtualenv, reactivate it
-    if [ -n "$VIRTUAL_ENV" ]; then
-        DIR="$VIRTUAL_ENV";
-        deactivate;
-        if [ -e "$DIR/bin/activate" ]; then
-            . "$DIR/bin/activate";
-        fi;
-    fi;
+    export PS1=$(tput bold)'\u@\h:\w'$(tput sgr0)'\n$ '
 }
 
 _;

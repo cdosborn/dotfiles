@@ -142,7 +142,7 @@ vnoremap <silent> -tb :!column -t<CR>
 
 " re(fresh)
 nnoremap -re :normal! <C-V><C-L><CR>
-nnoremap <silent> -dt :call setline(".", strftime("%m/%d/%y"))<CR>
+nnoremap <silent> -dt :let @"=system('date +%F')<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -168,6 +168,7 @@ nnoremap <silent> -tr m`:%s:\s*$::g<CR>``
 
 " Settings
 " set autochdir
+set modeline
 set autoindent
 set autoread
 set backspace=indent,eol,start
