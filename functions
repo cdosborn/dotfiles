@@ -9,7 +9,7 @@ fi
 
 function copy {
     if [[ "$(uname)" -eq "Linux" ]]; then
-        xsel -b -i;
+        xclip -i -selection clipboard;
     else
         pbcopy;
     fi;
@@ -36,7 +36,7 @@ function tmuxrun {
 
 function paste {
     if [[ "$(uname)" -eq "Linux" ]]; then
-        xsel -b -o;
+        xclip -o -selection clipboard;
     else
         pbpaste;
     fi;
