@@ -15,6 +15,13 @@ function copy {
     fi;
 }
 
+# Truncated a file to its last 10K lines
+#
+# trunklog /var/log/syslog
+function trunklog {
+    tail -n 10000  $1 | sponge $1
+}
+
 # Execute a command in each pane inside a tmux session
 # tmuxrun $COMMAND
 # tmuxrun "echo hi"
