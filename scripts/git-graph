@@ -84,22 +84,18 @@ function main {
 
 
     local MERGE_BASE=$(oldest-merge-base "${REFS[@]}");
-    local NEGATION_SET;
+    local NEGATION_SET=();
 
     # Only compute negation set, if a merge base exists
     if [ -n "$MERGE_BASE" ]; then
 
-        # We want to show the merge base of the tips, but no further, so we
-        # add the parents of the merge base, so we exclude with ^parent
+        # We want to show the merge base of the tips, but no further, in the
+        # usual case a merge base has parents, and we hide these parents, by
+        # adding them to the NEGATION_SET, if there are no parents, MERGE_BASE
+        # is the root and we don't need to exclude anything
         for parent in $(git log --format=%P $MERGE_BASE -n 1); do
             NEGATION_SET+=( "^$parent" );
         done;
-
-        # If the merge base exists, but has no parents, the merge base is the
-        # first commit
-        if [ "${#NEGATION_SET[@]}" -eq 0 ]; then
-            NEGATION_SET=( "^$MERGE_BASE" );
-        fi
     fi
 
     local COMMAND=( git log "${FLAGS[@]}" "${NEGATION_SET[@]}" "${REFS[@]}" -- "${FILES[@]}" );
