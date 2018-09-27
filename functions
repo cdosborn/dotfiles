@@ -443,9 +443,9 @@ function t {
 }
 
 function randrwork {
-    xrandr --output HDMI2 --scale 1.5x1.5 --mode 1920x1200 --fb 2880x1800 --panning 2880x1800 --output eDP1 --off;
-
+    xrandr --output VIRTUAL1 --off --output eDP1 --off --output DP1 --off --output HDMI2 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output HDMI1 --off --output DP2 --off;
 }
+
 function randrreset {
     xrandr --output HDMI2 --off --output eDP1 --auto;
 }

@@ -22,8 +22,8 @@ main = do
                         , ppTitle = xmobarColor "white" "" . shorten 50
                         }
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
-        , borderWidth = 2
-        , focusedBorderColor = "#0000FF"
+        , borderWidth = 8
+        , focusedBorderColor = "#AAAAFF"
         , normalBorderColor = "#000000"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_e), spawn "EDITOR=vim st -e bash -c 'xsel -ob | vipe | xsel -ib'")
