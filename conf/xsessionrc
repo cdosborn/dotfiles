@@ -3,3 +3,4 @@ if [ -f $HOME/.Xresources]; then
 fi
 redshift -O 3000
 safeeyes &
+STARTUP=x-window-manager

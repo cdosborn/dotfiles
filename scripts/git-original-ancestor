@@ -27,6 +27,8 @@ then
 fi
 
 COMMON_ANCESTOR=""
+
+
 while read sha1 <&3  && read sha2 <&4
 do
     if [ "$sha1" == "$sha2" ];
@@ -38,7 +40,13 @@ do
         then
             echo $COMMON_ANCESTOR;
         fi;
-        break;
+        exit;
     fi;
 
-done 3< <(git rev-list --reverse --first-parent "$1") 4< <(git rev-list --reverse  --first-parent "$2")
+done 3< <(git rev-list --topo-order --reverse "$1") 4< <(git rev-list --topo-order --reverse  "$2")
+
+# If the history doesn't ever diverge echo the last COMMON_ANCESTOR
+if [ -n "$COMMON_ANCESTOR" ];
+then
+    echo $COMMON_ANCESTOR;
+fi;

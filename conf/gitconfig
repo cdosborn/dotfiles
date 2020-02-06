@@ -1,6 +1,6 @@
 [user]
 	name = Connor Osborn
-	email = cdosborn@email.arizona.edu
+	email = connor@cdosborn.com
 [core]
 	editor = vim
 	commentChar = ";"
@@ -8,32 +8,33 @@
 	default = current
 [alias]
 	co = checkout
-        br = branch --sort=committerdate
-        ca = diff --cached
-        bname = rev-parse --abbrev-ref HEAD
-        re = remote -v
-	edit = !$EDITOR -o `git ls-files --modified | sort -u`
-        fixup = commit --amend -C @
-        diffls = diff --name-only
-        index = ls-files --stage
-        catapplydiff= "!{ echo 'cat <<DIFF | git apply'; git diff; echo 'DIFF'; }"
-        ff= fetch -fu
-        pull = pull --ff-only
-        lg = log --oneline
-        head = rev-parse @
+  br = branch --sort=committerdate
+  ca = diff --cached
+  bname = rev-parse --abbrev-ref HEAD
+  re = remote -v
+  edit = !$EDITOR -o `git ls-files --modified | sort -u`
+  fixup = commit --amend -C @
+  diffls = diff --name-only
+  index = ls-files --stage
+  catapplydiff= "!{ echo 'cat <<DIFF | git apply'; git diff; echo 'DIFF'; }"
+  printmerge="!f() { git merge-tree $(git merge-base $1 $2) $1 $2; }; f"
+  ff= fetch -fu
+  pull = pull --ff-only
+  lg = log --oneline
+  head = rev-parse @
 
-        # Commands to create a history quickly
-        empty = commit --allow-empty --allow-empty-message -m ''
-        mempty = merge --no-edit --no-ff
+  # Commands to create a history quickly
+  empty = commit --allow-empty --allow-empty-message -m ''
+  mempty = merge --no-edit --no-ff
 
-        # Get all files changed in a commit (d)iff(c)ommit
-        dc = diff-tree --no-commit-id --name-only -r
+  # Get all files changed in a commit (d)iff(c)ommit
+  dc = diff-tree --no-commit-id --name-only -r
 [mergetool]
 	tool = vimdiff
 [color]
 	ui = auto
 [merge]
-        ff = false
+  ff = false
 [rebase]
 	autosquash = true
 	autostash = true

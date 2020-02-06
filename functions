@@ -9,7 +9,7 @@ fi
 
 function copy {
     if [[ "$(uname)" -eq "Linux" ]]; then
-        xclip -i -selection clipboard;
+        xsel -ib;
     else
         pbcopy;
     fi;
@@ -311,7 +311,7 @@ function ve {
         fi;
 
         if [ ! -d "$VE_DIR/$1" ]; then
-            virtualenv -p "$(which python)" "$VE_DIR/$1";
+            "$(which python3)" -m venv "$VE_DIR/$1";
         fi;
 
         if [ -e "$VE_DIR/$1/bin/activate" ]; then
@@ -322,7 +322,7 @@ function ve {
 }
 
 pyenv() {
-  PYENV_PATH="${HOME}/.pyenv/shims"
+  PYENV_PATH="${HOME}/.pyenv/bin:${HOME}/.pyenv/shims"
   if [[ ! "${PATH}" =~ "${PYENV_PATH}" ]]; then
       export PATH="${PYENV_PATH}:${PATH}"
   fi

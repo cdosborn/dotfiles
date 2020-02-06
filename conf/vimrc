@@ -17,12 +17,11 @@ Plug 'mxw/vim-jsx'
 Plug 'alvan/vim-closetag'
 Plug 'altercation/vim-colors-solarized'
 Plug 'shime/vim-livedown'
-Plug 'mattboehm/vim-unstack'
 Plug 'rking/ag.vim'
-Plug 'millermedeiros/vim-esformatter'
 Plug 'nvie/vim-flake8'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
 Plug 'rbonvall/vim-textobj-latex'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
@@ -34,14 +33,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'yssl/TWcmd.vim'
 Plug 'ntpeters/vim-better-whitespace'
-
+Plug 'leafgarland/typescript-vim'
+Plug 'mbbill/undotree'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " vim-jsx
 let g:jsx_ext_required = 0
 
 " vim-closetag
-let g:closetag_filenames = '*.html,*.jsx,*.js'
+let g:closetag_filenames = '*.html,*.jsx,*.js,*.tsx'
 
 " Install/update all plugins
 if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
@@ -187,10 +188,10 @@ set listchars=eol:¬
 set noswapfile
 set pastetoggle=<F2>
 set ruler
-set shiftwidth=4
+set shiftwidth=2
 set showcmd
 set showmode
-set softtabstop=4
+set softtabstop=2
 set switchbuf=useopen,usetab
 set suffixesadd=.js,.jsx
 set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
@@ -201,6 +202,11 @@ set virtualedit=all
 set wildmenu
 set wildmode=longest:full
 set winminwidth=1
+" Auto strip whitespace 'ntpeters/vim-better-whitespace'
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
+let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommi_', 'unite', 'qf', 'help']
 
 " This purpoteldy allows running shell aliases/functions, but forces vim to
 " background, needs more futzing
@@ -269,7 +275,7 @@ colorscheme solarized
 " endfunction
 function! Prettier()
    let save_pos = getpos(".")
-   silent! %!prettier
+   silent! %!./node_modules/prettier/bin-prettier.js
    call setpos(".", save_pos)
 
    "Force a redraw, :redraw would show buffer has faving changes when there
@@ -277,13 +283,16 @@ function! Prettier()
    normal! <C-V><C-L><CR>
 endfunction
 function! EsLintAll()
-   set makeprg=./node_modules/eslint/bin/eslint.js\ -c\ .eslintrc\ --ext\ .jsx,.js\ --no-eslintrc\ --format\ unix\ --fix\ src
-   make
+   silent cexpr system('./node_modules/eslint/bin/eslint.js -c .eslintrc.js --ext .jsx,.js,.ts,.tsx --no-eslintrc --format unix src')
+   " Reprint the message of the current error
+   if len(getqflist())
+     cc
+   endif
 endfunction
 function! EsLint()
    " set makeprg=./node_modules/eslint/bin/eslint.js\ -c\ .eslintrc\ --ext\ .jsx,.js\ --no-eslintrc\ --format\ unix\ --fix\ %
    " make
-   silent cexpr system('./node_modules/eslint/bin/eslint.js -c .eslintrc --ext .jsx,.js --no-eslintrc --format unix --fix ' . expand('%'))
+   silent cexpr system('./node_modules/eslint/bin/eslint.js -c .eslintrc.js --ext .jsx,.js,.ts,.tsx --no-eslintrc --format unix ' . expand('%'))
 
    " Since eslint will change the buffer, manually reload the file
    silent execute 'open ' . expand('%')
@@ -306,13 +315,6 @@ augroup reload_vimrc " {
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
 
-" Auto strip whitespace 'ntpeters/vim-better-whitespace'
-augroup clean_whitespace
-    autocmd!
-    autocmd BufEnter * EnableStripWhitespaceOnSave
-augroup END
-
-
 augroup disable_auto_commenting
     " Disable auto commenting
     autocmd!
@@ -320,8 +322,12 @@ augroup disable_auto_commenting
 augroup END
 
 if system("uname") =~ "Linux"
-    let g:livedown_browser = "vivaldi"
+    let g:livedown_browser = "qutebrowser"
 endif
 
 command! GFollow execute 'file '.fnameescape(resolve(expand('%:p')))<bar>
     \ call fugitive#detect(fnameescape(expand('%:p:h')))
+
+" Prevent insecure project specific vimrs from setting autocmds
+set exrc
+set secure

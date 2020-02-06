@@ -41,6 +41,12 @@ for file in ~/dotfiles/scripts/*; do
     sudo ln -sf $file /usr/local/bin/$name
 done
 
+# Install git-graph
+if [ ! -d ~/dotfiles/git-graph ]; then
+    git clone git@github.com:cdosborn/git-graph.git ~/dotfiles/git-graph
+    sudo ln -sf ~/dotfiles/git-graph/git-graph /usr/local/bin/git-graph
+fi
+
 # Create task directory for t function to use
 mkdir ~/.tasks;
 

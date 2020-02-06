@@ -1,5 +1,5 @@
 function debug#InsertDebugStatement()
-  let debug = "debugger; 1"  | " default because it works for ruby & javascript
+  let debug = "debugger;"  | " default because it works for ruby & javascript
 
   if (&filetype == "python")
     let debug = "import ipdb; ipdb.set_trace()"
@@ -10,7 +10,7 @@ function debug#InsertDebugStatement()
 endfunction
 
 function debug#InsertPrintStatementOverSelection()
-  let debug = "debugger; 1"  | " default because it works for ruby & javascript
+  let debug = "debugger"  | " default because it works for ruby & javascript
 
   if (&filetype == "python")
     let debug = "import ipdb; ipdb.set_trace()"

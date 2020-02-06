@@ -22,6 +22,7 @@ function _ {
         ~/dotfiles/aliases \
         ~/dotfiles/functions \
         ~/dotfiles/scripts/z.sh \
+        /etc/bash_completion \
         ~/dotfiles/complete/*; do
         [ -f $file ] && source $file
     done
@@ -35,9 +36,16 @@ function _ {
     export HISTSIZE=
     export HISTFILESIZE=
 
-    export TERM=xterm-256color
-    export EDITOR="vim"
-    export PS1=$(tput bold)'\u@\h:\w'$(tput sgr0)'\n$ '
+    export TERM=xterm-256color;
+    export EDITOR="vim";
+    export PS1=$(tput bold)'\u@\h:\w'$(tput sgr0)'\n$ ';
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+    export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+    export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+    export INFOPATH="/home/linuxbrew/.linuxbrew/share/info";
+    # export PATH="/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/games";
+    # export PATH="/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games";
+    export PATH="/snap/bin:/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games";
 }
 
 _;
