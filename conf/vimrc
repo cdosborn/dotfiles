@@ -10,11 +10,10 @@ if !filereadable(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-
 " Using git URL
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
-Plug 'mxw/vim-jsx'
-Plug 'alvan/vim-closetag'
+" Plug 'maxmellon/vim-jsx-pretty' " Disabled because it comments code terribly
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'shime/vim-livedown'
 Plug 'rking/ag.vim'
@@ -33,7 +32,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'yssl/TWcmd.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'leafgarland/typescript-vim'
+"Plug 'jason0x43/vim-js-indent' " provides function of indent for both JavaScript and TypeScript.
 Plug 'mbbill/undotree'
 Plug 'hashivim/vim-terraform'
 call plug#end()
@@ -192,6 +191,7 @@ set shiftwidth=2
 set showcmd
 set showmode
 set softtabstop=2
+set tabstop=2
 set switchbuf=useopen,usetab
 set suffixesadd=.js,.jsx
 set sessionoptions=blank,tabpages,buffers,curdir,folds,help,options,winsize
@@ -275,7 +275,16 @@ colorscheme solarized
 " endfunction
 function! Prettier()
    let save_pos = getpos(".")
-   silent! %!./node_modules/prettier/bin-prettier.js
+   silent! %!./node_modules/prettier/bin-prettier.js %
+   call setpos(".", save_pos)
+
+   "Force a redraw, :redraw would show buffer has faving changes when there
+   "were no changes
+   normal! <C-V><C-L><CR>
+endfunction
+function! PrettierAll()
+   let save_pos = getpos(".")
+   silent! !./node_modules/prettier/bin-prettier.js --write src/**/*.js src/**/*.jsx
    call setpos(".", save_pos)
 
    "Force a redraw, :redraw would show buffer has faving changes when there
@@ -287,6 +296,8 @@ function! EsLintAll()
    " Reprint the message of the current error
    if len(getqflist())
      cc
+   else
+     echom "No errors"
    endif
 endfunction
 function! EsLint()
@@ -298,14 +309,22 @@ function! EsLint()
    silent execute 'open ' . expand('%')
 
    " Reprint the message of the current error
-   cc
+   if len(getqflist())
+     cc
+   else
+     echom "No errors"
+   endif
+endfunction
+function! Pylint()
+   set makeprg=pylint\ %
+   make
 endfunction
 function! Prospector()
-   set makeprg=prospector\ -s\ veryhigh\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint\ %
+   set makeprg=prospector\ --output\ pylint\ %
    make
 endfunction
 function! ProspectorAll()
-   set makeprg=prospector\ --profile\ prospector_profile.yaml\ -I\ create_as.py\ -I\ add_access.py\ --output\ pylint
+   set makeprg=prospector\ --output\ pylint\ app/
    make
 endfunction
 

@@ -1,6 +1,5 @@
-if [ -f $HOME/.Xresources]; then
+if [ -f $HOME/.Xresources ]; then
   xrdb -merge ~/.Xresources
 fi
 redshift -O 3000
-safeeyes &
-STARTUP=x-window-manager
+exec xmonad

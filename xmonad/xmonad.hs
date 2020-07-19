@@ -5,17 +5,18 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Layout.BorderResize
+import XMonad.Layout.MouseResizableTile
 import System.IO
 import qualified XMonad.StackSet as W
 
-
+-- Use xprop to query info about a window
 myManageHook = composeAll
     [ role =? "gimp-toolbox-color-dialog" --> doFloat
     , role =? "gimp-action-search-dialog" --> doFloat
-    , className =? "upwork" --> doFloat ]
+    , fmap (== "Upwork") className <&&> fmap (/= "Messages") title --> doFloat ]
   where role = stringProperty "WM_WINDOW_ROLE"
         name = stringProperty "WM_NAME"
-        className = stringProperty "WM_CLASS"
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -23,17 +24,20 @@ main = do
     xmonad $ defaultConfig
         { manageHook = myManageHook <+> manageDocks <+> manageHook defaultConfig
         , terminal = "xfce4-terminal"
-        , focusFollowsMouse = True
-        , handleEventHook = fullscreenEventHook
-        , layoutHook = avoidStruts $ smartBorders  $ layoutHook defaultConfig
+        , focusFollowsMouse = False
+        , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook
+
+        -- , handleEventHook = fullscreenEventHook
+        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
+        , layoutHook = (avoidStruts $ smartBorders $ mouseResizableTile) ||| (avoidStruts $ smartBorders $ layoutHook defaultConfig)
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "white" "black" . wrap "[" "]"
                         , ppTitle = xmobarColor "white" "" . shorten 50
                         }
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
-        , borderWidth = 8
-        , focusedBorderColor = "#AAAAFF"
+        , borderWidth = 4
+        , focusedBorderColor = "#aaa"
         , normalBorderColor = "#000000"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_e), spawn "EDITOR=vim x-terminal-emulator -e bash -c 'xsel -ob | vipe | xsel -ib'")

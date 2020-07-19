@@ -1,6 +1,5 @@
 {
     "bracketSpacing": false,
     "jsxBracketSameLine": true,
-    "parser": "babel",
     "tabWidth": 2,
 }

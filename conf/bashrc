@@ -45,7 +45,7 @@ function _ {
     export INFOPATH="/home/linuxbrew/.linuxbrew/share/info";
     # export PATH="/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/games";
     # export PATH="/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games";
-    export PATH="/snap/bin:/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games";
+    export PATH="/home/cdosborn/.yarn/bin:/snap/bin:/home/cdosborn/.pyenv/bin:/home/cdosborn/.pyenv/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games";
 }
 
 _;

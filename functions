@@ -252,11 +252,6 @@ function ve {
     #
     local VE_DIR="${VE_DIR:-$HOME/.ve}"
 
-    if [ ! -x "$(which virtualenv)" ]; then
-        echo "virtualenv is not installed";
-        return;
-    fi;
-
     case $1 in
     --help|-h )
         echo "ve                List all virtual envs";
